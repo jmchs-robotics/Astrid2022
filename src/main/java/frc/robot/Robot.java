@@ -18,6 +18,9 @@ import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.ClipSubsystem;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.HookSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,6 +35,11 @@ public class Robot extends TimedRobot {
 
     private RobotContainer m_robotContainer;
 
+    //Defining subsystems
+    public static ClipSubsystem clip;
+    public static Drivetrain drivetrain;
+    public static HookSubsystem hook;
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -42,6 +50,11 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
+
+        //Assigning defined subsytems
+        clip = new ClipSubsystem();
+        drivetrain = new Drivetrain();
+        hook = new HookSubsystem();
     }
 
     /**
