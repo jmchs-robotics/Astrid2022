@@ -28,5 +28,19 @@ public class Constants {
     *   public static final int kRightMotor2Port = 3; 
     * }
     */ 
-}
 
+    public static final int left1ID = 0;
+    public static final int left2ID = 1;
+    public static final int left3ID = 2;
+    public static final int right1ID = 3;
+    public static final int right2ID = 4;
+    public static final int right3ID = 5;
+    public static final int rTalonID = 6;
+
+    public static final int ripleyLMID = 10;
+    public static final int ripleyLF1ID = 12;
+    public static final int ripleyLF2ID = 14;
+    public static final int ripleyRMID = 11;
+    public static final int ripleyRF1ID = 13;
+    public static final int ripleyRF2ID = 15;
+}

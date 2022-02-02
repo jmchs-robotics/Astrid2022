@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ClipSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.HookSubsystem;
+import frc.robot.subsystems.RollerIntake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
     public static ClipSubsystem clip;
     public static Drivetrain drivetrain;
     public static HookSubsystem hook;
+    public static RollerIntake intake;
 
     /**
      * This function is run when the robot is first started up and should be
