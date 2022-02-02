@@ -61,7 +61,7 @@ left2 = new PWMTalonFX(1);
  addChild("left2",left2);
  left2.setInverted(false);
 
-left3 = new PWMTalonFX(3);
+left3 = new PWMTalonFX(2);
  addChild("left3",left3);
  left3.setInverted(false);
 
@@ -69,15 +69,15 @@ leftMotors = new MotorControllerGroup(left1, left2 , left3 );
  addChild("leftMotors",leftMotors);
  
 
-right1 = new PWMTalonFX(4);
+right1 = new PWMTalonFX(3);
  addChild("right1",right1);
  right1.setInverted(true);
 
-right2 = new PWMTalonFX(5);
+right2 = new PWMTalonFX(4);
  addChild("right2",right2);
  right2.setInverted(true);
 
-right3 = new PWMTalonFX(6);
+right3 = new PWMTalonFX(5);
  addChild("right3",right3);
  right3.setInverted(true);
 
