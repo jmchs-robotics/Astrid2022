@@ -14,6 +14,7 @@ package frc.robot;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -34,6 +35,8 @@ import frc.robot.subsystems.*;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+    public static ADXRS450_Gyro roborioGyro;
 
   private static RobotContainer m_robotContainer = new RobotContainer();
 
@@ -66,7 +69,7 @@ private final static XboxController driveStick = new XboxController(0);
     SmartDashboard.putData("retractHook", new retractHook());
     SmartDashboard.putData("pushClipArm", new pushClipArm());
     SmartDashboard.putData("pullClipArm", new pullClipArm());
-    SmartDashboard.putData("driveStraight", new driveStraight(0.0));
+    SmartDashboard.putData("driveStraight", new driveStraight(0, 0, false));
     SmartDashboard.putData("turn", new turn(0.0));
     SmartDashboard.putData("auto1", new auto1());
     SmartDashboard.putData("auto2", new auto2());
