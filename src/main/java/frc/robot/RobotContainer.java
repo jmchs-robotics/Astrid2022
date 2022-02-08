@@ -138,11 +138,11 @@ subA.whenPressed(new auto1() ,true);
     SmartDashboard.putData("subA",new auto1() );
 
 final JoystickButton subB = new JoystickButton(subStick, XboxController.Button.kB.value);        
-subB.whenPressed(new auto1() ,true);
+subB.whenPressed(new pullClipArm() ,true);
     SmartDashboard.putData("subB",new auto1() );
 
 final JoystickButton subX = new JoystickButton(subStick, XboxController.Button.kX.value);        
-subX.whenPressed(new auto1() ,true);
+subX.whenPressed(new pushClipArm() ,true);
     SmartDashboard.putData("subX",new auto1() );
 
 final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);        
