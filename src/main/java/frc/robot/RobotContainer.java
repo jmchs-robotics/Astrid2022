@@ -70,7 +70,7 @@ private final static XboxController driveStick = new XboxController(0);
     SmartDashboard.putData("pushClipArm", new pushClipArm());
     SmartDashboard.putData("pullClipArm", new pullClipArm());
     SmartDashboard.putData("driveStraight", new driveStraight(0, 0, false));
-    SmartDashboard.putData("turn", new turn(0.0));
+    SmartDashboard.putData("turn", new turn(0, 0, 0));
     SmartDashboard.putData("auto1", new auto1());
     SmartDashboard.putData("auto2", new auto2());
     SmartDashboard.putData("auto3", new auto3());
