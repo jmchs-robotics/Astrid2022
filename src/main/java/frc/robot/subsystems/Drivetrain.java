@@ -68,16 +68,15 @@ private static final double minVBusOutVal = 0.2;
 
 //MICROBOT MOTORS
 
-/*
-left1 = new PWMTalonFX(0);
+left1 = new PWMTalonFX(2);
  addChild("left1",left1);
  left1.setInverted(false);
 
-left2 = new PWMTalonFX(1);
+left2 = new PWMTalonFX(4);
  addChild("left2",left2);
  left2.setInverted(false);
 
-left3 = new PWMTalonFX(2);
+left3 = new PWMTalonFX(6);
  addChild("left3",left3);
  left3.setInverted(false);
 
@@ -85,17 +84,17 @@ right1 = new PWMTalonFX(3);
  addChild("right1",right1);
  right1.setInverted(true);
 
-right2 = new PWMTalonFX(4);
+right2 = new PWMTalonFX(5);
  addChild("right2",right2);
  right2.setInverted(true);
 
-right3 = new PWMTalonFX(5);
+right3 = new PWMTalonFX(7);
  addChild("right3",right3);
  right3.setInverted(true);
- */
 
 //RIPLEY TEST MOTORS
 
+/*
 testLeft1 = new WPI_TalonSRX(0);
  addChild("left1",left1);
  left1.setInverted(false);
@@ -119,11 +118,12 @@ testRight2 = new WPI_TalonSRX(4);
 testRight3 = new WPI_TalonSRX(5);
  addChild("right3",right3);
  right3.setInverted(true);
+ */
 
-leftMotors = new MotorControllerGroup(testLeft1, testLeft2 , testLeft3);
+leftMotors = new MotorControllerGroup(left1, left2 , left3);
  addChild("leftMotors",leftMotors);
 
-rightMotors = new MotorControllerGroup(testRight1, testRight2, testRight3);
+rightMotors = new MotorControllerGroup(right1, right2, right3);
  addChild("rightMotors",rightMotors);
  
 
