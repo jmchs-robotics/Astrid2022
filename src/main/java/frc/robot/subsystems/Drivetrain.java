@@ -22,11 +22,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.PWMTalonFX;
-import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
@@ -173,11 +170,11 @@ drive.setMaxOutput(1.0);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public double getLeftEncoderPos(int pidIdx) {
-		return left2.getSelectedSensorPosition(pidIdx);
+		return testLeft2.getSelectedSensorPosition(pidIdx);
 	}
 
 	public double getRightEncoderPos(int pidIdx) {
-		return right2.getSelectedSensorPosition(pidIdx);
+		return testRight2.getSelectedSensorPosition(pidIdx);
 	}	
 
 	//goodies for gyro
@@ -201,8 +198,8 @@ drive.setMaxOutput(1.0);
 	}
 
 	public void resetEncoders() {
-		left2.setSelectedSensorPosition(0, 0, 20);
-		right2.setSelectedSensorPosition(0, 0, 20);
+		testLeft2.setSelectedSensorPosition(0, 0, 20);
+		testRight2.setSelectedSensorPosition(0, 0, 20);
 	}
 
 }
