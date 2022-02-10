@@ -40,6 +40,8 @@ public class Constants {
     public static final int LeftHookTalon = 0;
     public static final int RightHookTalon = 1;
 
+    
+
     public static final int ripleyLMID = 10;
     public static final int ripleyLF1ID = 12;
     public static final int ripleyLF2ID = 14;
