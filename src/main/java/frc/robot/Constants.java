@@ -29,6 +29,7 @@ public class Constants {
     * }
     */ 
 
+    //Drivetrain IDs
     public static final int left1ID = 2;
     public static final int left2ID = 4;
     public static final int left3ID = 6;
@@ -36,7 +37,9 @@ public class Constants {
     public static final int right2ID = 5;
     public static final int right3ID = 7;
     public static final int rTalonID = 8;
-    //public static final int softwareBraincells = 0;
+    //Hook Subsystem IDs
+    public static final int LeftHookTalon = 0;
+    public static final int RightHookTalon = 1;  
 
     /*
     public static final int ripleyLMID = 10;
