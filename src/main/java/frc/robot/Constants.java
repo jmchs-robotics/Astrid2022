@@ -36,6 +36,8 @@ public class Constants {
     public static final int right2ID = 5;
     public static final int right3ID = 7;
     public static final int rTalonID = 8;
+    public static final int leftHookID = 10;
+    public static final int rightHookID = 9;
     //public static final int softwareBraincells = 0;
 
     /*
