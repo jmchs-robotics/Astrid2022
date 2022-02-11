@@ -70,7 +70,7 @@ private final static XboxController driveStick = new XboxController(0);
     SmartDashboard.putData("pushClipArm", new pushClipArm());
     SmartDashboard.putData("pullClipArm", new pullClipArm());
     SmartDashboard.putData("driveStraight", new driveStraight(0, 0, false));
-    SmartDashboard.putData("turn", new turn(0.0));
+    SmartDashboard.putData("turn", new turn(0, 0, 0));
     SmartDashboard.putData("auto1", new auto1());
     SmartDashboard.putData("auto2", new auto2());
     SmartDashboard.putData("auto3", new auto3());
@@ -134,19 +134,19 @@ driveRB.whenPressed(new auto1() ,true);
     SmartDashboard.putData("driveRB",new auto1() );
 
 final JoystickButton subA = new JoystickButton(subStick, XboxController.Button.kA.value);        
-subA.whenPressed(new auto1() ,true);
+subA.whenPressed(new retractHook(),true);
     SmartDashboard.putData("subA",new auto1() );
 
 final JoystickButton subB = new JoystickButton(subStick, XboxController.Button.kB.value);        
-subB.whenPressed(new auto1() ,true);
+subB.whenPressed(new pullClipArm() ,true);
     SmartDashboard.putData("subB",new auto1() );
 
 final JoystickButton subX = new JoystickButton(subStick, XboxController.Button.kX.value);        
-subX.whenPressed(new auto1() ,true);
+subX.whenPressed(new pushClipArm() ,true);
     SmartDashboard.putData("subX",new auto1() );
 
 final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);        
-subY.whenPressed(new auto1() ,true);
+subY.whenPressed(new extendHook(),true);
     SmartDashboard.putData("subY",new auto1() );
 
 final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value);        
