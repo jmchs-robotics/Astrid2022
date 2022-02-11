@@ -55,7 +55,7 @@ rightHookMotor = new WPI_TalonFX(Constants.rightHookID);
  addChild("rightHookMotor",rightHookMotor);
  rightHookMotor.setInverted(true);
 
-bothhooks = new MotorControllerGroup(leftHookMotor, rightHookMotor  );
+bothhooks = new MotorControllerGroup(leftHookMotor, rightHookMotor);
  addChild("Motor Controller Group 1",bothhooks);
  
 
