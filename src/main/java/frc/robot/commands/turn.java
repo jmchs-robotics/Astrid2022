@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class turn extends CommandBase {
+	
+	Drivetrain m_subsystem;
 	double targetHeading;
 	double vBus;
 	double threshold;
@@ -23,10 +25,10 @@ public class turn extends CommandBase {
 	 * @param marginOfError
 	 * The allowable error to end the command
 	 */
-    public turn(double targetAngle, double percentVBus, double marginOfError) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	addRequirements(Robot.drivetrain);
+    public turn(Drivetrain subsystem, double targetAngle, double percentVBus, double marginOfError) {
+        
+		m_subsystem = subsystem;
+    	addRequirements(m_subsystem);
     	
     	targetHeading = targetAngle;
     	vBus = percentVBus;
@@ -35,17 +37,17 @@ public class turn extends CommandBase {
 
     // Called just before this Command runs the first time
     public void initialize() {
-    	targetHeading += Robot.drivetrain.getGyroHeading(); //accomodate for not actually being square on field. Alternative is zeroing the gyro before any of this.
+    	targetHeading += m_subsystem.getGyroHeading(); //accomodate for not actually being square on field. Alternative is zeroing the gyro before any of this.
     	SmartDashboard.putNumber("Turn ME: ", threshold);
     	SmartDashboard.putString("Current Command: ", "turn");
     }
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	error = (targetHeading - Robot.drivetrain.getGyroHeading()) * Drivetrain.kPGyroTurnConstant;
+    	error = (targetHeading - m_subsystem.getGyroHeading()) * Drivetrain.kPGyroTurnConstant;
     	
-    	double leftVal = 1.5 * Robot.drivetrain.thresholdVBus(vBus * error);
-    	double rightVal = 1.5 * Robot.drivetrain.thresholdVBus(vBus * error);
+    	double leftVal = 1.5 * m_subsystem.thresholdVBus(vBus * error);
+    	double rightVal = 1.5 * m_subsystem.thresholdVBus(vBus * error);
     	
     	Robot.drivetrain.tankDrive(leftVal, rightVal);
     	SmartDashboard.putNumber("Left gyro val: ", leftVal);
@@ -61,7 +63,7 @@ public class turn extends CommandBase {
 
     // Called once after isFinished returns true
     public void end() {
-    	Robot.drivetrain.tankDrive(0, 0);
+    	m_subsystem.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

@@ -13,6 +13,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 
@@ -25,6 +26,8 @@ import frc.robot.subsystems.Drivetrain;
  */
 public class driveStraight extends CommandBase {
 
+	private Drivetrain m_subsystem;
+
 	double endVal;
 	double vBus;
 	double initialHeading;
@@ -32,9 +35,10 @@ public class driveStraight extends CommandBase {
 	double direction;
 	double distThisLeg;
 	
-    public driveStraight (double timeToRun, double percentVBus) {
+    public driveStraight (Drivetrain subsystem, double timeToRun, double percentVBus) {
 
-    	addRequirements(Robot.drivetrain);
+		m_subsystem = subsystem;
+    	addRequirements(m_subsystem);
     	
     	endVal = timeToRun;
     	vBus = -percentVBus;
@@ -48,8 +52,10 @@ public class driveStraight extends CommandBase {
      * @param percentVBus Requires same sign as inches.
      * @param useEncoders TRUE to use encoders.
      */
-    public driveStraight(double inches, double percentVBus, boolean useEncoders) {
-    	addRequirements(Robot.drivetrain);
+    public driveStraight(Drivetrain subsystem, double inches, double percentVBus, boolean useEncoders) {
+    	
+		m_subsystem = subsystem;
+		addRequirements(m_subsystem);
     	
     	endVal = inches * Drivetrain.kEncoderTicksPerInch;
     	distThisLeg = endVal;

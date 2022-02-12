@@ -37,11 +37,12 @@ public class Constants {
     public static final int right2ID = 5;
     public static final int right3ID = 7;
     public static final int rTalonID = 8;
+
     //Hook Subsystem IDs
-    public static final int leftHookTalon = 0;
-    public static final int rightHookTalon = 1;  
+    public static final int leftHookID= 0;
+    public static final int rightHookID = 1;  
 
-
+    //Ripley Test IDs
     public static final int ripleyLMID = 10;
     public static final int ripleyLF1ID = 12;
     public static final int ripleyLF2ID = 14;

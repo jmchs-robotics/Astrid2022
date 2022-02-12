@@ -1,10 +1,18 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.subsystems.RollerIntake;
 
 public class consumeCargo extends CommandBase{
-    public consumeCargo() {
+
+    RollerIntake m_subsystem;
+
+    public consumeCargo(RollerIntake subsystem) {
+      
+        m_subsystem = subsystem;
+        addRequirements(m_subsystem);
 
     }
 
@@ -14,7 +22,7 @@ public class consumeCargo extends CommandBase{
 
   @Override
   public void execute() {
-      Robot.intake.setSpeed(0.5);
+    m_subsystem.setSpeed(0.5);
   }
 
   @Override
