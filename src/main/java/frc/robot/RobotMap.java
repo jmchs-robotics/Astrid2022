@@ -29,7 +29,7 @@ public class RobotMap {
     //hook objects
     public static WPI_TalonFX leftHookMotor;
     public static WPI_TalonFX rightHookMotor;
-    public static MotorControllerGroup bothhooks;
+    public static MotorControllerGroup hookMotorGroup;
 
     //clip objects
     public static DoubleSolenoid leftPiston;
@@ -55,7 +55,7 @@ public class RobotMap {
         //instantiate hook motors
         leftHookMotor = new WPI_TalonFX(Constants.leftHookID);
         rightHookMotor = new WPI_TalonFX(Constants.rightHookID);
-        bothhooks = new MotorControllerGroup(leftHookMotor, rightHookMotor);
+        hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);
         
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
         roborioGyro = new ADXRS450_Gyro();

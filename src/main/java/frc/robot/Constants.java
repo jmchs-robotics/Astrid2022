@@ -32,11 +32,8 @@ public class Constants {
     //Drivetrain IDs
     public static final int left1ID = 2;
     public static final int left2ID = 4;
-    public static final int left3ID = 6;
     public static final int right1ID = 3;
     public static final int right2ID = 5;
-    public static final int right3ID = 7;
-    public static final int rTalonID = 8;
 
     //Hook Subsystem IDs
     public static final int leftHookID= 0;
