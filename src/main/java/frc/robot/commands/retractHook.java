@@ -22,11 +22,11 @@ import frc.robot.subsystems.HookSubsystem;
 /**
  *
  */
-public class retractHook extends CommandBase {
+public class RetractHook extends CommandBase {
 
     private HookSubsystem m_subsystem;
 
-    public retractHook(HookSubsystem subsystem) {
+    public RetractHook(HookSubsystem subsystem) {
 
         m_subsystem = subsystem;
         // addRequirements(m_subsystem);    

@@ -34,13 +34,7 @@ public class Robot extends TimedRobot {
 
     private Command m_autonomousCommand;
 
-    private RobotContainer m_robotContainer;
-
-    //Defining subsystems
-    public static ClipSubsystem clip;
-    public static Drivetrain drivetrain;
-    public static HookSubsystem hook;
-    public static RollerIntake intake;
+    public static RobotContainer m_robotContainer;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -51,12 +45,6 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = RobotContainer.getInstance();
-        HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
-
-        //Assigning defined subsytems
-        clip = new ClipSubsystem();
-        drivetrain = new Drivetrain();
-        hook = new HookSubsystem();
     }
 
     /**
@@ -109,10 +97,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        // This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
+
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }

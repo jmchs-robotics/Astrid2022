@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class turn extends CommandBase {
+public class Turn extends CommandBase {
 	
 	Drivetrain m_subsystem;
 	double targetHeading;
@@ -25,10 +25,10 @@ public class turn extends CommandBase {
 	 * @param marginOfError
 	 * The allowable error to end the command
 	 */
-    public turn(Drivetrain subsystem, double targetAngle, double percentVBus, double marginOfError) {
+    public Turn(Drivetrain subsystem, double targetAngle, double percentVBus, double marginOfError) {
         
 		m_subsystem = subsystem;
-    	addRequirements(m_subsystem);
+    	addRequirements(subsystem);
     	
     	targetHeading = targetAngle;
     	vBus = percentVBus;

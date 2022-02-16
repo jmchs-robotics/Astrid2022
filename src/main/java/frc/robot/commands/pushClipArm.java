@@ -24,11 +24,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 /**
  *
  */
-public class pushClipArm extends CommandBase {
+public class PushClipArm extends CommandBase {
 
     private ClipSubsystem m_subsystem;
 
-    public pushClipArm(ClipSubsystem subsystem) {
+    public PushClipArm(ClipSubsystem subsystem) {
 
         m_subsystem = subsystem;
         addRequirements(m_subsystem); 

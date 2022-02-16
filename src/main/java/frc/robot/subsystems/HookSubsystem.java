@@ -47,11 +47,9 @@ private MotorControllerGroup bothhooks;
     public HookSubsystem() {
         leftHookMotor = RobotMap.leftHookMotor;
         addChild("leftHookMotor",leftHookMotor);
-        leftHookMotor.setInverted(false);
 
         rightHookMotor = RobotMap.leftHookMotor;
         addChild("rightHookMotor",rightHookMotor);
-        rightHookMotor.setInverted(true);
 
         bothhooks = RobotMap.hookMotorGroup;
         addChild("Motor Controller Group 1",bothhooks);

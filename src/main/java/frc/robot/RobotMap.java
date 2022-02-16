@@ -46,6 +46,7 @@ public class RobotMap {
         
         leftMotors = new MotorControllerGroup(left1, left2);
         rightMotors = new MotorControllerGroup(right1, right2);
+        rightMotors.setInverted(true);
         
         drive = new DifferentialDrive(leftMotors, rightMotors);
         drive.setSafetyEnabled(true);
@@ -56,6 +57,7 @@ public class RobotMap {
         leftHookMotor = new WPI_TalonFX(Constants.leftHookID);
         rightHookMotor = new WPI_TalonFX(Constants.rightHookID);
         hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);
+        rightHookMotor.setInverted(true);
         
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
         roborioGyro = new ADXRS450_Gyro();

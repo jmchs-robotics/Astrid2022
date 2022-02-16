@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.RollerIntake;
 
-public class consumeCargo extends CommandBase{
+public class ConsumeCargo extends CommandBase{
 
     RollerIntake m_subsystem;
 
-    public consumeCargo(RollerIntake subsystem) {
+    public ConsumeCargo(RollerIntake subsystem) {
       
         m_subsystem = subsystem;
         addRequirements(m_subsystem);
