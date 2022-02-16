@@ -49,7 +49,7 @@ public class Turn extends CommandBase {
     	double leftVal = 1.5 * m_subsystem.thresholdVBus(vBus * error);
     	double rightVal = 1.5 * m_subsystem.thresholdVBus(vBus * error);
     	
-    	Robot.drivetrain.tankDrive(leftVal, rightVal);
+    	m_subsystem.tankDrive(leftVal, rightVal);
     	SmartDashboard.putNumber("Left gyro val: ", leftVal);
     	SmartDashboard.putNumber("Right gyro val", rightVal);
     	

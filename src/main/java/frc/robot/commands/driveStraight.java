@@ -62,25 +62,25 @@ public class DriveStraight extends CommandBase {
     // Called just before this Command runs the first time
     public void initialize() {
     	// set our target position as current position plus desired distance
-    	endVal += Robot.drivetrain.getRightEncoderPos(0);
+    	endVal += m_subsystem.getRightEncoderPos(0);
     	// get the robot's current direction, so we can stay pointed that way
-    	initialHeading = Robot.drivetrain.getGyroHeading();
+    	initialHeading = m_subsystem.getGyroHeading();
     
     }
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	double proportion = Drivetrain.kPGyroConstant * (Robot.drivetrain.getGyroHeading() - initialHeading);
+    	double proportion = Drivetrain.kPGyroConstant * (m_subsystem.getGyroHeading() - initialHeading);
     	double coefficient = 1;
     	
     	if(useFeedback) {    		
     		// ramp down at the end of this leg of travel
     		// coefficient = Math.pow((endVal - Robot.drivetrain.getRightEncoderPos(0)) / endVal,2/3);  // this won't really work any more because endVal is not relative to resetting encoders to zero    		
-    		coefficient = Math.abs( distThisLeg - Robot.drivetrain.getRightEncoderPos(0)) / 2000;    		
-    		coefficient = Robot.drivetrain.thresholdVBus(coefficient);
+    		coefficient = Math.abs( distThisLeg - m_subsystem.getRightEncoderPos(0)) / 2000;    		
+    		coefficient = m_subsystem.thresholdVBus(coefficient);
     	}
     	
-    	Robot.drivetrain.tankDrive(coefficient * (vBus - proportion), -coefficient * (vBus + proportion));
+    	m_subsystem.tankDrive(coefficient * (vBus - proportion), -coefficient * (vBus + proportion));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -88,9 +88,9 @@ public class DriveStraight extends CommandBase {
     	if(useFeedback) {
     		// have we gone far enough?
     		if(Math.signum(vBus) < 0) {
-    			return Robot.drivetrain.getRightEncoderPos(0) <= endVal;
+    			return m_subsystem.getRightEncoderPos(0) <= endVal;
     		} else {
-    			return Robot.drivetrain.getRightEncoderPos(0) >= endVal;
+    			return m_subsystem.getRightEncoderPos(0) >= endVal;
     		}
     		
     	}
@@ -104,7 +104,7 @@ public class DriveStraight extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.tankDrive(0, 0);
+    	m_subsystem.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
