@@ -26,6 +26,10 @@ public class RetractHook extends CommandBase {
 
     private HookSubsystem m_subsystem;
 
+    /**
+     * @param subsystem
+     */
+
     public RetractHook(HookSubsystem subsystem) {
 
         m_subsystem = subsystem;

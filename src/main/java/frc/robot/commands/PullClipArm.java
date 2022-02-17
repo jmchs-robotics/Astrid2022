@@ -31,6 +31,10 @@ public class PullClipArm extends CommandBase {
 
     private ClipSubsystem m_subsystem;
 
+    /**
+     * @param subsystem
+     */
+
     public PullClipArm(ClipSubsystem subsystem) {
 
         this.m_subsystem = subsystem;

@@ -27,6 +27,12 @@ public class DriveStraight extends CommandBase {
 	boolean useFeedback;
 	double direction;
 	double distThisLeg;
+
+	/**
+	 * @param subsystem
+	 * @param timeToRun
+	 * @param percentVBus
+	 */
 	
   public DriveStraight(Drivetrain subsystem, double timeToRun, double percentVBus) {
 

@@ -9,6 +9,10 @@ public class ConsumeCargo extends CommandBase{
 
     RollerIntake m_subsystem;
 
+    /**
+     * @param subsystem
+     */
+
     public ConsumeCargo(RollerIntake subsystem) {
       
         m_subsystem = subsystem;

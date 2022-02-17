@@ -17,6 +17,13 @@ public class Paths { // extends CommandBase {
     ClipSubsystem m_Clip;
     RollerIntake m_Intake;
 
+    /**
+     * @param drive
+     * @param hook
+     * @param clip
+     * @param intake
+     */
+
     public Paths(Drivetrain drive, HookSubsystem hook, ClipSubsystem clip, RollerIntake intake) {
         m_drive = drive;
         m_Hook = hook;
@@ -24,17 +31,29 @@ public class Paths { // extends CommandBase {
         m_Intake = intake;     
     }
 
+    /**
+    * @return
+    */
+
     public Command PathTestCommand() {
       return new SequentialCommandGroup(
 
       );
     }
 
+    /**
+     * @return
+     */
+
     public Command Path1() {
       return new SequentialCommandGroup(
 
       );
     }
+
+    /**
+     * @return
+     */
 
     public Command Path2() {
       return new SequentialCommandGroup(

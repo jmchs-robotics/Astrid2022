@@ -24,7 +24,7 @@ public class RobotContainer {
 
     public static ADXRS450_Gyro roborioGyro;
 
-    private static RobotContainer m_robotContainer = new RobotContainer();
+    public static RobotContainer m_robotContainer = new RobotContainer();
 
     // The robot's subsystems
     public final Drivetrain m_drive = new Drivetrain();
@@ -127,14 +127,25 @@ public class RobotContainer {
 
     }
 
+    /**
+     * @return
+     */
+
     public XboxController getdriveStick() {
         return driveStick;
         }
+
+    /**
+     * @return
+     */
 
     public XboxController getsubStick() {
         return subStick;
         }
 
+    /**
+     * @return
+     */
 
     public Command getAutonomousCommand() {
         // The selected command will be run in autonomous

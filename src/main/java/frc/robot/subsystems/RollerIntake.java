@@ -13,6 +13,10 @@ public class RollerIntake extends SubsystemBase{
         rTalon.setInverted(false);
     }
 
+    /**
+     * @param speed
+     */
+
     public void setSpeed(double speed){
         rTalon.set(speed);  
     }

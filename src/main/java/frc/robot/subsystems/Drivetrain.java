@@ -125,6 +125,10 @@ drive = RobotMap.drive;
 
     }
 
+	/**
+	 * @return
+	 */
+
     public DifferentialDrive getDrive() {
         return drive;
     }
@@ -133,6 +137,13 @@ drive = RobotMap.drive;
 		drive.arcadeDrive(-Robot.m_robotContainer.getdriveStick().getLeftY(), Robot.m_robotContainer.getdriveStick().getLeftX());
 	}
 
+	/**
+	 * @param forward
+	 * how much power of forward the autonomous arcade has
+	 * @param rotation
+	 * how much power of rotation the autonomous arcade has
+	 */
+
     public void arcadeDrive(double forward, double rotation) {
 		drive.arcadeDrive(forward, rotation);
 	}
@@ -140,6 +151,13 @@ drive = RobotMap.drive;
 	public void tankDrive() {
 		drive.tankDrive(Robot.m_robotContainer.getdriveStick().getLeftY(), Robot.m_robotContainer.getdriveStick().getRightY());
 	}
+
+	/**
+	 * @param leftVal
+	 * how much power the "left stick" of the auto tank has
+	 * @param rightVal
+	 * how much power the "right stick" of the auto tank has
+	 */
 
     public void tankDrive(double leftVal, double rightVal) {
 		leftMotors.set(leftVal);
@@ -159,12 +177,23 @@ drive = RobotMap.drive;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+
+	/**
+	 * @param pidIdx
+	 * @return
+	 */
+
     public double getLeftEncoderPos(int pidIdx) {
-		return testLeft2.getSelectedSensorPosition(pidIdx);
+		return left2.getSelectedSensorPosition(pidIdx);
 	}
 
+	/**
+	 * @param pidIdx
+	 * @return
+	 */
+
 	public double getRightEncoderPos(int pidIdx) {
-		return testRight2.getSelectedSensorPosition(pidIdx);
+		return right2.getSelectedSensorPosition(pidIdx);
 	}	
 
 	//goodies for gyro
@@ -176,9 +205,18 @@ drive = RobotMap.drive;
 		gyro.reset();
 	}
 
+	/**
+	 * @return
+	 */
+
 	public double getGyroHeading() {
 		return gyro.getAngle();
 	}
+
+	/**
+	 * @param val
+	 * @return
+	 */
 
 	public double thresholdVBus(double val) {
 		if(Math.abs(val) < minVBusOutVal) {

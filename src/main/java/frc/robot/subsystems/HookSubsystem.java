@@ -69,6 +69,11 @@ private MotorControllerGroup bothhooks;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+
+    /**
+     * @param speed
+     */
+
     public void setSpeed (double speed){
         bothhooks.set(speed);  
     }

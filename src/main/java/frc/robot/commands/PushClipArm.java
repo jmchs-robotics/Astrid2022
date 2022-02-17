@@ -28,6 +28,10 @@ public class PushClipArm extends CommandBase {
 
     private ClipSubsystem m_subsystem;
 
+    /**
+     * @param subsystem
+     */
+
     public PushClipArm(ClipSubsystem subsystem) {
 
         m_subsystem = subsystem;
