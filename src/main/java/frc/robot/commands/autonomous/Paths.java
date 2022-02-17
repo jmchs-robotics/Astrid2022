@@ -13,9 +13,9 @@ public class Paths { // extends CommandBase {
  
     //private SwerveDriveSubsystem m_swerve;
     Drivetrain m_drive;
-    HookSubsystem m_Hook;
-    ClipSubsystem m_Clip;
-    RollerIntake m_Intake;
+    HookSubsystem m_hook;
+    ClipSubsystem m_clip;
+    RollerIntake m_intake;
 
     /**
      * @param drive
@@ -26,9 +26,9 @@ public class Paths { // extends CommandBase {
 
     public Paths(Drivetrain drive, HookSubsystem hook, ClipSubsystem clip, RollerIntake intake) {
         m_drive = drive;
-        m_Hook = hook;
-        m_Clip = clip;   
-        m_Intake = intake;     
+        m_hook = hook;
+        m_clip = clip;   
+        m_intake = intake;     
     }
 
     /**
@@ -45,9 +45,9 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path1() {
+    public Command Path1() { //Move out of the zone
       return new SequentialCommandGroup(
-
+        new DriveStraight(m_drive, -12, 0.7, true)
       );
     }
 
@@ -55,7 +55,21 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path2() {
+    public Command Path2() { //Score --> Move
+      return new SequentialCommandGroup(
+        new DriveStraight(m_drive, 6, 0.7, true),
+        new PushClipArm(m_clip),
+        new WaitCommand(1),
+        new PullClipArm(m_clip),
+        new DriveStraight(m_drive, -18, 0.7, true)
+      );
+    }
+
+    /**
+     * @return
+     */
+
+    public Command Path3() { //Score --> Intake --> Score --> etc.
       return new SequentialCommandGroup(
 
       );
