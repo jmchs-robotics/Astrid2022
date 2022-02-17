@@ -28,7 +28,7 @@ public class DriveStraight extends CommandBase {
 	double direction;
 	double distThisLeg;
 	
-    public DriveStraight(Drivetrain subsystem, double timeToRun, double percentVBus) {
+  public DriveStraight(Drivetrain subsystem, double timeToRun, double percentVBus) {
 
 		m_subsystem = subsystem;
     	addRequirements(m_subsystem);
