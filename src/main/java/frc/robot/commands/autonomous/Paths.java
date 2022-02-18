@@ -47,7 +47,7 @@ public class Paths { // extends CommandBase {
 
     public Command Path1() { //Move out of the zone
       return new SequentialCommandGroup(
-        new DriveStraight(m_drive, -12, 0.7, true)
+        new DriveStraight(m_drive, 120, 1, true) //120.75 is measurement to move completely out
       );
     }
 
@@ -57,11 +57,11 @@ public class Paths { // extends CommandBase {
 
     public Command Path2() { //Score --> Move
       return new SequentialCommandGroup(
-        new DriveStraight(m_drive, 6, 0.7, true),
+        //new DriveStraight(m_drive, -6, 0.7, true),
         new PushClipArm(m_clip),
-        new WaitCommand(1),
+        new WaitCommand(0.3),
         new PullClipArm(m_clip),
-        new DriveStraight(m_drive, -18, 0.7, true)
+        new DriveStraight(m_drive, 120, 0.7, true)
       );
     }
 
