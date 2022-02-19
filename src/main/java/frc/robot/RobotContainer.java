@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -8,11 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.*;
-
-
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -48,13 +47,10 @@ public class RobotContainer {
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
   
-    // A chooser for autonomous commands
-    SendableChooser<Command> m_chooser = new SendableChooser<>();
-
     // The container for the robot. Configures subsystems, OI devices, and commands.
     private RobotContainer() {
 
-        // SmartDashboard Buttons
+        // SmartDashboard Command Buttons
         SmartDashboard.putData("extend hook", new ExtendHook(m_Hook));
         SmartDashboard.putData("retract hook", new RetractHook(m_Hook));
         SmartDashboard.putData("push L-arm", new PushClipArm(m_Clip));
@@ -65,13 +61,6 @@ public class RobotContainer {
         configureButtonBindings();
 
         configureDefaultCommands();
-
-        // Configure autonomous sendable chooser
-
-        // m_chooser.addOption("auto1", new auto1());
-        // m_chooser.setDefaultOption("auto1", new auto1());
-
-        SmartDashboard.putData("Auto Mode", m_chooser);
     }
 
     public static RobotContainer getInstance() {
@@ -128,7 +117,7 @@ public class RobotContainer {
     }
 
     /**
-     * @return
+     * @return The driver stick 
      */
 
     public XboxController getdriveStick() {
@@ -136,7 +125,7 @@ public class RobotContainer {
         }
 
     /**
-     * @return
+     * @return The sub stick
      */
 
     public XboxController getsubStick() {
@@ -144,12 +133,30 @@ public class RobotContainer {
         }
 
     /**
-     * @return
+     * @return Selected autonomous command
      */
 
-    public Command getAutonomousCommand() {
-        // The selected command will be run in autonomous
-        return m_chooser.getSelected();
+    public Command getAutonomousCommand(String a) {
+        Paths p = new Paths(m_drive, m_Hook, m_Clip, m_Intake);
+        
+        //Default set command
+        Command autoCommand = new SequentialCommandGroup(p.Path1());
+
+        //Autonomous options
+        switch( a) {
+        case "1":
+            autoCommand = new SequentialCommandGroup(p.Path1());
+            break;
+        case "2":
+            autoCommand = new SequentialCommandGroup(p.Path2());
+            break;
+        case "3":
+            autoCommand = new SequentialCommandGroup(p.Path3());
+            break;
+        
+        }   
+
+        return autoCommand;
     }
 }
 

@@ -2,16 +2,11 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.cameraserver.*;
-
 
 public class RobotMap {
 	//drivetrain master objects
@@ -34,6 +29,7 @@ public class RobotMap {
     //clip objects
     public static DoubleSolenoid leftPiston;
     public static DoubleSolenoid rightPiston;
+    public static Compressor compressor;
 
     public static void init() {
 
@@ -65,6 +61,7 @@ public class RobotMap {
         //instantiate clip pistons
         leftPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
         rightPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
+        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
         
     }
 }

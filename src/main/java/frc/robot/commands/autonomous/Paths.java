@@ -32,16 +32,6 @@ public class Paths { // extends CommandBase {
     }
 
     /**
-    * @return
-    */
-
-    public Command PathTestCommand() {
-      return new SequentialCommandGroup(
-
-      );
-    }
-
-    /**
      * @return
      */
 
@@ -56,6 +46,16 @@ public class Paths { // extends CommandBase {
      */
 
     public Command Path2() {
+      return new SequentialCommandGroup(
+
+      );
+    }
+
+    /**
+    * @return
+    */
+
+    public Command Path3() {
       return new SequentialCommandGroup(
 
       );
