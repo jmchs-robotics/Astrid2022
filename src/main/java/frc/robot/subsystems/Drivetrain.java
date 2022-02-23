@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * Drivetrain is responsible for all robot driving and translational movement.
@@ -29,7 +29,7 @@ public class Drivetrain extends SubsystemBase {
 	public static final double kPGyroConstant = 0.01;
 	public static final double kPGyroTurnConstant = 0.01;
 	public static final double kEncoderTicksPerInch = 325.9493209;
-	private final ADXRS450_Gyro gyro = RobotContainer.roborioGyro;
+	private final AHRS gyro = RobotContainer.roborioGyro;
 	private static final double minVBusOutVal = 0.2;
 
     public Drivetrain() {
