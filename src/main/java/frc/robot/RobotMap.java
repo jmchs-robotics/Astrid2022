@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import com.kauailabs.navx.frc.AHRS;
 
 public class RobotMap {
 	//drivetrain master objects
@@ -19,7 +20,7 @@ public class RobotMap {
     public static DifferentialDrive drive;
     
     //control system objects
-    public static ADXRS450_Gyro roborioGyro;
+    public static AHRS roborioGyro;
     
     //hook objects
     public static WPI_TalonFX leftHookMotor;
@@ -56,12 +57,11 @@ public class RobotMap {
         rightHookMotor.setInverted(true);
         
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
-        roborioGyro = new ADXRS450_Gyro();
+        roborioGyro = new AHRS();
         
         //instantiate clip pistons
         leftPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
         rightPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
-        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-        
+        compressor = new Compressor(PneumaticsModuleType.CTREPCM); 
     }
 }
