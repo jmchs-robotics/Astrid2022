@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
 
-    public static AHRS roborioGyro;
-
     public static RobotContainer m_robotContainer = new RobotContainer();
 
     // The robot's subsystems
