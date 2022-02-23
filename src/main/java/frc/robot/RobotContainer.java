@@ -102,7 +102,7 @@ public class RobotContainer {
             new ExtendHook(m_Hook)
         );
         subLB.whenPressed(
-            new ConsumeCargo(m_Intake)
+            new ExpelCargo(m_Intake)
         );
         subRB.whenPressed(
             new ConsumeCargo(m_Intake)
