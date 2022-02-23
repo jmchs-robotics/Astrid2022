@@ -31,9 +31,9 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         RobotMap.init();
 
-        startPosChooser.setDefaultOption("Path 1", "1");
-        startPosChooser.addOption ("Path 2", "2");
-        startPosChooser.addOption ("Path 3", "3");
+        startPosChooser.setDefaultOption("Motor Show Off", "1");
+        startPosChooser.addOption ("Score 'n' Dash", "2");
+        startPosChooser.addOption ("Lots o' Points", "3");
 		
 		// 'print' the Chooser to the dashboard
 		SmartDashboard.putData("Path Chosen", startPosChooser);
