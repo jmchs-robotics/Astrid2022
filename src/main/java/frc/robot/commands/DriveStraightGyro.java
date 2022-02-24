@@ -2,7 +2,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-public class DriveStraight extends CommandBase {
+public class DriveStraightGyro extends CommandBase {
 
 	private Drivetrain m_subsystem;
 
@@ -19,7 +19,7 @@ public class DriveStraight extends CommandBase {
 	 * @param percentVBus
 	 */
 	
-  public DriveStraight(Drivetrain subsystem, double timeToRun, double percentVBus) {
+  public DriveStraightGyro(Drivetrain subsystem, double timeToRun, double percentVBus) {
 
 		m_subsystem = subsystem;
     	addRequirements(m_subsystem);
@@ -35,7 +35,7 @@ public class DriveStraight extends CommandBase {
      * @param percentVBus Requires same sign as inches.
      * @param useEncoders TRUE to use encoders.
      */
-    public DriveStraight(Drivetrain subsystem, double inches, double percentVBus, boolean useEncoders) {
+    public DriveStraightGyro(Drivetrain subsystem, double inches, double percentVBus, boolean useEncoders) {
     	
 		m_subsystem = subsystem;
 		addRequirements(m_subsystem);

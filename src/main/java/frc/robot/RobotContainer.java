@@ -53,7 +53,7 @@ public class RobotContainer {
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
         SmartDashboard.putData("Push L-Arm", new PushClipArm(m_Clip));
         SmartDashboard.putData("Pull L-Arm", new PullClipArm(m_Clip));
-        SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 10, 0.5, true));
+        SmartDashboard.putData("Drive Straight", new DriveStraightGyro(m_drive, 10, 0.5, true));
         SmartDashboard.putData("Turn", new Turn(m_drive,0, 0, 0));
 
         configureButtonBindings();
