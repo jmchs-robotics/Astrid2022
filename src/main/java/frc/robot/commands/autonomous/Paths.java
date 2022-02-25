@@ -37,7 +37,8 @@ public class Paths { // extends CommandBase {
 
     public Command Path1() { //Move out of the zone
       return new SequentialCommandGroup(
-        new DriveStraight(m_drive, 36, 1, true)
+        //new DriveStraight(m_drive, 0.1).withTimeout(5)
+        new Turn(m_drive, 90, .2).withTimeout(2)
       );
     }
 

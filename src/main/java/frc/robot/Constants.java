@@ -11,10 +11,10 @@ package frc.robot;
 public class Constants {
 
     //ASTRID IDs
-    public static final int left1ID = 2;
-    public static final int left2ID = 4;
-    public static final int right1ID = 3;
-    public static final int right2ID = 5;
+    public static final int left1ID = 3;
+    public static final int left2ID = 5;
+    public static final int right1ID = 2;
+    public static final int right2ID = 4;
 
     //Hook Subsystem IDs
     public static final int leftHookID= 0;

@@ -1,4 +1,5 @@
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -9,7 +10,7 @@ public class DriveStraight extends CommandBase {
 	double endVal;
 	double vBus;
 	double initialHeading;
-	boolean useFeedback;
+	boolean usePD;
 	double direction;
 	double distThisLeg;
 
@@ -19,14 +20,13 @@ public class DriveStraight extends CommandBase {
 	 * @param percentVBus
 	 */
 	
-  public DriveStraight(Drivetrain subsystem, double timeToRun, double percentVBus) {
+  public DriveStraight(Drivetrain subsystem, double percentVBus) {
 
 		m_subsystem = subsystem;
     	addRequirements(m_subsystem);
     	
-    	endVal = timeToRun;
-    	vBus = -percentVBus;
-    	useFeedback = false;
+		vBus = percentVBus;
+    	usePD = false;
     }
     
     /**
@@ -35,15 +35,15 @@ public class DriveStraight extends CommandBase {
      * @param percentVBus Requires same sign as inches.
      * @param useEncoders TRUE to use encoders.
      */
-    public DriveStraight(Drivetrain subsystem, double inches, double percentVBus, boolean useEncoders) {
+    public DriveStraight(Drivetrain subsystem, double inches, double percentVBus, boolean usePD) {
     	
 		m_subsystem = subsystem;
 		addRequirements(m_subsystem);
     	
-    	endVal = inches * Drivetrain.kEncoderTicksPerInch;
+    	endVal = inches * m_subsystem.kEncoderTicksPerInch;
     	distThisLeg = endVal;
     	vBus = percentVBus;
-    	useFeedback = useEncoders;
+    	this.usePD = usePD;
 
     	//direction is positive for forwards and negative for backwards.
     	
@@ -60,22 +60,22 @@ public class DriveStraight extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	double proportion = Drivetrain.kPGyroConstant * (m_subsystem.getGyroHeading() - initialHeading);
-    	double coefficient = 1;
+    	double proportion = m_subsystem.kPGyroConstant * (m_subsystem.getGyroHeading() - initialHeading);
+    	double left_coefficient = 1;
+		double right_coefficient = 0.985;
     	
-    	if(useFeedback) {    		
-    		// ramp down at the end of this leg of travel
-    		// coefficient = Math.pow((endVal - Robot.drivetrain.getRightEncoderPos(0)) / endVal,2/3);  // this won't really work any more because endVal is not relative to resetting encoders to zero    		
-    		coefficient = Math.abs( distThisLeg - m_subsystem.getRightEncoderPos(0)) / 2000;    		
-    		coefficient = m_subsystem.thresholdVBus(coefficient);
+    	if(usePD) {    		
+			
+			
     	}
     	
-    	m_subsystem.tankDrive(coefficient * (vBus - proportion), -coefficient * (vBus + proportion));
+    	m_subsystem.tankDrive(left_coefficient * vBus, right_coefficient * vBus);
+		
     }
 
     // Make this return true when this Command no longer needs to run execute()
     public boolean isFinished() {
-    	if(useFeedback) {
+    	if(usePD) {
     		// have we gone far enough?
     		if(Math.signum(vBus) < 0) {
     			return m_subsystem.getRightEncoderPos(0) <= endVal;

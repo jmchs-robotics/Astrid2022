@@ -26,11 +26,11 @@ public class Drivetrain extends SubsystemBase {
 	private final MotorControllerGroup rightMotors;
 	private final DifferentialDrive drive;
 
-	public static final double kPGyroConstant = 0.01;
-	public static final double kPGyroTurnConstant = 0.01;
-	public static final double kEncoderTicksPerInch = 325.9493209;
-	private final AHRS gyro = RobotMap.roborioGyro;
-	private static final double minVBusOutVal = 0.2;
+	public final double kPGyroConstant = 0.01;
+	public final double kPGyroTurnConstant = 0.01;
+	public final double kEncoderTicksPerInch = 108.6497;
+	public final AHRS gyro = RobotMap.roborioGyro;
+	public final double minVBusOutVal = 0.2;
 
     public Drivetrain() {
 
