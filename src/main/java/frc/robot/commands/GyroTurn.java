@@ -1,6 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -8,12 +9,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class Turn extends CommandBase {
+public class GyroTurn extends CommandBase {
 	
 	Drivetrain m_subsystem;
 	double targetHeading;
 	double vBus;
 	double threshold;
+	double error;
 
 	/**
 	 * Instantiate a turn object. Angle is in gryoscope native units.
@@ -22,13 +24,14 @@ public class Turn extends CommandBase {
 	 * @param percentVBus
 	 * The maximum turning voltage bus proportion
 	 */
-    public Turn(Drivetrain subsystem, double targetAngle, double percentVBus) {
+    public GyroTurn(Drivetrain subsystem, double targetAngle, double percentVBus, double marginofError) {
         
 		m_subsystem = subsystem;
     	addRequirements(subsystem);
     	
     	targetHeading = targetAngle;
     	vBus = percentVBus;
+		threshold = marginofError;
     }
 
     // Called just before this Command runs the first time
@@ -38,16 +41,20 @@ public class Turn extends CommandBase {
     }
 
     // Called repeatedly when this Command is scheduled to run
+	
     public void execute() {
+		error = (targetHeading - m_subsystem.getGyroHeading() * Constants.kP_Turn);
 
-    	m_subsystem.tankDrive(vBus, -vBus);
+		// Turns the robot to face the desired direction\
+		m_subsystem.tankDrive(vBus * error, -vBus * error);
     	SmartDashboard.putNumber("Left gyro val: ", vBus);
     	SmartDashboard.putNumber("Right gyro val", vBus);
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     public boolean isFinished() {
-        return false;
+        return error < threshold && error > - threshold;
     }
 
     // Called once after isFinished returns true

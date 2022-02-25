@@ -27,4 +27,7 @@ public class Constants {
     public static final int ripleyRMID = 11;
     public static final int ripleyRF1ID = 13;
     public static final int ripleyRF2ID = 15;
+
+    //Drive Constants
+    public static final double kP_Turn = 0.05;
 }
