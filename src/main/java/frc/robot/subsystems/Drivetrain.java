@@ -127,7 +127,7 @@ public class Drivetrain extends SubsystemBase {
 
 	public double getRightEncoderPos(int pidIdx) {
 		return right2.getSelectedSensorPosition(pidIdx);
-	}	
+	}
 
 	//goodies for gyro
 	private void initGyro() {

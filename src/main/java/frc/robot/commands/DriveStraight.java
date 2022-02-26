@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import org.w3c.dom.UserDataHandler;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -10,23 +12,40 @@ public class DriveStraight extends CommandBase {
 	double endVal;
 	double vBus;
 	double initialHeading;
-	boolean usePD;
+	boolean useGyro;
+	boolean useEncoders;
 	double direction;
 	double distThisLeg;
 
 	/**
+	 * @desc Simple drive straight command with only voltage
 	 * @param subsystem
-	 * @param timeToRun
 	 * @param percentVBus
 	 */
-	
-  public DriveStraight(Drivetrain subsystem, double percentVBus) {
+  	public DriveStraight(Drivetrain subsystem, double percentVBus) {
 
 		m_subsystem = subsystem;
     	addRequirements(m_subsystem);
     	
 		vBus = percentVBus;
-    	usePD = false;
+    	useGyro = false;
+		useEncoders = false;
+    }
+
+	/**
+	 * @desc Drive command with gyro stabilization
+	 * @param subsystem
+	 * @param percentVBus
+	 * @param gyro TRUE to use gyroscope
+	 */
+	public DriveStraight(Drivetrain subsystem, double percentVBus, boolean gyro) {
+
+		m_subsystem = subsystem;
+    	addRequirements(m_subsystem);
+    	
+		vBus = percentVBus;
+    	useGyro = gyro;
+		useEncoders = false;
     }
     
     /**

@@ -27,8 +27,8 @@ public class RobotContainer {
     public final RollerIntake m_Intake = new RollerIntake();
 
     // Joysticks
-    private final XboxController subStick = new XboxController(1);
-    private final XboxController driveStick = new XboxController(0);
+    private final XboxController subStick = new XboxController(0);
+    private final XboxController driveStick = new XboxController(1);
     private final JoystickButton driveA = new JoystickButton(driveStick, XboxController.Button.kA.value);
     private final JoystickButton driveB = new JoystickButton(driveStick, XboxController.Button.kB.value);    
     private final JoystickButton driveX = new JoystickButton(driveStick, XboxController.Button.kX.value); 
@@ -84,7 +84,7 @@ public class RobotContainer {
 
         */
 
-        subA.whenPressed(
+        subA.whenHeld(
             new RetractHook(m_Hook)
         );   
         subB.whenPressed(
@@ -93,13 +93,13 @@ public class RobotContainer {
         subX.whenPressed(
             new PushClipArm(m_Clip)
         );
-        subY.whenPressed(
+        subY.whenHeld(
             new ExtendHook(m_Hook)
         );
-        subLB.whenPressed(
-            new ConsumeCargo(m_Intake)
+        subLB.whenHeld(
+            new ExpelCargo(m_Intake)
         );
-        subRB.whenPressed(
+        subRB.whenHeld(
             new ConsumeCargo(m_Intake)
         );
     }
@@ -108,6 +108,7 @@ public class RobotContainer {
     private void configureDefaultCommands() {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
+        m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
 
     }
 

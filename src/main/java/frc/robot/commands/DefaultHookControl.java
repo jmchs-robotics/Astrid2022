@@ -1,25 +1,24 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.HookSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class DefaultArcadeDrive extends CommandBase {
+public class DefaultHookControl extends CommandBase {
   
-  private final Drivetrain m_subsystem;
+  private final HookSubsystem m_subsystem;
   private final XboxController m_stick;
 
   /**
-   * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    * @param stick The XBoxController used by this command.
    */
-  public DefaultArcadeDrive(Drivetrain subsystem, XboxController stick) {
+  public DefaultHookControl(HookSubsystem subsystem, XboxController stick) {
     m_subsystem = subsystem;
     m_stick = stick;
     addRequirements(subsystem);
@@ -33,12 +32,9 @@ public class DefaultArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Gyro Heading:", m_subsystem.getGyroHeading());
-
-    double forward = m_stick.getLeftY();
-    double rotation = m_stick.getLeftX();
+    double hookControl = m_stick.getLeftY();
     
-    m_subsystem.arcadeDrive(forward, rotation);
+    m_subsystem.setSpeed(hookControl);
   }
 
   // Called once the command ends or is interrupted.
