@@ -3,6 +3,8 @@ package frc.robot.commands;
 import org.w3c.dom.UserDataHandler;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Constants.Drive;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveStraight extends CommandBase {
@@ -12,7 +14,6 @@ public class DriveStraight extends CommandBase {
 	double endVal;
 	double vBus;
 	double initialHeading;
-	boolean useGyro;
 	boolean useEncoders;
 	double direction;
 	double distThisLeg;
@@ -28,41 +29,23 @@ public class DriveStraight extends CommandBase {
     	addRequirements(m_subsystem);
     	
 		vBus = percentVBus;
-    	useGyro = false;
 		useEncoders = false;
     }
 
-	/**
-	 * @desc Drive command with gyro stabilization
-	 * @param subsystem
-	 * @param percentVBus
-	 * @param gyro TRUE to use gyroscope
-	 */
-	public DriveStraight(Drivetrain subsystem, double percentVBus, boolean gyro) {
-
-		m_subsystem = subsystem;
-    	addRequirements(m_subsystem);
-    	
-		vBus = percentVBus;
-    	useGyro = gyro;
-		useEncoders = false;
-    }
-    
     /**
      * @desc Command that drives straight with the help of encoders
      * @param inches Needs to be negative for backwards movement, positive otherwise.
      * @param percentVBus Requires same sign as inches.
      * @param useEncoders TRUE to use encoders.
      */
-    public DriveStraight(Drivetrain subsystem, double inches, double percentVBus, boolean usePD) {
+    public DriveStraight(Drivetrain subsystem, double percentVBus, double inches) {
     	
 		m_subsystem = subsystem;
 		addRequirements(m_subsystem);
     	
-    	endVal = inches * m_subsystem.kEncoderTicksPerInch;
-    	distThisLeg = endVal;
+    	endVal = inches * Drive.kEncoderTicksPerInch;
     	vBus = percentVBus;
-    	this.usePD = usePD;
+		useEncoders = true;
 
     	//direction is positive for forwards and negative for backwards.
     	
@@ -79,22 +62,23 @@ public class DriveStraight extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	double proportion = m_subsystem.kPGyroConstant * (m_subsystem.getGyroHeading() - initialHeading);
-    	double left_coefficient = 1;
-		double right_coefficient = 0.985;
+    	double proportion = Drive.kP_gyroTurn * (m_subsystem.getGyroHeading() - initialHeading);
+    	double leftVal = 1 * vBus;
+		double rightVal = 0.985 * vBus;
     	
-    	if(usePD) {    		
+    	if(useEncoders) {    		
 			
+			m_subsystem.tankDrive(leftVal + proportion, rightVal - proportion);
 			
     	}
     	
-    	m_subsystem.tankDrive(left_coefficient * vBus, right_coefficient * vBus);
+    	m_subsystem.tankDrive(leftVal, rightVal);
 		
     }
 
     // Make this return true when this Command no longer needs to run execute()
     public boolean isFinished() {
-    	if(usePD) {
+    	if(useEncoders) {
     		// have we gone far enough?
     		if(Math.signum(vBus) < 0) {
     			return m_subsystem.getRightEncoderPos(0) <= endVal;

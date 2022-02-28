@@ -1,4 +1,7 @@
 package frc.robot;
+import frc.robot.Constants.Clip;
+import frc.robot.Constants.Drive;
+import frc.robot.Constants.Hook;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -6,6 +9,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.SPI;
 import com.kauailabs.navx.frc.AHRS;
 
 public class RobotMap {
@@ -35,10 +39,10 @@ public class RobotMap {
 
     	//Drivetrain master instantiation.
     	//Convention: evens are left motors, odds are right motors.
-        left1 = new WPI_TalonFX(Constants.left1ID);
-        left2 = new WPI_TalonFX(Constants.left2ID);
-        right1 = new WPI_TalonFX(Constants.right1ID);
-        right2 = new WPI_TalonFX(Constants.right2ID);
+        left1 = new WPI_TalonFX(Drive.left1ID);
+        left2 = new WPI_TalonFX(Drive.left2ID);
+        right1 = new WPI_TalonFX(Drive.right1ID);
+        right2 = new WPI_TalonFX(Drive.right2ID);
         
         leftMotors = new MotorControllerGroup(left1, left2);
         rightMotors = new MotorControllerGroup(right1, right2);
@@ -50,17 +54,17 @@ public class RobotMap {
         drive.setMaxOutput(1.0);
         
         //instantiate hook motors
-        leftHookMotor = new WPI_TalonFX(Constants.leftHookID);
-        rightHookMotor = new WPI_TalonFX(Constants.rightHookID);
+        leftHookMotor = new WPI_TalonFX(Hook.leftHookID);
+        rightHookMotor = new WPI_TalonFX(Hook.rightHookID);
         hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);
         rightHookMotor.setInverted(true);
         
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
-        roborioGyro = new AHRS();
+        roborioGyro = new AHRS(SPI.Port.kMXP);
         
         //instantiate clip pistons
-        leftPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
-        rightPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
+        leftPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Clip.leftForwardChannel, Clip.leftReverseChannel);
+        rightPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Clip.rightForwardChannel, Clip.rightForwardChannel);
         compressor = new Compressor(PneumaticsModuleType.CTREPCM); 
     }
 }

@@ -54,5 +54,10 @@ private MotorControllerGroup bothhooks;
         bothhooks.stopMotor();
     }
 
+
+    public double getEncoderPos(int pidIdx) {
+		return rightHookMotor.getSelectedSensorPosition(pidIdx);
+	}
+
 }
 

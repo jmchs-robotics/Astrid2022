@@ -50,7 +50,7 @@ public class RobotContainer {
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
         SmartDashboard.putData("Push L-Arm", new PushClipArm(m_Clip));
         SmartDashboard.putData("Pull L-Arm", new PullClipArm(m_Clip));
-        SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 10, 0.5, true));
+        SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
         configureButtonBindings();
@@ -109,7 +109,7 @@ public class RobotContainer {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
         m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
-
+        
     }
 
     /**

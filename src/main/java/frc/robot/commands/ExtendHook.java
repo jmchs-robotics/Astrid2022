@@ -1,4 +1,5 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.HookSubsystem;
@@ -27,6 +28,8 @@ public class ExtendHook extends CommandBase {
     @Override
     public void execute() {
         m_subsystem.setSpeed(0.2);
+        
+        SmartDashboard.putNumber("Hook Encoder: ", m_subsystem.getEncoderPos(0));
     }
 
     // Called once the command ends or is interrupted.

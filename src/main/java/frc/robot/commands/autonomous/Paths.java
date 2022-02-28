@@ -38,7 +38,7 @@ public class Paths { // extends CommandBase {
     public Command Path1() { //Move out of the zone
       return new SequentialCommandGroup(
         //new DriveStraight(m_drive, 0.1).withTimeout(5)
-        new GyroTurn(m_drive, 90, .2, 0.05).withTimeout(2)
+        new DriveStraight(m_drive, .2).withTimeout(2)
       );
     }
 
@@ -52,7 +52,7 @@ public class Paths { // extends CommandBase {
         new PushClipArm(m_clip),
         new WaitCommand(0.3),
         new PullClipArm(m_clip),
-        new DriveStraight(m_drive, 36, 0.7, true)
+        new DriveStraight(m_drive, 36)
       );
     }
 

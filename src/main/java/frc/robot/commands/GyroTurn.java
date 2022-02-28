@@ -1,8 +1,8 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.Constants.Drive;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -43,7 +43,7 @@ public class GyroTurn extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
 	
     public void execute() {
-		error = (targetHeading - m_subsystem.getGyroHeading() * Constants.kP_Turn);
+		error = (targetHeading - m_subsystem.getGyroHeading() * Drive.kP_turn);
 
 		// Turns the robot to face the desired direction\
 		m_subsystem.tankDrive(vBus * error, -vBus * error);
