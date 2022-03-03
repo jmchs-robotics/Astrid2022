@@ -35,7 +35,8 @@ public final class Constants {
         public static final int leftHookID = 0;
         public static final int rightHookID = 1;
 
-        public static final double minHookPos = 0; 
+        public static final double minHookPos = -5; 
+        public static final double maxHookPos = 1000000; 
     }
         
     public static final class Clip {

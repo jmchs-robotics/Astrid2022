@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.Constants.Hook;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.HookSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,6 +14,7 @@ public class DefaultHookControl extends CommandBase {
   
   private final HookSubsystem m_subsystem;
   private final XboxController m_stick;
+  private double hookControl;
 
   /**
    *
@@ -33,10 +35,11 @@ public class DefaultHookControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double hookControl = 0.2 * m_stick.getLeftY();
+    hookControl = 0.2 * m_stick.getLeftY();
     
     m_subsystem.setSpeed(hookControl);
-    SmartDashboard.putNumber("Hook Encoder Value: ", m_subsystem.getEncoderPos(0));
+    SmartDashboard.putNumber("Hook Encoder Value: ", m_subsystem.getEncoderValue(0));
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -49,6 +52,12 @@ public class DefaultHookControl extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (hookControl < 0) {
+      return m_subsystem.getEncoderValue(0) < Hook.minHookPos;
+    } else if (hookControl > 0) {
+      return m_subsystem.getEncoderValue(0) > Hook.maxHookPos;
+    } else {
+      return false;
+    }
   }
 }

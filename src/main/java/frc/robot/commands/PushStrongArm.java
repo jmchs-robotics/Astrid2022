@@ -4,11 +4,12 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.subsystems.ClipSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  *
  */
-public class PushClipArm extends CommandBase {
+public class PushStrongArm extends CommandBase {
 
     private ClipSubsystem m_subsystem;
 
@@ -16,7 +17,7 @@ public class PushClipArm extends CommandBase {
      * @param subsystem
      */
 
-    public PushClipArm(ClipSubsystem subsystem) {
+    public PushStrongArm(ClipSubsystem subsystem) {
 
         m_subsystem = subsystem;
         addRequirements(m_subsystem); 
@@ -31,13 +32,13 @@ public class PushClipArm extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.pistonsForward();
+        m_subsystem.setStrongSolenoid(Value.kReverse);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.pistonsOff();
+        m_subsystem.setStrongSolenoid(Value.kOff);
     }
 
     // Returns true when the command should end.

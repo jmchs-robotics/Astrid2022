@@ -43,7 +43,7 @@ public class GyroTurn extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
 	
     public void execute() {
-		error = (targetHeading - m_subsystem.getGyroHeading() * Drive.kP_turn);
+		error = (targetHeading - m_subsystem.getGyroHeading()) * Drive.kP_turn;
 
 		// Turns the robot to face the desired direction\
 		m_subsystem.tankDrive(vBus * error, -vBus * error);

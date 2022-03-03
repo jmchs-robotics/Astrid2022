@@ -41,15 +41,15 @@ public class RobotContainer {
     private final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);  
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
-  
+
     // The container for the robot. Configures subsystems, OI devices, and commands.
     private RobotContainer() {
 
         // SmartDashboard Command Buttons
         SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook));
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
-        SmartDashboard.putData("Push L-Arm", new PushClipArm(m_Clip));
-        SmartDashboard.putData("Pull L-Arm", new PullClipArm(m_Clip));
+        SmartDashboard.putData("Push L-Arm", new PushWeakArm(m_Clip));
+        SmartDashboard.putData("Pull L-Arm", new PullWeakArm(m_Clip));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
@@ -85,23 +85,26 @@ public class RobotContainer {
         */
 
         subA.whenHeld(
-            new RetractHook(m_Hook)
-        );   
-        subB.whenPressed(
-            new PushClipArm(m_Clip)
-        );
-        subX.whenPressed(
-            new PushClipArm(m_Clip)
-        );
-        subY.whenHeld(
             new ExtendHook(m_Hook)
+        ); 
+        subY.whenHeld(
+            new RetractHook(m_Hook)
+        );  
+        subX.whenPressed(
+            new PullStrongArm(m_Clip).withTimeout(0.1)
         );
-        subLB.whenHeld(
-            new ExpelCargo(m_Intake)
+        subB.whenPressed(
+            new PushStrongArm(m_Clip).withTimeout(0.1)
         );
-        subRB.whenHeld(
-            new ConsumeCargo(m_Intake)
+        subLB.whenPressed(
+            new PullWeakArm(m_Clip).withTimeout(0.1)
         );
+        subRB.whenPressed(
+            new PushWeakArm(m_Clip).withTimeout(0.1)
+        );
+        
+        //new ExpelCargo(m_Intake)
+        //new ConsumeCargo(m_Intake)
     }
 
 

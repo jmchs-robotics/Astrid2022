@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.HookSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 
@@ -51,10 +50,12 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void robotPeriodic() {
-        // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-        // commands, running already-scheduled commands, removing finished or interrupted commands,
-        // and running subsystem periodic() methods.  This must be called from the robot's periodic
-        // block in order for anything in the Command-based framework to work.
+        
+        //Print Test Statements
+        SmartDashboard.putNumber("Gyro Yaw Value: ", m_robotContainer.m_drive.getGyroHeading());
+        SmartDashboard.putString("Clip Values: ", m_robotContainer.m_Clip.getPistonValue());
+        SmartDashboard.putNumber("Hook Encoder Value2: ", m_robotContainer.m_Hook.getEncoderValue(0));
+
         CommandScheduler.getInstance().run();
     }
 
@@ -64,7 +65,6 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void disabledInit() {
-        
     }
 
     @Override

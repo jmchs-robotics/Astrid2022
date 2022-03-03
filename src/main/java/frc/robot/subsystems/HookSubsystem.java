@@ -1,8 +1,11 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
+import frc.robot.Constants.Hook;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 /**
@@ -23,11 +26,11 @@ private MotorControllerGroup bothhooks;
 
         bothhooks = RobotMap.hookMotorGroup;
         addChild("Motor Controller Group 1",bothhooks);
+
     }
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
 
     }
 
@@ -54,9 +57,12 @@ private MotorControllerGroup bothhooks;
         bothhooks.stopMotor();
     }
 
+    public void resetEncoderValue() {
+		rightHookMotor.setSelectedSensorPosition(0);
+	}
 
-    public double getEncoderPos(int pidIdx) {
-		return rightHookMotor.getSelectedSensorPosition(pidIdx);
+    public double getEncoderValue(int index) {
+		return rightHookMotor.getSelectedSensorPosition(index);
 	}
 
 }
