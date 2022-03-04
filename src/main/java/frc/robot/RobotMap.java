@@ -62,7 +62,7 @@ public class RobotMap {
         roborioGyro = new AHRS(SPI.Port.kMXP);
         
         //instantiate clip pistons
-        climbPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.leftForwardChannel, Clip.leftReverseChannel);
-        dumpPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.rightForwardChannel, Clip.rightReverseChannel);
+        climbPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.climbForwardChannel, Clip.climbReverseChannel);
+        dumpPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.dumpForwardChannel, Clip.dumpReverseChannel);
     }
 }

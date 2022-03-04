@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 /**
@@ -19,9 +20,11 @@ private MotorControllerGroup bothhooks;
 
     public HookSubsystem() {
         leftHookMotor = RobotMap.leftHookMotor;
+        leftHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("leftHookMotor",leftHookMotor);
 
         rightHookMotor = RobotMap.leftHookMotor;
+        rightHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("rightHookMotor",rightHookMotor);
 
         bothhooks = RobotMap.hookMotorGroup;
@@ -58,12 +61,18 @@ private MotorControllerGroup bothhooks;
     }
 
     public void resetEncoderValue() {
+        leftHookMotor.setSelectedSensorPosition(0);
 		rightHookMotor.setSelectedSensorPosition(0);
 	}
 
-    public double getEncoderValue(int index) {
-		return rightHookMotor.getSelectedSensorPosition(index);
-	}
+    public double getEncoderValue(boolean left) {
+		if (left) {
+            return leftHookMotor.getSelectedSensorPosition();
+        } else {
+            return rightHookMotor.getSelectedSensorPosition();
+        }
+
+    }
 
 }
 

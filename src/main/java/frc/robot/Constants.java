@@ -32,8 +32,8 @@ public final class Constants {
 
     public static final class Hook {
         //Hook Motor IDs
-        public static final int leftHookID = 0;
-        public static final int rightHookID = 1;
+        public static final int leftHookID = 1;
+        public static final int rightHookID = 0;
 
         public static final double minHookPos = -5; 
         public static final double maxHookPos = 1000000; 
@@ -41,10 +41,10 @@ public final class Constants {
         
     public static final class Clip {
         //Pneumatic Channel IDs 
-        public static final int leftForwardChannel = 4;
-        public static final int leftReverseChannel = 5;
-        public static final int rightForwardChannel = 6;
-        public static final int rightReverseChannel = 7;
+        public static final int climbForwardChannel = 4;
+        public static final int climbReverseChannel = 5;
+        public static final int dumpForwardChannel = 6;
+        public static final int dumpReverseChannel = 7;
     }
     
  

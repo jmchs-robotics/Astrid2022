@@ -38,7 +38,7 @@ public class DefaultHookControl extends CommandBase {
     hookControl = 0.2 * m_stick.getLeftY();
     
     m_subsystem.setSpeed(hookControl);
-    SmartDashboard.putNumber("Hook Encoder Value: ", m_subsystem.getEncoderValue(0));
+    SmartDashboard.putNumber("Hook Right Encoder Value: ", m_subsystem.getEncoderValue(true));
     
   }
 
@@ -53,9 +53,9 @@ public class DefaultHookControl extends CommandBase {
   @Override
   public boolean isFinished() {
     if (hookControl < 0) {
-      return m_subsystem.getEncoderValue(0) < Hook.minHookPos;
+      return m_subsystem.getEncoderValue(true) < Hook.minHookPos;
     } else if (hookControl > 0) {
-      return m_subsystem.getEncoderValue(0) > Hook.maxHookPos;
+      return m_subsystem.getEncoderValue(true) > Hook.maxHookPos;
     } else {
       return false;
     }

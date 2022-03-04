@@ -40,7 +40,7 @@ public class ExtendHook extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_subsystem.getEncoderValue(0) > Hook.maxHookPos;
+        return m_subsystem.getEncoderValue(true) > Hook.maxHookPos;
     }
 
     @Override
