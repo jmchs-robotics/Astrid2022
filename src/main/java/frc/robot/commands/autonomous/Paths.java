@@ -37,7 +37,8 @@ public class Paths { // extends CommandBase {
 
     public Command Path1() { //Motor Show Off
       return new SequentialCommandGroup(
-        new DriveStraight(m_drive, 36, 1, true)
+        //new DriveStraight(m_drive, 0.1).withTimeout(5)
+        new DriveStraight(m_drive, .2).withTimeout(2)
       );
     }
 
@@ -48,10 +49,10 @@ public class Paths { // extends CommandBase {
     public Command Path2() { //Score 'n' Dash
       return new SequentialCommandGroup(
         //new DriveStraight(m_drive, -6, 0.7, true),
-        new PushClipArm(m_clip),
+        new PushWeakArm(m_clip),
         new WaitCommand(0.3),
-        new PullClipArm(m_clip),
-        new DriveStraight(m_drive, 36, 0.7, true)
+        new PullWeakArm(m_clip),
+        new DriveStraight(m_drive, 36)
       );
     }
 

@@ -11,21 +11,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class ClipSubsystem extends SubsystemBase {
 
-    private DoubleSolenoid leftPiston;
-    private DoubleSolenoid rightPiston;
-    private Compressor compressor;
-    
+    private DoubleSolenoid strongPiston;
+    private DoubleSolenoid weakPiston;
+        
     /**
     *
     */
     public ClipSubsystem() {
 
-        leftPiston = RobotMap.leftPiston;
-        addChild("leftPiston", leftPiston);
-        rightPiston = RobotMap.rightPiston;
-        addChild("rightPiston", rightPiston); 
-        compressor = RobotMap.compressor;
-        addChild("compressor", compressor); 
+        strongPiston = RobotMap.strongPiston;
+        addChild("strongPiston", strongPiston);
+        weakPiston = RobotMap.weakPiston;
+        addChild("weakPiston", weakPiston);  
 
     }
 
@@ -40,21 +37,23 @@ public class ClipSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run when in simulation
 
     }
-    
-    public void pistonsForward() {
-        leftPiston.set(Value.kForward);
-        rightPiston.set(Value.kForward);
+
+    public void setWeakSolenoid (Value val) {
+        weakPiston.set(val);
     }
 
-    public void pistonsReverse() {
-        leftPiston.set(Value.kReverse);
-        rightPiston.set(Value.kReverse);
+    public void setStrongSolenoid (Value val) {
+        strongPiston.set(val);
     }
 
-    public void pistonsOff() {
-        leftPiston.set(Value.kOff);
-        rightPiston.set(Value.kOff);
+    public void setBothSolenoids (Value val) {
+        weakPiston.set(val);
+        strongPiston.set(val);
+    }
+
+    public String getPistonValue() {
+        return "weak: " + weakPiston.get() + "   strong: " + strongPiston.get();
     }
 
 }
-
+ 

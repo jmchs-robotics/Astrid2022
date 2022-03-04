@@ -4,9 +4,10 @@ import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
@@ -26,11 +27,9 @@ public class Drivetrain extends SubsystemBase {
 	private final MotorControllerGroup rightMotors;
 	private final DifferentialDrive drive;
 
-	public static final double kPGyroConstant = 0.01;
-	public static final double kPGyroTurnConstant = 0.01;
-	public static final double kEncoderTicksPerInch = 325.9493209;
-	private final AHRS gyro = RobotMap.roborioGyro;
-	private static final double minVBusOutVal = 0.2;
+	
+	public final AHRS gyro = RobotMap.roborioGyro;
+	public final double minVBusOutVal = 0.2;
 
     public Drivetrain() {
 
@@ -127,9 +126,8 @@ public class Drivetrain extends SubsystemBase {
 
 	public double getRightEncoderPos(int pidIdx) {
 		return right2.getSelectedSensorPosition(pidIdx);
-	}	
+	}
 
-	//goodies for gyro
 	private void initGyro() {
 		gyro.calibrate();
 	}
@@ -143,7 +141,7 @@ public class Drivetrain extends SubsystemBase {
 	 */
 
 	public double getGyroHeading() {
-		return gyro.getAngle();
+		return gyro.getYaw();
 	}
 
 	/**

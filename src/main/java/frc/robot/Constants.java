@@ -8,23 +8,45 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public class Constants {
+public final class Constants {
 
-    //ASTRID IDs
-    public static final int left1ID = 2;
-    public static final int left2ID = 4;
-    public static final int right1ID = 3;
-    public static final int right2ID = 5;
+    public static final class Drive {
+        //Drivetrain Motor IDs
+        public static final int left1ID = 3;
+        public static final int left2ID = 5;
+        public static final int right1ID = 2;
+        public static final int right2ID = 4;
 
-    //Hook Subsystem IDs
-    public static final int leftHookID= 0;
-    public static final int rightHookID = 1;  
+        public static final double kP_turn = 0.1;
+        public static final double kI_turn = 0;
+	    public static final double kD_turn = 0;
 
-    //Ripley Test IDs
-    public static final int ripleyLMID = 10;
-    public static final int ripleyLF1ID = 12;
-    public static final int ripleyLF2ID = 14;
-    public static final int ripleyRMID = 11;
-    public static final int ripleyRF1ID = 13;
-    public static final int ripleyRF2ID = 15;
+        public static final double kP_gyroTurn = 0;
+
+        public static final double kP_forward = 0;
+	    public static final double KI_forward = 0;
+        public static final double kD_forward = 0;
+        
+        public static final double kEncoderTicksPerInch = 0;
+    }
+
+    public static final class Hook {
+        //Hook Motor IDs
+        public static final int leftHookID = 0;
+        public static final int rightHookID = 1;
+
+        public static final double minHookPos = -5; 
+        public static final double maxHookPos = 1000000; 
+    }
+        
+    public static final class Clip {
+        //Pneumatic Channel IDs 
+        public static final int leftForwardChannel = 4;
+        public static final int leftReverseChannel = 5;
+        public static final int rightForwardChannel = 6;
+        public static final int rightReverseChannel = 7;
+    }
+    
+ 
+
 }

@@ -1,22 +1,23 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants.Hook;
-import frc.robot.subsystems.HookSubsystem;
+import frc.robot.subsystems.ClipSubsystem;
 
-public class ExtendHook extends CommandBase {
+/**
+ *
+ */
+public class PullBothArms extends CommandBase {
 
-    private HookSubsystem m_subsystem;
+    private ClipSubsystem m_subsystem;
 
     /**
      * @param subsystem
      */
 
-    public ExtendHook(HookSubsystem subsystem) {
+    public PullBothArms(ClipSubsystem subsystem) {
 
-        m_subsystem = subsystem;
-        addRequirements(m_subsystem);    
+        this.m_subsystem = subsystem;
+        addRequirements(subsystem); 
 
     }
 
@@ -28,19 +29,19 @@ public class ExtendHook extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setSpeed(0.2);
+        m_subsystem.setBothSolenoids(Value.kForward);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.stopMotors();
+        m_subsystem.setBothSolenoids(Value.kOff);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_subsystem.getEncoderValue(0) > Hook.maxHookPos;
+        return false;
     }
 
     @Override

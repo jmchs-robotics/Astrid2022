@@ -3,12 +3,9 @@ package frc.robot;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -30,8 +27,8 @@ public class RobotContainer {
     public final RollerIntake m_Intake = new RollerIntake();
 
     // Joysticks
-    private final XboxController subStick = new XboxController(1);
-    private final XboxController driveStick = new XboxController(0);
+    private final XboxController subStick = new XboxController(0);
+    private final XboxController driveStick = new XboxController(1);
     private final JoystickButton driveA = new JoystickButton(driveStick, XboxController.Button.kA.value);
     private final JoystickButton driveB = new JoystickButton(driveStick, XboxController.Button.kB.value);    
     private final JoystickButton driveX = new JoystickButton(driveStick, XboxController.Button.kX.value); 
@@ -44,17 +41,17 @@ public class RobotContainer {
     private final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);  
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
-  
+
     // The container for the robot. Configures subsystems, OI devices, and commands.
     private RobotContainer() {
 
         // SmartDashboard Command Buttons
         SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook));
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
-        SmartDashboard.putData("Push L-Arm", new PushClipArm(m_Clip));
-        SmartDashboard.putData("Pull L-Arm", new PullClipArm(m_Clip));
-        SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 10, 0.5, true));
-        SmartDashboard.putData("Turn", new Turn(m_drive,0, 0, 0));
+        SmartDashboard.putData("Push L-Arm", new PushWeakArm(m_Clip));
+        SmartDashboard.putData("Pull L-Arm", new PullWeakArm(m_Clip));
+        SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
+        SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
         configureButtonBindings();
 
@@ -87,31 +84,35 @@ public class RobotContainer {
 
         */
 
-        subA.whenPressed(
-            new RetractHook(m_Hook)
-        );   
-        subB.whenPressed(
-            new PushClipArm(m_Clip)
-        );
-        subX.whenPressed(
-            new PushClipArm(m_Clip)
-        );
-        subY.whenPressed(
+        subA.whenHeld(
             new ExtendHook(m_Hook)
+        ); 
+        subY.whenHeld(
+            new RetractHook(m_Hook)
+        );  
+        subX.whenPressed(
+            new PullStrongArm(m_Clip).withTimeout(0.1)
+        );
+        subB.whenPressed(
+            new PushStrongArm(m_Clip).withTimeout(0.1)
         );
         subLB.whenPressed(
-            new ConsumeCargo(m_Intake)
+            new PullWeakArm(m_Clip).withTimeout(0.1)
         );
         subRB.whenPressed(
-            new ConsumeCargo(m_Intake)
+            new PushWeakArm(m_Clip).withTimeout(0.1)
         );
+        
+        //new ExpelCargo(m_Intake)
+        //new ConsumeCargo(m_Intake)
     }
 
 
     private void configureDefaultCommands() {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
-
+        m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
+        
     }
 
     /**
