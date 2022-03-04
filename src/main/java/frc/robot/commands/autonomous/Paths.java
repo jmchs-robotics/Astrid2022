@@ -35,7 +35,7 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path1() { //Move out of the zone
+    public Command Path1() { //Motor Show Off
       return new SequentialCommandGroup(
         new DriveStraight(m_drive, 36, 1, true)
       );
@@ -45,7 +45,7 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path2() { //Score --> Move
+    public Command Path2() { //Score 'n' Dash
       return new SequentialCommandGroup(
         //new DriveStraight(m_drive, -6, 0.7, true),
         new PushClipArm(m_clip),
@@ -59,7 +59,7 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path3() { //Score --> Intake --> Score --> etc.
+    public Command Path3() { //Lots o' points
       return new SequentialCommandGroup(
 
       );
