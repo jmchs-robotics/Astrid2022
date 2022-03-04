@@ -49,9 +49,9 @@ public class Paths { // extends CommandBase {
     public Command Path2() { //Score 'n' Dash
       return new SequentialCommandGroup(
         //new DriveStraight(m_drive, -6, 0.7, true),
-        new PushWeakArm(m_clip),
+        new PushDumpArm(m_clip),
         new WaitCommand(0.3),
-        new PullWeakArm(m_clip),
+        new PullDumpArm(m_clip),
         new DriveStraight(m_drive, 36)
       );
     }

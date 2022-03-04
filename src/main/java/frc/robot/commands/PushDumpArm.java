@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 /**
  *
  */
-public class PushWeakArm extends CommandBase {
+public class PushDumpArm extends CommandBase {
 
     private ClipSubsystem m_subsystem;
 
@@ -17,7 +17,7 @@ public class PushWeakArm extends CommandBase {
      * @param subsystem
      */
 
-    public PushWeakArm(ClipSubsystem subsystem) {
+    public PushDumpArm(ClipSubsystem subsystem) {
 
         m_subsystem = subsystem;
         addRequirements(m_subsystem); 
@@ -32,13 +32,13 @@ public class PushWeakArm extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setWeakSolenoid(Value.kReverse);
+        m_subsystem.setDumpSolenoid(Value.kReverse);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.setWeakSolenoid(Value.kOff);
+        m_subsystem.setDumpSolenoid(Value.kOff);
     }
 
     // Returns true when the command should end.

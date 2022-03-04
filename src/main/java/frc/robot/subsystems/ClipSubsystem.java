@@ -11,18 +11,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class ClipSubsystem extends SubsystemBase {
 
-    private DoubleSolenoid strongPiston;
-    private DoubleSolenoid weakPiston;
+    private DoubleSolenoid climbPiston;
+    private DoubleSolenoid dumpPiston;
         
     /**
     *
     */
     public ClipSubsystem() {
 
-        strongPiston = RobotMap.strongPiston;
-        addChild("strongPiston", strongPiston);
-        weakPiston = RobotMap.weakPiston;
-        addChild("weakPiston", weakPiston);  
+        climbPiston = RobotMap.climbPiston;
+        addChild("strongPiston", climbPiston);
+        dumpPiston = RobotMap.dumpPiston;
+        addChild("weakPiston", dumpPiston);  
 
     }
 
@@ -38,21 +38,17 @@ public class ClipSubsystem extends SubsystemBase {
 
     }
 
-    public void setWeakSolenoid (Value val) {
-        weakPiston.set(val);
-    }
-
-    public void setStrongSolenoid (Value val) {
-        strongPiston.set(val);
+    public void setDumpSolenoid (Value val) {
+        dumpPiston.set(val);
     }
 
     public void setBothSolenoids (Value val) {
-        weakPiston.set(val);
-        strongPiston.set(val);
+        dumpPiston.set(val);
+        climbPiston.set(val);
     }
 
     public String getPistonValue() {
-        return "weak: " + weakPiston.get() + "   strong: " + strongPiston.get();
+        return "Dump: " + dumpPiston.get() + "   Climb: " + climbPiston.get();
     }
 
 }

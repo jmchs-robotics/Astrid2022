@@ -31,8 +31,8 @@ public class RobotMap {
     public static MotorControllerGroup hookMotorGroup;
 
     //clip objects
-    public static DoubleSolenoid weakPiston;
-    public static DoubleSolenoid strongPiston;
+    public static DoubleSolenoid dumpPiston;
+    public static DoubleSolenoid climbPiston;
 
     public static void init() {
 
@@ -62,7 +62,7 @@ public class RobotMap {
         roborioGyro = new AHRS(SPI.Port.kMXP);
         
         //instantiate clip pistons
-        strongPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.leftForwardChannel, Clip.leftReverseChannel);
-        weakPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.rightForwardChannel, Clip.rightReverseChannel);
+        climbPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.leftForwardChannel, Clip.leftReverseChannel);
+        dumpPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.rightForwardChannel, Clip.rightReverseChannel);
     }
 }
