@@ -62,7 +62,7 @@ public class RobotMap {
         roborioGyro = new AHRS(SPI.Port.kMXP);
         
         //instantiate clip pistons
-        strongPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.leftForwardChannel, Clip.leftReverseChannel);
-        weakPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.rightForwardChannel, Clip.rightReverseChannel);
+        strongPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.strongForwardChannel, Clip.strongReverseChannel);
+        weakPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.weakForwardChannel, Clip.weakReverseChannel);
     }
 }

@@ -48,8 +48,8 @@ public class RobotContainer {
         // SmartDashboard Command Buttons
         SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook));
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
-        SmartDashboard.putData("Push L-Arm", new PushWeakArm(m_Clip));
-        SmartDashboard.putData("Pull L-Arm", new PullWeakArm(m_Clip));
+        SmartDashboard.putData("Push Weak Arm", new PushWeakArm(m_Clip));
+        SmartDashboard.putData("Pull Weak Arm", new PullWeakArm(m_Clip));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 

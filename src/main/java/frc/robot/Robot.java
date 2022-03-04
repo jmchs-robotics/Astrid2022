@@ -54,7 +54,8 @@ public class Robot extends TimedRobot {
         //Print Test Statements
         SmartDashboard.putNumber("Gyro Yaw Value: ", m_robotContainer.m_drive.getGyroHeading());
         SmartDashboard.putString("Clip Values: ", m_robotContainer.m_Clip.getPistonValue());
-        SmartDashboard.putNumber("Hook Encoder Value2: ", m_robotContainer.m_Hook.getEncoderValue(0));
+        SmartDashboard.putNumber("Left Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(true));
+        SmartDashboard.putNumber("Right Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(false));
 
         CommandScheduler.getInstance().run();
     }
@@ -100,6 +101,8 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+
+        m_robotContainer.m_Hook.resetEncoderValue();
     }
 
     /**
@@ -113,6 +116,9 @@ public class Robot extends TimedRobot {
     public void testInit() {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
+
+        m_robotContainer.m_Hook.resetEncoderValue();
+
     }
 
     /**
