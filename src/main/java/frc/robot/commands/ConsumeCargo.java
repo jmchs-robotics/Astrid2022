@@ -24,7 +24,7 @@ public class ConsumeCargo extends CommandBase{
 
   @Override
   public void execute() {
-    m_subsystem.setSpeed(0.5);
+    m_subsystem.setSpeed(0.2);
   }
 
   @Override

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 /**
  *
  */
-public class ClipSubsystem extends SubsystemBase {
+public class LArmSubsystem extends SubsystemBase {
 
     private DoubleSolenoid climbPiston;
     private DoubleSolenoid dumpPiston;
@@ -17,7 +17,7 @@ public class ClipSubsystem extends SubsystemBase {
     /**
     *
     */
-    public ClipSubsystem() {
+    public LArmSubsystem() {
 
         climbPiston = RobotMap.climbPiston;
         addChild("strongPiston", climbPiston);

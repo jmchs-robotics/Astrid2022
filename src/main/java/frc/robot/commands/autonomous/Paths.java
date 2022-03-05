@@ -14,7 +14,7 @@ public class Paths { // extends CommandBase {
     //private SwerveDriveSubsystem m_swerve;
     Drivetrain m_drive;
     HookSubsystem m_hook;
-    ClipSubsystem m_clip;
+    LArmSubsystem m_LArm;
     RollerIntake m_intake;
 
     /**
@@ -24,10 +24,10 @@ public class Paths { // extends CommandBase {
      * @param intake
      */
 
-    public Paths(Drivetrain drive, HookSubsystem hook, ClipSubsystem clip, RollerIntake intake) {
+    public Paths(Drivetrain drive, HookSubsystem hook, LArmSubsystem LArm, RollerIntake intake) {
         m_drive = drive;
         m_hook = hook;
-        m_clip = clip;   
+        m_LArm = LArm;   
         m_intake = intake;     
     }
 
@@ -49,9 +49,9 @@ public class Paths { // extends CommandBase {
     public Command Path2() { //Score 'n' Dash
       return new SequentialCommandGroup(
         //new DriveStraight(m_drive, -6, 0.7, true),
-        new PushDumpArm(m_clip),
+        new PushDumpArm(m_LArm),
         new WaitCommand(0.3),
-        new PullDumpArm(m_clip),
+        new PullDumpArm(m_LArm),
         new DriveStraight(m_drive, 36)
       );
     }
