@@ -22,7 +22,7 @@ public class RobotContainer {
 
     // The robot's subsystems
     public final Drivetrain m_drive = new Drivetrain();
-    public final ClipSubsystem m_Clip = new ClipSubsystem();
+    public final LArmSubsystem m_LArm = new LArmSubsystem();
     public final HookSubsystem m_Hook = new HookSubsystem();
     public final RollerIntake m_Intake = new RollerIntake();
 
@@ -48,10 +48,10 @@ public class RobotContainer {
         // SmartDashboard Command Buttons
         SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook));
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
-        SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_Clip));
-        SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_Clip));
-        SmartDashboard.putData("Push Both Arms", new PushBothArms(m_Clip));
-        SmartDashboard.putData("Pull Both Arms", new PullBothArms(m_Clip));
+        SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm));
+        SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm));
+        SmartDashboard.putData("Push Both Arms", new PushBothArms(m_LArm));
+        SmartDashboard.putData("Pull Both Arms", new PullBothArms(m_LArm));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
@@ -87,7 +87,7 @@ public class RobotContainer {
         */
 
         subA.whenHeld(
-            new PushBothArms(m_Clip).withTimeout(0.1) //Change back to ExtendHook
+            new PushBothArms(m_LArm).withTimeout(0.1) //Change back to ExtendHook
         ); 
         /*subY.whenHeld(
             new PullBothArms(m_Clip) //Change back to RetractHook
@@ -96,13 +96,13 @@ public class RobotContainer {
             new PullStrongArm(m_Clip).withTimeout(0.1)
         );*/
         subB.whenPressed(
-            new PullBothArms(m_Clip).withTimeout(0.1) //Change back to PushStrongArm
+            new PullBothArms(m_LArm).withTimeout(0.1) //Change back to PushStrongArm
         );
         subLB.whenPressed(
-            new PullDumpArm(m_Clip).withTimeout(0.1)
+            new PullDumpArm(m_LArm).withTimeout(0.1)
         );
         subRB.whenPressed(
-            new PushDumpArm(m_Clip).withTimeout(0.1)
+            new PushDumpArm(m_LArm).withTimeout(0.1)
         );
         
         //new ExpelCargo(m_Intake)
@@ -139,7 +139,7 @@ public class RobotContainer {
      */
 
     public Command getAutonomousCommand(String a) {
-        Paths p = new Paths(m_drive, m_Hook, m_Clip, m_Intake);
+        Paths p = new Paths(m_drive, m_Hook, m_LArm, m_Intake);
         
         //Default set command
         Command autoCommand = new SequentialCommandGroup(p.Path1());

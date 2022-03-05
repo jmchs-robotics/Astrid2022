@@ -1,20 +1,21 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClipSubsystem;
+import frc.robot.subsystems.LArmSubsystem;
+import frc.robot.subsystems.LArmSubsystem;
 
 /**
  *
  */
 public class PullBothArms extends CommandBase {
 
-    private ClipSubsystem m_subsystem;
+    private LArmSubsystem m_subsystem;
 
     /**
      * @param subsystem
      */
 
-    public PullBothArms(ClipSubsystem subsystem) {
+    public PullBothArms(LArmSubsystem subsystem) {
 
         this.m_subsystem = subsystem;
         addRequirements(subsystem); 

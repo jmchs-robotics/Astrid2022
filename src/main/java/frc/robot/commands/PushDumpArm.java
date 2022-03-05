@@ -2,7 +2,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
-import frc.robot.subsystems.ClipSubsystem;
+import frc.robot.subsystems.LArmSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class PushDumpArm extends CommandBase {
 
-    private ClipSubsystem m_subsystem;
+    private LArmSubsystem m_subsystem;
 
     /**
      * @param subsystem
      */
 
-    public PushDumpArm(ClipSubsystem subsystem) {
+    public PushDumpArm(LArmSubsystem subsystem) {
 
         m_subsystem = subsystem;
         addRequirements(m_subsystem); 
