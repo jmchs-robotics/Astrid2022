@@ -114,6 +114,7 @@ public class RobotContainer {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
         m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
+        m_Intake.setDefaultCommand(new DefaultCargo(m_Intake, subStick));
         
     }
 

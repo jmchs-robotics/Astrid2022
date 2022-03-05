@@ -3,6 +3,9 @@ package frc.robot.commands;
 import frc.robot.Constants.Hook;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.HookSubsystem;
+
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -36,9 +39,18 @@ public class DefaultHookControl extends CommandBase {
   @Override
   public void execute() {
     hookControl = 0.2 * m_stick.getLeftY();
+
+    if(hookControl > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
+      m_subsystem.setSpeed(hookControl);
+    }
+    else if(hookControl < 0 && m_subsystem.getEncoderValue(false) > Hook.minHookPos) {
+      m_subsystem.setSpeed(hookControl);
+    }
+    else {
+      m_subsystem.stopMotors();
+    }
     
-    m_subsystem.setSpeed(hookControl);
-    SmartDashboard.putNumber("Hook Right Encoder Value: ", m_subsystem.getEncoderValue(true));
+    SmartDashboard.putNumber("Hook Right Encoder Value: ", m_subsystem.getEncoderValue(false));
     
   }
 
@@ -52,12 +64,6 @@ public class DefaultHookControl extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (hookControl < 0) {
-      return m_subsystem.getEncoderValue(true) < Hook.minHookPos;
-    } else if (hookControl > 0) {
-      return m_subsystem.getEncoderValue(true) > Hook.maxHookPos;
-    } else {
       return false;
     }
   }
-}
