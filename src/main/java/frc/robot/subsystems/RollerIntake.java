@@ -1,16 +1,17 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMTalonFX;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Intake;
 
 public class RollerIntake extends SubsystemBase{
 
-    private PWMTalonFX rTalon;
+    private PWMVictorSPX rIntake;
 
     public RollerIntake() {
-        rTalon = new PWMTalonFX(8);
-        addChild("RollerTalon", rTalon);
-        rTalon.setInverted(false);
+        rIntake = new PWMVictorSPX(Intake.intakeID);
+        addChild("RollerVictor", rIntake);
+        rIntake.setInverted(false);
     }
 
     /**
@@ -18,10 +19,10 @@ public class RollerIntake extends SubsystemBase{
      */
 
     public void setSpeed(double speed){
-        rTalon.set(speed);  
+        rIntake.set(speed);  
     }
 
     public void stopMotors() {
-        rTalon.stopMotor();
+        rIntake.stopMotor();
     }
 }

@@ -27,8 +27,8 @@ public class RobotContainer {
     public final RollerIntake m_Intake = new RollerIntake();
 
     // Joysticks
-    private final XboxController subStick = new XboxController(0);
-    private final XboxController driveStick = new XboxController(1);
+    private final XboxController subStick = new XboxController(1);
+    private final XboxController driveStick = new XboxController(0);
     private final JoystickButton driveA = new JoystickButton(driveStick, XboxController.Button.kA.value);
     private final JoystickButton driveB = new JoystickButton(driveStick, XboxController.Button.kB.value);    
     private final JoystickButton driveX = new JoystickButton(driveStick, XboxController.Button.kX.value); 
@@ -50,8 +50,8 @@ public class RobotContainer {
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
         SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm));
         SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm));
-        SmartDashboard.putData("Push Both Arms", new PushBothArms(m_LArm));
-        SmartDashboard.putData("Pull Both Arms", new PullBothArms(m_LArm));
+        SmartDashboard.putData("Push Climb Arm", new PushClimbArm(m_LArm));
+        SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
@@ -87,7 +87,7 @@ public class RobotContainer {
         */
 
         subA.whenHeld(
-            new PushBothArms(m_LArm).withTimeout(0.1) //Change back to ExtendHook
+            new PushClimbArm(m_LArm).withTimeout(0.1) //Change back to ExtendHook
         ); 
         /*subY.whenHeld(
             new PullBothArms(m_Clip) //Change back to RetractHook
@@ -96,7 +96,7 @@ public class RobotContainer {
             new PullStrongArm(m_Clip).withTimeout(0.1)
         );*/
         subB.whenPressed(
-            new PullBothArms(m_LArm).withTimeout(0.1) //Change back to PushStrongArm
+            new PullClimbArm(m_LArm).withTimeout(0.1) //Change back to PushStrongArm
         );
         subLB.whenPressed(
             new PullDumpArm(m_LArm).withTimeout(0.1)
@@ -153,7 +153,7 @@ public class RobotContainer {
             autoCommand = new SequentialCommandGroup(p.Path2());
             break;
         case "3":
-            autoCommand = new SequentialCommandGroup(p.Path3());
+            autoCommand = new SequentialCommandGroup(p.DriveTest());
             break;
         
         }   

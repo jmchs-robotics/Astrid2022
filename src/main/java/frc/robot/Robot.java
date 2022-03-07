@@ -56,6 +56,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putString("LArm Values: ", m_robotContainer.m_LArm.getPistonValue());
         SmartDashboard.putNumber("Left Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(true));
         SmartDashboard.putNumber("Right Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(false));
+        SmartDashboard.putNumber("Left Drive Encoder Value: ", m_robotContainer.m_drive.getLeftEncoderPos(0));
+        SmartDashboard.putNumber("Right Drive Encoder Value: ", m_robotContainer.m_drive.getRightEncoderPos(0));
+
 
         CommandScheduler.getInstance().run();
     }

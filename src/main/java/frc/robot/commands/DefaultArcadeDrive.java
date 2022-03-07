@@ -38,7 +38,7 @@ public class DefaultArcadeDrive extends CommandBase {
     double forward = m_stick.getLeftY();
     double rotation = m_stick.getLeftX();
     
-    m_subsystem.arcadeDrive(forward, rotation);
+    m_subsystem.arcadeDrive(-forward, rotation);
   }
 
   // Called once the command ends or is interrupted.

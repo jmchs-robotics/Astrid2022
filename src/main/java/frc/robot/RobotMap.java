@@ -3,6 +3,7 @@ import frc.robot.Constants.Clip;
 import frc.robot.Constants.Drive;
 import frc.robot.Constants.Hook;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -55,8 +56,10 @@ public class RobotMap {
         //instantiate hook motors
         leftHookMotor = new WPI_TalonFX(Hook.leftHookID);
         rightHookMotor = new WPI_TalonFX(Hook.rightHookID);
-        hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);
+        leftHookMotor.setNeutralMode(NeutralMode.Brake);
+        rightHookMotor.setNeutralMode(NeutralMode.Brake);
         rightHookMotor.setInverted(true);
+        hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);        
         
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
         roborioGyro = new AHRS(SPI.Port.kMXP);

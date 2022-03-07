@@ -17,9 +17,15 @@ public final class Constants {
         public static final int right1ID = 2;
         public static final int right2ID = 4;
 
-        public static final double kP_turn = 0.1;
+        public static final int kEncoderCPR = 2048;
+        public static final double kWheelDiameterInches = 6;
+        public static final double kEncoderDistancePerPulse = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+
+        public static final double kP_turn = 1;
         public static final double kI_turn = 0;
 	    public static final double kD_turn = 0;
+        public static final double kTurnToleranceDeg = 5;
+        public static final double kTurnRateToleranceDegPerS = 10; // degrees per second     
 
         public static final double kP_gyroTurn = 0;
 
@@ -41,12 +47,16 @@ public final class Constants {
         
     public static final class Clip {
         //Pneumatic Channel IDs 
-        public static final int climbForwardChannel = 4;
-        public static final int climbReverseChannel = 5;
-        public static final int dumpForwardChannel = 6;
-        public static final int dumpReverseChannel = 7;
+        public static final int climbForwardChannel = 6;
+        public static final int climbReverseChannel = 7;
+        public static final int dumpForwardChannel = 4;
+        public static final int dumpReverseChannel = 5;
     }
     
- 
+    public static final class Intake {
+        
+        public static final int intakeID = 6;
+
+    }
 
 }

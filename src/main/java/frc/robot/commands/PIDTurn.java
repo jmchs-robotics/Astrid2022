@@ -32,6 +32,7 @@ public class PIDTurn extends PIDCommand {
 		);
 
 		getController().enableContinuousInput(-180, 180);
+		getController().setTolerance(Drive.kTurnToleranceDeg, Drive.kTurnRateToleranceDegPerS);
     }
 
     // Make this return true when this Command no longer needs to run execute()

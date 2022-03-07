@@ -1,13 +1,15 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.subsystems.LArmSubsystem;
-import frc.robot.subsystems.LArmSubsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  *
  */
-public class PullBothArms extends CommandBase {
+public class PushClimbArm extends CommandBase {
 
     private LArmSubsystem m_subsystem;
 
@@ -15,10 +17,10 @@ public class PullBothArms extends CommandBase {
      * @param subsystem
      */
 
-    public PullBothArms(LArmSubsystem subsystem) {
+    public PushClimbArm(LArmSubsystem subsystem) {
 
-        this.m_subsystem = subsystem;
-        addRequirements(subsystem); 
+        m_subsystem = subsystem;
+        addRequirements(m_subsystem); 
 
     }
 
@@ -30,7 +32,7 @@ public class PullBothArms extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setBothSolenoids(Value.kForward);
+        m_subsystem.setBothSolenoids(Value.kReverse);
     }
 
     // Called once the command ends or is interrupted.

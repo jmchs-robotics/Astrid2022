@@ -60,9 +60,9 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path3() { //Lots o' points
+    public Command DriveTest() { 
       return new SequentialCommandGroup(
-
+        new PIDTurn(m_drive, 90)
       );
     }
 }
