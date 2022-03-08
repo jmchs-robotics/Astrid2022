@@ -29,7 +29,8 @@ public class RobotMap {
     //hook objects
     public static WPI_TalonFX leftHookMotor;
     public static WPI_TalonFX rightHookMotor;
-    public static MotorControllerGroup hookMotorGroup;
+    public static MotorControllerGroup bothHooks;
+    public static DifferentialDrive hookDrive;
 
     //clip objects
     public static DoubleSolenoid dumpPiston;
@@ -56,7 +57,7 @@ public class RobotMap {
         drive = new DifferentialDrive(leftMotors, rightMotors);
         drive.setSafetyEnabled(true);
         drive.setExpiration(0.1);
-        drive.setMaxOutput(1.0);
+        drive.setMaxOutput(0.5);
         
         //instantiate hook motors
         leftHookMotor = new WPI_TalonFX(Hook.leftHookID);
@@ -64,7 +65,8 @@ public class RobotMap {
         leftHookMotor.setNeutralMode(NeutralMode.Brake);
         rightHookMotor.setNeutralMode(NeutralMode.Brake);
         rightHookMotor.setInverted(true);
-        hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);        
+        bothHooks = new MotorControllerGroup(leftHookMotor, rightHookMotor);
+        hookDrive = new DifferentialDrive(leftHookMotor, rightHookMotor);        
         
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
         roborioGyro = new AHRS(SPI.Port.kMXP);

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import frc.robot.Constants.Hook;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -16,7 +17,8 @@ public class HookSubsystem extends SubsystemBase {
 
 private WPI_TalonFX leftHookMotor;
 private WPI_TalonFX rightHookMotor;
-private MotorControllerGroup bothhooks;
+private MotorControllerGroup bothHooks;
+private DifferentialDrive hookDrive;
 
     public HookSubsystem() {
         leftHookMotor = RobotMap.leftHookMotor;
@@ -27,8 +29,11 @@ private MotorControllerGroup bothhooks;
         rightHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("rightHookMotor",rightHookMotor);
 
-        bothhooks = RobotMap.hookMotorGroup;
-        addChild("Motor Controller Group 1",bothhooks);
+        bothHooks = RobotMap.bothHooks;
+        addChild("Motor Controller Group 1",bothHooks);
+
+        hookDrive = RobotMap.hookDrive;
+        addChild("Motor Controller Group 1",bothHooks);
 
     }
 
@@ -49,7 +54,11 @@ private MotorControllerGroup bothhooks;
      */
 
     public void setSpeed(double speed){
-        bothhooks.set(speed);  
+        bothHooks.set(speed);  
+    }
+
+    public void hookCorrection(double speed, double rotation){
+        hookDrive.arcadeDrive(speed, rotation);
     }
 
     /**
@@ -57,7 +66,7 @@ private MotorControllerGroup bothhooks;
      */
 
     public void stopMotors() {
-        bothhooks.stopMotor();
+        bothHooks.stopMotor();
     }
 
     public void resetEncoderValue() {

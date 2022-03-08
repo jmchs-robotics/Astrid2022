@@ -18,6 +18,7 @@ public class DefaultHookControl extends CommandBase {
   private final HookSubsystem m_subsystem;
   private final XboxController m_stick;
   private double hookControl;
+  private double hookCorrection;
 
   /**
    *
@@ -38,7 +39,8 @@ public class DefaultHookControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    hookControl = 0.2 * m_stick.getLeftY();
+    hookControl = m_stick.getLeftY();
+    hookCorrection = m_stick.getLeftX();
 
     /*
     if(hookControl > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
@@ -52,7 +54,7 @@ public class DefaultHookControl extends CommandBase {
     }
     */
 
-    m_subsystem.setSpeed(hookControl);
+    m_subsystem.hookCorrection(hookControl, hookCorrection);
     
     SmartDashboard.putNumber("Hook Right Encoder Value: ", m_subsystem.getEncoderValue(false));
     

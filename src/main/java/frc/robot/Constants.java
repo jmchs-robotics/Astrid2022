@@ -48,8 +48,8 @@ public final class Constants {
         //Pneumatic Channel IDs 
         public static final int climbForwardChannel = 6;
         public static final int climbReverseChannel = 7;
-        public static final int dumpForwardChannel = 4;
-        public static final int dumpReverseChannel = 5;
+        public static final int dumpForwardChannel = 1;
+        public static final int dumpReverseChannel = 0;
     }
     
     public static final class Intake {

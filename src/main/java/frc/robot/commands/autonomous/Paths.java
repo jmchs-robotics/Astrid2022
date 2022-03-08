@@ -76,8 +76,8 @@ public class Paths { // extends CommandBase {
 
     public Command DriveTest() { 
       return new SequentialCommandGroup(
-        new PIDGyroTurn(m_drive, 90)
-        //new DriveStraight(m_drive, 0.2, 12)
+        //new PIDGyroTurn(m_drive, 90)
+        new DriveStraight(m_drive, 0.2, 12)
       );
     }
 }
