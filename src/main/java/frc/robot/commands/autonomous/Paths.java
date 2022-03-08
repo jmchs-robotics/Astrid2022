@@ -65,7 +65,7 @@ public class Paths { // extends CommandBase {
           new DriveStraight(m_drive, 0.2, 108),
           new ConsumeCargo(m_intake)
         ).withTimeout(2),
-        new PIDTurn(m_drive, 75),
+        new PIDGyroTurn(m_drive, 75),
         new DriveStraight(m_drive, 0.2, 256)
       );
     }
@@ -76,8 +76,8 @@ public class Paths { // extends CommandBase {
 
     public Command DriveTest() { 
       return new SequentialCommandGroup(
-        //new PIDTurn(m_drive, 90)
-        new DriveStraight(m_drive, 0.2, 12)
+        new PIDGyroTurn(m_drive, 90)
+        //new DriveStraight(m_drive, 0.2, 12)
       );
     }
 }

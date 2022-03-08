@@ -43,7 +43,7 @@ public class DriveStraight extends CommandBase {
 		m_subsystem = subsystem;
 		addRequirements(m_subsystem);
     	
-    	endVal = inches * Drive.kEncoderInchesPerPulse / 2;
+    	endVal = inches * Drive.kEncoderInchesPerPulse;
     	vBus = percentVBus;
 		useEncoders = true;
 
@@ -70,10 +70,12 @@ public class DriveStraight extends CommandBase {
 			
 			m_subsystem.tankDrive(leftVal + proportion, rightVal - proportion);
 			
-    	}
+    	} else {
+
+			m_subsystem.tankDrive(leftVal, rightVal);
+
+		}
     	
-    	m_subsystem.tankDrive(leftVal, rightVal);
-		
     }
 
     // Make this return true when this Command no longer needs to run execute()
