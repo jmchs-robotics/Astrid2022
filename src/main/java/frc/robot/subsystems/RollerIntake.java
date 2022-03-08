@@ -1,15 +1,16 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 import frc.robot.Constants.Intake;
 
 public class RollerIntake extends SubsystemBase{
 
-    private PWMVictorSPX rIntake;
+    private WPI_VictorSPX rIntake;
 
     public RollerIntake() {
-        rIntake = new PWMVictorSPX(Intake.intakeID);
+        rIntake = RobotMap.rollerMotor;
         addChild("RollerVictor", rIntake);
         rIntake.setInverted(false);
     }
