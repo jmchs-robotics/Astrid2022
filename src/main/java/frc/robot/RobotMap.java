@@ -43,6 +43,11 @@ public class RobotMap {
         left2 = new WPI_TalonFX(Drive.left2ID);
         right1 = new WPI_TalonFX(Drive.right1ID);
         right2 = new WPI_TalonFX(Drive.right2ID);
+        left1.setNeutralMode(NeutralMode.Brake);
+        left2.setNeutralMode(NeutralMode.Brake);
+        right1.setNeutralMode(NeutralMode.Brake);
+        right2.setNeutralMode(NeutralMode.Brake);
+
         
         leftMotors = new MotorControllerGroup(left1, left2);
         rightMotors = new MotorControllerGroup(right1, right2);

@@ -27,7 +27,7 @@ public class PIDTurn extends PIDCommand {
 			new PIDController(Drive.kP_turn, Drive.kI_turn, Drive.kD_turn),
 			m_subsystem::getGyroHeading,
 			targetAngle,
-			output -> m_subsystem.arcadeDrive(0, output),
+			output -> m_subsystem.arcadeDrive(0, 0.2 * output),
 			m_subsystem
 		);
 

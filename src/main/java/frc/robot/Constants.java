@@ -19,21 +19,20 @@ public final class Constants {
 
         public static final int kEncoderCPR = 2048;
         public static final double kWheelDiameterInches = 6;
-        public static final double kEncoderDistancePerPulse = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+        public static final double kEncoderInchesPerPulse = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
-        public static final double kP_turn = 1;
+        public static final double kP_turn = 0.8;
         public static final double kI_turn = 0;
 	    public static final double kD_turn = 0;
         public static final double kTurnToleranceDeg = 5;
         public static final double kTurnRateToleranceDegPerS = 10; // degrees per second     
 
-        public static final double kP_gyroTurn = 0;
+        public static final double kP_gyroDriveStraight = 0;
 
         public static final double kP_forward = 0;
 	    public static final double KI_forward = 0;
         public static final double kD_forward = 0;
         
-        public static final double kEncoderTicksPerInch = 0;
     }
 
     public static final class Hook {

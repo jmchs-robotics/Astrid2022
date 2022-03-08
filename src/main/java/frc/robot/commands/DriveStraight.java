@@ -43,7 +43,7 @@ public class DriveStraight extends CommandBase {
 		m_subsystem = subsystem;
 		addRequirements(m_subsystem);
     	
-    	endVal = inches * Drive.kEncoderTicksPerInch;
+    	endVal = inches * Drive.kEncoderInchesPerPulse / 2;
     	vBus = percentVBus;
 		useEncoders = true;
 
@@ -62,7 +62,7 @@ public class DriveStraight extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	double proportion = Drive.kP_gyroTurn * (m_subsystem.getGyroHeading() - initialHeading);
+    	double proportion = Drive.kP_gyroDriveStraight * (m_subsystem.getGyroHeading() - initialHeading);
     	double leftVal = 1 * vBus;
 		double rightVal = 0.985 * vBus;
     	
@@ -91,10 +91,6 @@ public class DriveStraight extends CommandBase {
 		return false;
     }
     
-    public boolean exposedIsFinished() {
-    	return isFinished();
-    }
-
     // Called once after isFinished returns true
     protected void end() {
     	m_subsystem.tankDrive(0, 0);
