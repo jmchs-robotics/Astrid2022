@@ -19,7 +19,8 @@ public final class Constants {
 
         public static final int kEncoderCPR = 2048;
         public static final double kWheelDiameterInches = 6;
-        public static final double kEncoderInchesPerPulse = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+        public static final double kEncoderTicksPerInch = (double) kEncoderCPR / (kWheelDiameterInches * Math.PI);
+        public static final double kEncoderInchesPerTick = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
         public static final double kP_turn = 0.8;
         public static final double kI_turn = 0;

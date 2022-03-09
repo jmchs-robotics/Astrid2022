@@ -36,14 +36,14 @@ public class GyroTurn extends CommandBase {
 
     // Called just before this Command runs the first time
     public void initialize() {
-    	targetHeading += m_subsystem.getGyroHeading(); //accomodate for not actually being square on field. Alternative is zeroing the gyro before any of this.
+    	targetHeading += m_subsystem.getGyroYaw(); //accomodate for not actually being square on field. Alternative is zeroing the gyro before any of this.
     	SmartDashboard.putString("Current Command: ", "turn");
     }
 
     // Called repeatedly when this Command is scheduled to run
 	
     public void execute() {
-		error = (targetHeading - m_subsystem.getGyroHeading()) * Drive.kP_turn;
+		error = (targetHeading - m_subsystem.getGyroYaw()) * Drive.kP_turn;
 
 		// Turns the robot to face the desired direction\
 		m_subsystem.tankDrive(vBus * error, -vBus * error);
