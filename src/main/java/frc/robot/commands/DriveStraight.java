@@ -56,13 +56,13 @@ public class DriveStraight extends CommandBase {
     	// set our target position as current position plus desired distance
     	endVal += m_subsystem.getRightEncoderPos(0);
     	// get the robot's current direction, so we can stay pointed that way
-    	initialHeading = m_subsystem.getGyroHeading();
+    	initialHeading = m_subsystem.getGyroYaw();
     
     }
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	double proportion = Drive.kP_gyroDriveStraight * (m_subsystem.getGyroHeading() - initialHeading);
+    	double proportion = Drive.kP_gyroDriveStraight * (m_subsystem.getGyroYaw() - initialHeading);
     	double leftVal = 1 * vBus;
 		double rightVal = 0.985 * vBus;
     	
