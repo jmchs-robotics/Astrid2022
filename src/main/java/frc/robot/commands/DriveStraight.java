@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import org.w3c.dom.UserDataHandler;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Drive;
@@ -59,7 +60,8 @@ public class DriveStraight extends CommandBase {
     	// get the robot's current direction, so we can stay pointed that way
     	initialHeading = m_subsystem.getGyroYaw();
 
-		System.out.print("Start Drive Straight Encoder Value: " + m_subsystem.getRightEncoderPos(0));
+		SmartDashboard.putNumber("Drive Straight Encoder Start", m_subsystem.getRightEncoderPos(0));
+		SmartDashboard.putNumber("Drive Straight Encoder Target", endVal);
     
     }
 
@@ -77,6 +79,7 @@ public class DriveStraight extends CommandBase {
 			rightVal *= coefficient;
     	}
 		
+		SmartDashboard.putNumber("Drive Straight Encoder Counter", m_subsystem.getRightEncoderPos(0));
 		m_subsystem.tankDrive(leftVal - proportion, rightVal + proportion);
     }
 

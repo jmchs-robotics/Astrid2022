@@ -147,6 +147,15 @@ public class Drivetrain extends SubsystemBase {
 	public double getGyroRate() {
 		return gyro.getRate();
 	}
+
+	public double getGyroPitch() {
+		return gyro.getPitch();
+	}
+
+	public double getGyroRoll() {
+		return gyro.getRoll();
+	}
+
 	/**
 	 * @param val
 	 * @return
