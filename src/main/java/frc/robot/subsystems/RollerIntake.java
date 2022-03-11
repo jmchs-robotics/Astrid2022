@@ -24,6 +24,13 @@ public class RollerIntake extends SubsystemBase{
     }
 
     public void stopMotors() {
-        rIntake.stopMotor();
+        rIntake.set(0);
     }
+
+    public double deadband(double input){
+        if (Math.abs(input) <= 0.05) {
+            return 0;
+        }
+        return input;
+    }    
 }

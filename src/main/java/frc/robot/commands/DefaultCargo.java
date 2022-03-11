@@ -14,8 +14,6 @@ public class DefaultCargo extends CommandBase {
   
   private final RollerIntake m_subsystem;
   private final XboxController m_stick;
-  private double intakeControl;
-  private double extakeControl;
 
   /**
    *
@@ -39,15 +37,11 @@ public class DefaultCargo extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    extakeControl = m_stick.getRightTriggerAxis() * 0.2;
-    intakeControl = m_stick.getLeftTriggerAxis() * 0.2;
+    double moveValue = m_stick.getLeftTriggerAxis() - m_stick.getRightTriggerAxis();
+    SmartDashboard.putNumber("Move Value: ", moveValue);
 
-    if(intakeControl > extakeControl) {
-        m_subsystem.setSpeed(intakeControl);
-    }
-    else {
-        m_subsystem.setSpeed(-extakeControl);
-    }
+
+    m_subsystem.setSpeed(0.6 * m_subsystem.deadband(moveValue));
   }
 
   // Called once the command ends or is interrupted.
