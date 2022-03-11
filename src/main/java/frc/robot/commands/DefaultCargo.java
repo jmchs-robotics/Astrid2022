@@ -39,14 +39,14 @@ public class DefaultCargo extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    extakeControl = m_stick.getRightTriggerAxis() * 0.2;
-    intakeControl = m_stick.getLeftTriggerAxis() * 0.2;
+    extakeControl = m_stick.getRightTriggerAxis();
+    intakeControl = m_stick.getLeftTriggerAxis();
 
-    if(intakeControl > extakeControl) {
-        m_subsystem.setSpeed(intakeControl);
+    if (intakeControl > extakeControl) {
+        m_subsystem.setSpeed(0.2 * intakeControl);
     }
-    else {
-        m_subsystem.setSpeed(-extakeControl);
+    else if (extakeControl > intakeControl) {
+        m_subsystem.setSpeed(0.2 * -extakeControl);
     }
   }
 
