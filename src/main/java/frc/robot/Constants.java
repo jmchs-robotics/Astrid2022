@@ -19,21 +19,21 @@ public final class Constants {
 
         public static final int kEncoderCPR = 2048;
         public static final double kWheelDiameterInches = 6;
-        public static final double kEncoderDistancePerPulse = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+        public static final double kEncoderTicksPerInch = (double) kEncoderCPR / (kWheelDiameterInches * Math.PI);
+        public static final double kEncoderInchesPerTick = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
-        public static final double kP_turn = 1;
+        public static final double kP_turn = 0.8;
         public static final double kI_turn = 0;
 	    public static final double kD_turn = 0;
         public static final double kTurnToleranceDeg = 5;
         public static final double kTurnRateToleranceDegPerS = 10; // degrees per second     
 
-        public static final double kP_gyroTurn = 0;
+        public static final double kP_gyroDriveStraight = 0;
 
         public static final double kP_forward = 0;
 	    public static final double KI_forward = 0;
         public static final double kD_forward = 0;
         
-        public static final double kEncoderTicksPerInch = 0;
     }
 
     public static final class Hook {
@@ -49,8 +49,8 @@ public final class Constants {
         //Pneumatic Channel IDs 
         public static final int climbForwardChannel = 6;
         public static final int climbReverseChannel = 7;
-        public static final int dumpForwardChannel = 4;
-        public static final int dumpReverseChannel = 5;
+        public static final int dumpForwardChannel = 1;
+        public static final int dumpReverseChannel = 0;
     }
     
     public static final class Intake {

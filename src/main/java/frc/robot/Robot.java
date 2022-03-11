@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
 
         startPosChooser.setDefaultOption("Motor Show Off", "1");
         startPosChooser.addOption ("Score 'n' Dash", "2");
-        startPosChooser.addOption ("Lots o' Points", "3");
+        startPosChooser.addOption ("Drive Test", "3");
 		
 		// 'print' the Chooser to the dashboard
 		SmartDashboard.putData("Path Chosen", startPosChooser);
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         
         //Print Test Statements
-        SmartDashboard.putNumber("Gyro Yaw Value: ", m_robotContainer.m_drive.getGyroHeading());
+        SmartDashboard.putNumber("Gyro Yaw Value: ", m_robotContainer.m_drive.getGyroYaw());
         SmartDashboard.putString("LArm Values: ", m_robotContainer.m_LArm.getPistonValue());
         SmartDashboard.putNumber("Left Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(true));
         SmartDashboard.putNumber("Right Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(false));

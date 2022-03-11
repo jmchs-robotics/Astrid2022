@@ -33,7 +33,7 @@ public class DefaultArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Gyro Heading:", m_subsystem.getGyroHeading());
+    SmartDashboard.putNumber("Gyro Heading:", m_subsystem.getGyroYaw());
 
     double forward = m_stick.getLeftY();
     double rotation = m_stick.getLeftX();

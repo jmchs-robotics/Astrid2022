@@ -53,6 +53,20 @@ public class Paths { // extends CommandBase {
         new WaitCommand(0.3),
         new PullDumpArm(m_LArm),
         new DriveStraight(m_drive, 36)
+          // new PushDumpArm(m_LArm),
+          // new WaitCommand(0.3),
+          // new PullDumpArm(m_LArm),
+          // new DriveStraight(m_drive, 36)
+      );
+    }
+    public Command Path3() { //Grab n' Go
+      return new SequentialCommandGroup(
+        new ParallelCommandGroup(
+          new DriveStraight(m_drive, 0.2, 108),
+          new ConsumeCargo(m_intake)
+        ).withTimeout(2),
+        new PIDGyroTurn(m_drive, 75),
+        new DriveStraight(m_drive, 0.2, 256)
       );
     }
 
@@ -62,7 +76,8 @@ public class Paths { // extends CommandBase {
 
     public Command DriveTest() { 
       return new SequentialCommandGroup(
-        new PIDTurn(m_drive, 90)
+        //new PIDGyroTurn(m_drive, 90)
+        new DriveStraight(m_drive, -0.2, -12)
       );
     }
 }

@@ -140,8 +140,20 @@ public class Drivetrain extends SubsystemBase {
 	 * @return
 	 */
 
-	public double getGyroHeading() {
+	public double getGyroYaw() {
 		return gyro.getYaw();
+	}
+
+	public double getGyroRate() {
+		return gyro.getRate();
+	}
+
+	public double getGyroPitch() {
+		return gyro.getPitch();
+	}
+
+	public double getGyroRoll() {
+		return gyro.getRoll();
 	}
 
 	/**

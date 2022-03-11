@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import org.w3c.dom.UserDataHandler;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Drive;
@@ -44,6 +45,7 @@ public class DriveStraight extends CommandBase {
 		addRequirements(m_subsystem);
     	
     	endVal = inches * Drive.kEncoderTicksPerInch;
+		initialHeading = endVal;
     	vBus = percentVBus;
 		useEncoders = true;
 
@@ -56,24 +58,29 @@ public class DriveStraight extends CommandBase {
     	// set our target position as current position plus desired distance
     	endVal += m_subsystem.getRightEncoderPos(0);
     	// get the robot's current direction, so we can stay pointed that way
-    	initialHeading = m_subsystem.getGyroHeading();
+    	initialHeading = m_subsystem.getGyroYaw();
+
+		SmartDashboard.putNumber("Drive Straight Encoder Start", m_subsystem.getRightEncoderPos(0));
+		SmartDashboard.putNumber("Drive Straight Encoder Target", endVal);
     
     }
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-    	double proportion = Drive.kP_gyroTurn * (m_subsystem.getGyroHeading() - initialHeading);
+    	double proportion = Drive.kP_gyroDriveStraight * (m_subsystem.getGyroYaw() - initialHeading);
     	double leftVal = 1 * vBus;
 		double rightVal = 0.985 * vBus;
+		double coefficient = 1;
     	
     	if(useEncoders) {    		
-			
-			m_subsystem.tankDrive(leftVal + proportion, rightVal - proportion);
-			
+    		coefficient = Math.abs( distThisLeg - m_subsystem.getRightEncoderPos(0)) / 2000;    		
+    		coefficient = m_subsystem.thresholdVBus(coefficient);
+			leftVal *= coefficient;
+			rightVal *= coefficient;
     	}
-    	
-    	m_subsystem.tankDrive(leftVal, rightVal);
 		
+		SmartDashboard.putNumber("Drive Straight Encoder Counter", m_subsystem.getRightEncoderPos(0));
+		m_subsystem.tankDrive(leftVal - proportion, rightVal + proportion);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -85,19 +92,15 @@ public class DriveStraight extends CommandBase {
     		} else {
     			return m_subsystem.getRightEncoderPos(0) >= endVal;
     		}
-    		
     	}
-		
+
 		return false;
     }
     
-    public boolean exposedIsFinished() {
-    	return isFinished();
-    }
-
     // Called once after isFinished returns true
     protected void end() {
     	m_subsystem.tankDrive(0, 0);
+		System.out.print("Ending Drive Straight Encoder Value: " + m_subsystem.getRightEncoderPos(0));
     }
 
     // Called when another command which requires one or more of the same

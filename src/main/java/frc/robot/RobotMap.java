@@ -31,7 +31,8 @@ public class RobotMap {
     //hook objects
     public static WPI_TalonFX leftHookMotor;
     public static WPI_TalonFX rightHookMotor;
-    public static MotorControllerGroup hookMotorGroup;
+    public static MotorControllerGroup bothHooks;
+    public static DifferentialDrive hookDrive;
 
     //intake objects
     public static WPI_VictorSPX rollerMotor;
@@ -48,7 +49,11 @@ public class RobotMap {
         left2 = new WPI_TalonFX(Drive.left2ID);
         right1 = new WPI_TalonFX(Drive.right1ID);
         right2 = new WPI_TalonFX(Drive.right2ID);
-        
+        left1.setNeutralMode(NeutralMode.Brake);
+        left2.setNeutralMode(NeutralMode.Brake);
+        right1.setNeutralMode(NeutralMode.Brake);
+        right2.setNeutralMode(NeutralMode.Brake);
+     
         leftMotors = new MotorControllerGroup(left1, left2);
         rightMotors = new MotorControllerGroup(right1, right2);
         rightMotors.setInverted(true);
@@ -56,19 +61,20 @@ public class RobotMap {
         drive = new DifferentialDrive(leftMotors, rightMotors);
         drive.setSafetyEnabled(true);
         drive.setExpiration(0.1);
-        drive.setMaxOutput(1.0);
-        
+        drive.setMaxOutput(0.5);
+          
         //instantiate hook motors
         leftHookMotor = new WPI_TalonFX(Hook.leftHookID);
         rightHookMotor = new WPI_TalonFX(Hook.rightHookID);
         leftHookMotor.setNeutralMode(NeutralMode.Brake);
         rightHookMotor.setNeutralMode(NeutralMode.Brake);
         rightHookMotor.setInverted(true);
-        hookMotorGroup = new MotorControllerGroup(leftHookMotor, rightHookMotor);      
-        
+        bothHooks = new MotorControllerGroup(leftHookMotor, rightHookMotor);
+        hookDrive = new DifferentialDrive(leftHookMotor, rightHookMotor);      
+
         //instantiate intake motors
-        rollerMotor = new WPI_VictorSPX(Intake.intakeID);
-        
+        rollerMotor = new WPI_VictorSPX(Intake.intakeID);         
+      
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
         roborioGyro = new AHRS(SPI.Port.kMXP);
         

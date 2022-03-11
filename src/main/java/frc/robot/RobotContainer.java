@@ -86,7 +86,7 @@ public class RobotContainer {
 
         */
 
-        subA.whenHeld(
+        subA.whenPressed(
             new PushClimbArm(m_LArm).withTimeout(0.1) //Change back to ExtendHook
         ); 
         /*subY.whenHeld(

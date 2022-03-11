@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class PIDTurn extends PIDCommand {
+public class PIDGyroTurn extends PIDCommand {
 	
 
 	/**
@@ -22,12 +22,12 @@ public class PIDTurn extends PIDCommand {
 	 * @param percentVBus
 	 * The maximum turning voltage bus proportion
 	 */
-    public PIDTurn(Drivetrain m_subsystem, double targetAngle) {
+    public PIDGyroTurn(Drivetrain m_subsystem, double targetAngle) {
         super( 
 			new PIDController(Drive.kP_turn, Drive.kI_turn, Drive.kD_turn),
-			m_subsystem::getGyroHeading,
+			m_subsystem::getGyroYaw,
 			targetAngle,
-			output -> m_subsystem.arcadeDrive(0, output),
+			output -> m_subsystem.arcadeDrive(0, 0.2 * output),
 			m_subsystem
 		);
 
