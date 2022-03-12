@@ -16,6 +16,7 @@ public class Paths { // extends CommandBase {
     HookSubsystem m_hook;
     LArmSubsystem m_LArm;
     RollerIntake m_intake;
+    private double w = 0.1;
 
     /**
      * @param drive
@@ -49,9 +50,9 @@ public class Paths { // extends CommandBase {
     public Command Path2() { //Score 'n' Dash
       return new SequentialCommandGroup(
         //new DriveStraight(m_drive, -6, 0.7, true),
-        new PushDumpArm(m_LArm),
-        new WaitCommand(0.3),
-        new PullDumpArm(m_LArm),
+        new PushDumpArm(m_LArm).withTimeout(0.1),
+        new WaitCommand(w),
+        new PullDumpArm(m_LArm).withTimeout(0.1),
         new DriveStraight(m_drive, 36)
           // new PushDumpArm(m_LArm),
           // new WaitCommand(0.3),
@@ -70,15 +71,16 @@ public class Paths { // extends CommandBase {
       );
     }
 
-    /**c
+    /**
      * @return
      */
 
     public Command DriveTest() { 
       return new SequentialCommandGroup(
         //new PIDGyroTurn(m_drive, 90)
-        new DriveStraight(m_drive, 0.4, 12),
-        new PushDumpArm(m_LArm)
+        new PushDumpArm(m_LArm).withTimeout(0.1),
+        new WaitCommand(w),
+        new DriveStraight(m_drive, 0.2, 12)
       );
     }
 }
