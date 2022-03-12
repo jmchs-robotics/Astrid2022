@@ -61,7 +61,7 @@ public class RobotMap {
         drive = new DifferentialDrive(leftMotors, rightMotors);
         drive.setSafetyEnabled(true);
         drive.setExpiration(0.1);
-        drive.setMaxOutput(0.5);
+        drive.setMaxOutput(1.0);
           
         //instantiate hook motors
         leftHookMotor = new WPI_TalonFX(Hook.leftHookID);

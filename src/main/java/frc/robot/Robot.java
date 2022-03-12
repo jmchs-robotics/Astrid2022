@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
         startPosChooser.setDefaultOption("Motor Show Off", "1");
         startPosChooser.addOption ("Score 'n' Dash", "2");
         startPosChooser.addOption ("Drive Test", "3");
+        startPosChooser.addOption ("Lots o' Points", "4");
 		
 		// 'print' the Chooser to the dashboard
 		SmartDashboard.putData("Path Chosen", startPosChooser);

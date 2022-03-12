@@ -31,8 +31,8 @@ public class DefaultTankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double left = 0.2 * m_stick.getLeftY();
-    double right = 0.2 * m_stick.getRightY();
+    double left = -0.2 * m_stick.getLeftY();
+    double right = -0.2 * m_stick.getRightY();
     
     m_subsystem.tankDrive(left, right);
   }

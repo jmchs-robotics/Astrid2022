@@ -70,14 +70,15 @@ public class Paths { // extends CommandBase {
       );
     }
 
-    /**
+    /**c
      * @return
      */
 
     public Command DriveTest() { 
       return new SequentialCommandGroup(
         //new PIDGyroTurn(m_drive, 90)
-        new DriveStraight(m_drive, -0.2, -12)
+        new DriveStraight(m_drive, 0.4, 12),
+        new PushDumpArm(m_LArm)
       );
     }
 }

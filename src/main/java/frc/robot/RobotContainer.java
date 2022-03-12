@@ -114,7 +114,7 @@ public class RobotContainer {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
         m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
-        m_Intake.setDefaultCommand(new DefaultCargo(m_Intake, subStick));
+        m_Intake.setDefaultCommand(new DefaultCargo(m_Intake, driveStick));
         
     }
 
@@ -155,6 +155,8 @@ public class RobotContainer {
         case "3":
             autoCommand = new SequentialCommandGroup(p.DriveTest());
             break;
+        case "4":
+            autoCommand = new SequentialCommandGroup(p.Path3()); 
         
         }   
 
