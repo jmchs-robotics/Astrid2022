@@ -40,6 +40,7 @@ public class RobotMap {
     //clip objects
     public static DoubleSolenoid dumpPiston;
     public static DoubleSolenoid climbPiston;
+    public static DoubleSolenoid sparePiston;
 
     public static void init() {
 
