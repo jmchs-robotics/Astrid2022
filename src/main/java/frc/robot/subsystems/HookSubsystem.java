@@ -57,8 +57,12 @@ private DifferentialDrive hookDrive;
         bothHooks.set(speed);  
     }
 
-    public void hookCorrection(double speed, double rotation){
+    public void hookCorrectionArcade(double speed, double rotation){
         hookDrive.arcadeDrive(speed, rotation);
+    }
+
+    public void hookCorrectionTank(double leftSpeed, double rightSpeed){
+        hookDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     /**

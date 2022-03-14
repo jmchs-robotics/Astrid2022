@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.Drive;
+import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 
@@ -21,7 +23,7 @@ public class Robot extends TimedRobot {
     public static RobotContainer m_robotContainer;
 
     private final SendableChooser<String> startPosChooser = new SendableChooser<>();	
-
+    //private final SendableChooser<String> driveChooser = new SendableChooser<>();	
 
     /**
      * This function is run when the robot is first started up and should be
@@ -35,9 +37,13 @@ public class Robot extends TimedRobot {
         startPosChooser.addOption ("Score 'n' Dash", "2");
         startPosChooser.addOption ("Drive Test", "3");
         startPosChooser.addOption ("Lots o' Points", "4");
+
+        //driveChooser.setDefaultOption("Arcade", "a");
+        //driveChooser.addOption("Tank", "t");
 		
 		// 'print' the Chooser to the dashboard
 		SmartDashboard.putData("Path Chosen", startPosChooser);
+        //SmartDashboard.putData("Drive Chosen", driveChooser);
 
         m_robotContainer = RobotContainer.getInstance();
     }
@@ -102,11 +108,16 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
 
+        //String driveMode = driveChooser.getSelected();
+
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
 
+        //m_robotContainer.m_drive.setDefaultCommand(m.robotCongetDriveMode(driveMode));
+
         m_robotContainer.m_Hook.resetEncoderValue();
+        m_robotContainer.m_drive.resetEncoders();
     }
 
     /**
@@ -120,9 +131,6 @@ public class Robot extends TimedRobot {
     public void testInit() {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
-
-        m_robotContainer.m_Hook.resetEncoderValue();
-
     }
 
     /**

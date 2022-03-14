@@ -1,5 +1,6 @@
 package frc.robot;
 
+import frc.robot.Constants.Drive;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
@@ -113,7 +114,7 @@ public class RobotContainer {
     private void configureDefaultCommands() {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
-        m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
+        m_Hook.setDefaultCommand(new DefaultHookTank(m_Hook, subStick));
         m_Intake.setDefaultCommand(new DefaultCargo(m_Intake, driveStick));
         
     }
@@ -157,10 +158,28 @@ public class RobotContainer {
             break;
         case "4":
             autoCommand = new SequentialCommandGroup(p.Path3()); 
+            break;
         
         }   
 
         return autoCommand;
+    }
+
+    public Command getDriveMode(String d) {
+        
+        Command mode = new DefaultArcadeDrive(m_drive, driveStick);
+
+        //Autonomous options
+        switch(d) {
+        case "a":
+            mode = new DefaultArcadeDrive(m_drive, driveStick);
+            break;
+        case "t":
+            mode = new DefaultTankDrive(m_drive, driveStick);
+            break;
+        }   
+
+        return mode;
     }
 }
 

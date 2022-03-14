@@ -12,6 +12,7 @@ public class DriveStraight extends CommandBase {
 
 	private Drivetrain m_subsystem;
 
+	double startVal;
 	double endVal;
 	double vBus;
 	double initialHeading;
@@ -45,13 +46,12 @@ public class DriveStraight extends CommandBase {
 		addRequirements(m_subsystem);
 
     	vBus = Math.abs(percentVBus) * Math.signum(inches);
-    	endVal = inches * Drive.kEncoderTicksPerInch;
+
+		startVal = m_subsystem.getLeftEncoderPos(0);
+    	endVal = (inches * Drive.kEncoderTicksPerInch) + m_subsystem.getLeftEncoderPos(0);
+
 		initialHeading = endVal;
 		useEncoders = true;
-		
-		
-
-    	//direction is positive for forwards and negative for backwards.
     	
     }
 
@@ -62,7 +62,8 @@ public class DriveStraight extends CommandBase {
     	// get the robot's current direction, so we can stay pointed that way
     	initialHeading = m_subsystem.getGyroYaw();
 
-    
+		SmartDashboard.putNumber("Start DriveStraight Val:", startVal);
+		SmartDashboard.putNumber("End DriveStraight Val:", endVal);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -79,8 +80,10 @@ public class DriveStraight extends CommandBase {
     	if(useEncoders) {
     		// have we gone far enough?
     		if(Math.signum(vBus) < 0) {
+				SmartDashboard.putString("Reverse DriveStraight:", "end");
     			return m_subsystem.getLeftEncoderPos(0) <= endVal;
     		} else {
+				SmartDashboard.putString("Forward DriveStraight:", "end");
     			return m_subsystem.getLeftEncoderPos(0) >= endVal;
     		}
     	}
