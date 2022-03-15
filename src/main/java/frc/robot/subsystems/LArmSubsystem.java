@@ -42,6 +42,10 @@ public class LArmSubsystem extends SubsystemBase {
         dumpPiston.set(val);
     }
 
+    public void setClimbSolenoid (Value val) {
+        climbPiston.set(val);
+    }
+
     public void setBothSolenoids (Value val) {
         dumpPiston.set(val);
         climbPiston.set(val);

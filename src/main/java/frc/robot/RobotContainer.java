@@ -51,8 +51,10 @@ public class RobotContainer {
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
         SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm));
         SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm));
-        SmartDashboard.putData("Push Climb Arm", new PushClimbArm(m_LArm));
+        SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm));
         SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm));
+        SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm));
+        SmartDashboard.putData("Pull Spare Arms", new LowerIntake(m_LArm));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
@@ -88,16 +90,16 @@ public class RobotContainer {
         */
 
         subA.whenPressed(
-            new PushClimbArm(m_LArm).withTimeout(0.1) //Change back to ExtendHook
+            new PushClimbArm(m_LArm).withTimeout(0.1)
         ); 
-        /*subY.whenHeld(
-            new PullBothArms(m_Clip) //Change back to RetractHook
-        ); */
-        /*subX.whenPressed(
-            new PullStrongArm(m_Clip).withTimeout(0.1)
-        );*/
+        subY.whenHeld(
+            new LowerIntake(m_LArm).withTimeout(0.1)
+        );
+        subX.whenPressed(
+            new RaiseIntake(m_LArm).withTimeout(0.1)
+        );
         subB.whenPressed(
-            new PullClimbArm(m_LArm).withTimeout(0.1) //Change back to PushStrongArm
+            new PullClimbArm(m_LArm).withTimeout(0.1)
         );
         subLB.whenPressed(
             new PullDumpArm(m_LArm).withTimeout(0.1)
