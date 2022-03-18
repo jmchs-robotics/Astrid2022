@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.Constants.Intake;
 
-public class RollerIntake extends SubsystemBase{
+public class IntakeSubsystem extends SubsystemBase{
 
     private WPI_VictorSPX rIntake;
 
-    public RollerIntake() {
+    public IntakeSubsystem() {
         rIntake = RobotMap.rollerMotor;
         addChild("RollerVictor", rIntake);
         rIntake.setInverted(false);

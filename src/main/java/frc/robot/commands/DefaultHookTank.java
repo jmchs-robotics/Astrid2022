@@ -40,7 +40,7 @@ public class DefaultHookTank extends CommandBase {
   @Override
   public void execute() {
     leftControl = m_stick.getLeftY();
-    rightControl = m_stick.getRightY();
+    rightControl = m_stick.getLeftX();
 
     /*
     if(hookControl > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
@@ -54,7 +54,7 @@ public class DefaultHookTank extends CommandBase {
     }
     */
 
-    m_subsystem.hookCorrectionTank(leftControl, rightControl);
+    m_subsystem.hookCorrectionArcade(leftControl, rightControl);
     
     SmartDashboard.putNumber("Hook Right Encoder Value: ", m_subsystem.getEncoderValue(false));
     

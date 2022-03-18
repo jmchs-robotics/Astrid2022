@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.Drive;
 import frc.robot.commands.*;
 
 /**
@@ -15,8 +16,8 @@ public class Paths { // extends CommandBase {
     Drivetrain m_drive;
     HookSubsystem m_hook;
     LArmSubsystem m_LArm;
-    RollerIntake m_intake;
-    private double w = 0.1;
+    IntakeSubsystem m_intake;
+    private double w = 0.25;
 
     /**
      * @param drive
@@ -25,7 +26,7 @@ public class Paths { // extends CommandBase {
      * @param intake
      */
 
-    public Paths(Drivetrain drive, HookSubsystem hook, LArmSubsystem LArm, RollerIntake intake) {
+    public Paths(Drivetrain drive, HookSubsystem hook, LArmSubsystem LArm, IntakeSubsystem intake) {
         m_drive = drive;
         m_hook = hook;
         m_LArm = LArm;   
@@ -36,30 +37,34 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Path1() { //Motor Show Off
+    public Command DumpAndRun(String pos) { //Dump and Intake Cargo
       return new SequentialCommandGroup(
-        //new DriveStraight(m_drive, 0.1).withTimeout(5)
-        new DriveStraight(m_drive, .2).withTimeout(2)
-      );
+        //dump held cargo
+        new AutoDump(m_LArm),
+        //move to first ball and intake
+        new DriveStraight(m_drive, 0.2).withTimeout(4),
+        new WaitCommand(w),
+        //rotate to the loading station
+        new RotateToBall(m_drive, pos),
+        //drives distance depending on starting pos
+        new DriveToTerminal(m_drive, pos)
+      ); 
     }
 
     /**
      * @return
      */
 
-    public Command Path2() { //Score 'n' Dash
+    public Command Taxi() { //Intake Cargo
       return new SequentialCommandGroup(
-        //new DriveStraight(m_drive, -6, 0.7, true),
-        new PushDumpArm(m_LArm).withTimeout(0.1),
-        new WaitCommand(w),
-        new PullDumpArm(m_LArm).withTimeout(0.1),
-        new DriveStraight(m_drive, 36)
-          // new PushDumpArm(m_LArm),
-          // new WaitCommand(0.3),
-          // new PullDumpArm(m_LArm),
-          // new DriveStraight(m_drive, 36)
+
+        new AutoDump(m_LArm),
+
+        new DriveStraight(m_drive, 0.2).withTimeout(4)
+      
       );
     }
+
     public Command Path3() { //Grab n' Go
       return new SequentialCommandGroup(
         new ParallelCommandGroup(
@@ -75,12 +80,12 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command DriveTest() { 
+    public Command Test() { 
       return new SequentialCommandGroup(
-        //new PIDGyroTurn(m_drive, 90)
-        new PushDumpArm(m_LArm).withTimeout(0.1),
-        new WaitCommand(w),
-        new DriveStraight(m_drive, 0.2, 12)
+        new PIDGyroTurn(m_drive, 90)
+        //new PushDumpArm(m_LArm).withTimeout(0.1)
+        //new WaitCommand(w),
+        //new MoveAndConsume(m_intake, m_drive, 5, 12)
       );
     }
 }

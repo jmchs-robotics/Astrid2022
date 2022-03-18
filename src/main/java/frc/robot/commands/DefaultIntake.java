@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.RollerIntake;
+import frc.robot.subsystems.IntakeSubsystem;
 
 import javax.lang.model.util.ElementScanner6;
 
@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DefaultCargo extends CommandBase {
+public class DefaultIntake extends CommandBase {
   
-  private final RollerIntake m_subsystem;
+  private final IntakeSubsystem m_subsystem;
   private final XboxController m_stick;
 
   /**
@@ -20,7 +20,7 @@ public class DefaultCargo extends CommandBase {
    * @param subsystem The subsystem used by this command.
    * @param stick The XBoxController used by this command.
    */
-  public DefaultCargo(RollerIntake subsystem, XboxController stick) {
+  public DefaultIntake(IntakeSubsystem subsystem, XboxController stick) {
       m_subsystem = subsystem;
       m_stick = stick;
       addRequirements(subsystem);

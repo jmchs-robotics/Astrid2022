@@ -25,7 +25,7 @@ public class RobotContainer {
     public final Drivetrain m_drive = new Drivetrain();
     public final LArmSubsystem m_LArm = new LArmSubsystem();
     public final HookSubsystem m_Hook = new HookSubsystem();
-    public final RollerIntake m_Intake = new RollerIntake();
+    public final IntakeSubsystem m_Intake = new IntakeSubsystem();
 
     // Joysticks
     private final XboxController subStick = new XboxController(1);
@@ -92,11 +92,11 @@ public class RobotContainer {
         subA.whenPressed(
             new PushClimbArm(m_LArm).withTimeout(0.1)
         ); 
-        subY.whenHeld(
-            new LowerIntake(m_LArm).withTimeout(0.1)
+        subY.whenPressed(
+            new RaiseIntake(m_LArm).withTimeout(0.1)
         );
         subX.whenPressed(
-            new RaiseIntake(m_LArm).withTimeout(0.1)
+            new LowerIntake(m_LArm).withTimeout(0.1)
         );
         subB.whenPressed(
             new PullClimbArm(m_LArm).withTimeout(0.1)
@@ -117,7 +117,7 @@ public class RobotContainer {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
         m_Hook.setDefaultCommand(new DefaultHookTank(m_Hook, subStick));
-        m_Intake.setDefaultCommand(new DefaultCargo(m_Intake, driveStick));
+        m_Intake.setDefaultCommand(new DefaultIntake(m_Intake, driveStick));
         
     }
 
@@ -145,21 +145,24 @@ public class RobotContainer {
         Paths p = new Paths(m_drive, m_Hook, m_LArm, m_Intake);
         
         //Default set command
-        Command autoCommand = new SequentialCommandGroup(p.Path1());
+        Command autoCommand = new SequentialCommandGroup(p.DumpAndRun("right"));
 
         //Autonomous options
         switch( a) {
-        case "1":
-            autoCommand = new SequentialCommandGroup(p.Path1());
+        case "left":
+            autoCommand = new SequentialCommandGroup(p.DumpAndRun("left"));
             break;
-        case "2":
-            autoCommand = new SequentialCommandGroup(p.Path2());
+        case "right":
+            autoCommand = new SequentialCommandGroup(p.DumpAndRun("right"));
             break;
-        case "3":
-            autoCommand = new SequentialCommandGroup(p.DriveTest());
+        case "center":
+            autoCommand = new SequentialCommandGroup(p.DumpAndRun("center")); 
             break;
-        case "4":
-            autoCommand = new SequentialCommandGroup(p.Path3()); 
+        case "taxi":
+            autoCommand = new SequentialCommandGroup(p.Taxi()); 
+            break; 
+        case "test":
+            autoCommand = new SequentialCommandGroup(p.Test());
             break;
         
         }   

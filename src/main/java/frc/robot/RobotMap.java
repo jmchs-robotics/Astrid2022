@@ -1,8 +1,9 @@
 package frc.robot;
-import frc.robot.Constants.Clip;
+import frc.robot.Constants.LArm;
 import frc.robot.Constants.Drive;
 import frc.robot.Constants.Hook;
 import frc.robot.Constants.Intake;
+import frc.robot.Constants.LArm;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -39,8 +40,7 @@ public class RobotMap {
 
     //clip objects
     public static DoubleSolenoid dumpPiston;
-    public static DoubleSolenoid climbPiston;
-    public static DoubleSolenoid sparePiston;
+    public static DoubleSolenoid intakePiston;
 
     public static void init() {
 
@@ -80,7 +80,7 @@ public class RobotMap {
         roborioGyro = new AHRS(SPI.Port.kMXP);
         
         //instantiate clip pistons
-        climbPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.climbForwardChannel, Clip.climbReverseChannel);
-        dumpPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, Clip.dumpForwardChannel, Clip.dumpReverseChannel);
+        intakePiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, LArm.intakeForwardChannel, LArm.intakeReverseChannel);
+        dumpPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, LArm.dumpForwardChannel, LArm.dumpReverseChannel);
     }
 }
