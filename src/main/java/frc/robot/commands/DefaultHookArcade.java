@@ -13,19 +13,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class DefaultHookTank extends CommandBase {
+public class DefaultHookArcade extends CommandBase {
   
   private final HookSubsystem m_subsystem;
   private final XboxController m_stick;
-  private double leftSpeed;
-  private double rightSpeed;
+  private double control;
+  private double offset;
 
   /**
    *
    * @param subsystem The subsystem used by this command.
    * @param stick The XBoxController used by this command.
    */
-  public DefaultHookTank(HookSubsystem subsystem, XboxController stick) {
+  public DefaultHookArcade(HookSubsystem subsystem, XboxController stick) {
     m_subsystem = subsystem;
     m_stick = stick;
     addRequirements(subsystem);
@@ -39,8 +39,8 @@ public class DefaultHookTank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    leftSpeed = m_stick.getLeftY();
-    rightSpeed = m_stick.getRightY();
+    control = m_stick.getLeftY();
+    offset = m_stick.getLeftX();
 
     /*
     if(hookControl > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
@@ -54,8 +54,10 @@ public class DefaultHookTank extends CommandBase {
     }
     */
 
-    m_subsystem.hookCorrectionTank(leftSpeed, rightSpeed);
-        
+    m_subsystem.hookCorrectionArcade(control, offset);
+    
+    SmartDashboard.putNumber("Hook Right Encoder Value: ", m_subsystem.getEncoderValue(false));
+    
   }
 
   // Called once the command ends or is interrupted.

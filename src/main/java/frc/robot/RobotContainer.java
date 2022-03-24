@@ -53,7 +53,7 @@ public class RobotContainer {
         SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm));
         SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm));
         SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm));
-        SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm));
+        SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm).withTimeout(0.1));
         SmartDashboard.putData("Pull Spare Arms", new LowerIntake(m_LArm));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
@@ -116,7 +116,7 @@ public class RobotContainer {
     private void configureDefaultCommands() {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
-        m_Hook.setDefaultCommand(new DefaultHookTank(m_Hook, subStick));
+        m_Hook.setDefaultCommand(new DefaultHookArcade(m_Hook, subStick));
         m_Intake.setDefaultCommand(new DefaultIntake(m_Intake, driveStick));
         
     }

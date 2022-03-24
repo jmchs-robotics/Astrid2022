@@ -51,6 +51,8 @@ public final class Constants {
         public static final int intakeReverseChannel = 0;
         public static final int dumpForwardChannel = 6;
         public static final int dumpReverseChannel = 7;
+
+        public static final double timeout = 0.1;
     }
     
     public static final class Intake {
