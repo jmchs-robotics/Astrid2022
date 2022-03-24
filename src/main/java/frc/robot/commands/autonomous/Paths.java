@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.AutoGroup;
 import frc.robot.Constants.Drive;
 import frc.robot.commands.*;
 
@@ -17,6 +18,7 @@ public class Paths { // extends CommandBase {
     HookSubsystem m_hook;
     LArmSubsystem m_LArm;
     IntakeSubsystem m_intake;
+    AutoGroup m_autoGroup;
     private double w = 0.25;
 
     /**
@@ -30,7 +32,8 @@ public class Paths { // extends CommandBase {
         m_drive = drive;
         m_hook = hook;
         m_LArm = LArm;   
-        m_intake = intake;     
+        m_intake = intake;
+        m_autoGroup = new AutoGroup(m_LArm, m_drive, m_intake);  
     }
 
     /**
