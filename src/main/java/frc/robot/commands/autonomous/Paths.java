@@ -37,17 +37,11 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command DumpAndRun(String pos) { //Dump and Intake Cargo
+    public Command Taxi() {
       return new SequentialCommandGroup(
-        //dump held cargo
-        new AutoDump(m_LArm),
-        //move to first ball and intake
-        new DriveStraight(m_drive, 0.2).withTimeout(4),
-        new WaitCommand(w),
-        //rotate to the loading station
-        new RotateToBall(m_drive, pos),
-        //drives distance depending on starting pos
-        new DriveToTerminal(m_drive, pos)
+      
+        new DriveStraight(m_drive, 0.2).withTimeout(3)
+
       ); 
     }
 
@@ -55,25 +49,82 @@ public class Paths { // extends CommandBase {
      * @return
      */
 
-    public Command Taxi() { //Intake Cargo
+    public Command Dump() { //Intake Cargo
       return new SequentialCommandGroup(
 
-        new AutoDump(m_LArm),
+        new PushDumpArm(m_LArm).withTimeout(0.1),
+        new WaitCommand(w),
+        new PullDumpArm(m_LArm).withTimeout(0.1),
+        new WaitCommand(w),
 
-        new DriveStraight(m_drive, 0.2).withTimeout(4)
+        new DriveStraight(m_drive, 0.2).withTimeout(3)
       
       );
     }
 
-    public Command Path3() { //Grab n' Go
-      return new SequentialCommandGroup(
-        new ParallelCommandGroup(
-          new DriveStraight(m_drive, 0.2, 108),
-          new ConsumeCargo(m_intake)
-        ).withTimeout(2),
-        new PIDGyroTurn(m_drive, 75),
-        new DriveStraight(m_drive, 0.2, 256)
-      );
+    public Command IntakeAndTurn(String pos) {
+      if (pos.equals("left")) {
+        return new SequentialCommandGroup(
+          //Auto dump
+          new PushDumpArm(m_LArm).withTimeout(0.1),
+          new WaitCommand(w),
+          new PullDumpArm(m_LArm).withTimeout(0.1),
+          new WaitCommand(w),
+
+          //Move and Intake a ball
+          new ParallelCommandGroup(
+            new DriveStraight(m_drive, 0.2).withTimeout(3),
+            new ConsumeCargo(m_intake).withTimeout(3)
+          ),
+
+          new WaitCommand(w),
+          new PIDGyroTurn(m_drive, -70),
+
+          new WaitCommand(w),
+          new DriveStraight(m_drive, 0.2, 256).withTimeout(4)
+        );
+      } 
+      
+      else if (pos.equals("right")) {
+        return new SequentialCommandGroup(
+          //Auto dump
+          new PushDumpArm(m_LArm).withTimeout(0.1),
+          new WaitCommand(w),
+          new PullDumpArm(m_LArm).withTimeout(0.1),
+          new WaitCommand(w),
+
+          //Move and Intake a ball
+          new ParallelCommandGroup(
+            new DriveStraight(m_drive, 0.2).withTimeout(3),
+            new ConsumeCargo(m_intake).withTimeout(3)
+          ),
+
+          new WaitCommand(w),
+          new PIDGyroTurn(m_drive, 70),
+
+          new WaitCommand(2),
+          new DriveStraight(m_drive, 0.2, 256).withTimeout(4)
+        );
+      } 
+      
+      else {
+        return new SequentialCommandGroup(
+          //Auto dump
+          new PushDumpArm(m_LArm).withTimeout(0.1),
+          new WaitCommand(w),
+          new PullDumpArm(m_LArm).withTimeout(0.1),
+          new WaitCommand(w),
+
+          //Move and Intake a ball
+          new ParallelCommandGroup(
+            new DriveStraight(m_drive, 0.2).withTimeout(3),
+            new ConsumeCargo(m_intake).withTimeout(3)
+          ),
+
+          new WaitCommand(w),
+          new PIDGyroTurn(m_drive, 15)
+        );
+      }
     }
 
     /**
