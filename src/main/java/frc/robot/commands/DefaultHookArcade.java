@@ -42,17 +42,17 @@ public class DefaultHookArcade extends CommandBase {
     control = m_stick.getLeftY();
     offset = m_stick.getLeftX();
 
-    /*
-    if(hookControl > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
-      m_subsystem.setSpeed(hookControl);
+    
+    if(control > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
+      m_subsystem.setSpeed(control);
     }
-    else if(hookControl < 0 && m_subsystem.getEncoderValue(false) > Hook.minHookPos) {
-      m_subsystem.setSpeed(hookControl);
+    else if(control < 0 && m_subsystem.getEncoderValue(false) > Hook.minHookPos) {
+      m_subsystem.setSpeed(control);
     }
     else {
       m_subsystem.stopMotors();
     }
-    */
+    
 
     m_subsystem.hookCorrectionArcade(control, offset);
     

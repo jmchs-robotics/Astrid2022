@@ -25,7 +25,7 @@ private DifferentialDrive hookDrive;
         leftHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("leftHookMotor",leftHookMotor);
 
-        rightHookMotor = RobotMap.leftHookMotor;
+        rightHookMotor = RobotMap.rightHookMotor;
         rightHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("rightHookMotor",rightHookMotor);
 

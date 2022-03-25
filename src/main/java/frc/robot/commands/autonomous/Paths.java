@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.AutoGroup;
+import frc.robot.Constants.Auto;
 import frc.robot.Constants.Drive;
 import frc.robot.commands.*;
 
@@ -14,12 +15,12 @@ import frc.robot.commands.*;
 public class Paths { // extends CommandBase {
  
     //private SwerveDriveSubsystem m_swerve;
-    Drivetrain m_drive;
-    HookSubsystem m_hook;
-    LArmSubsystem m_LArm;
-    IntakeSubsystem m_intake;
-    AutoGroup m_autoGroup;
-    private double w = 0.25;
+    private Drivetrain m_drive;
+    private HookSubsystem m_hook;
+    private LArmSubsystem m_LArm;
+    private IntakeSubsystem m_intake;
+    private AutoGroup m_auto;
+    private final double w = Auto.wait;
 
     /**
      * @param drive
@@ -28,12 +29,12 @@ public class Paths { // extends CommandBase {
      * @param intake
      */
 
-    public Paths(Drivetrain drive, HookSubsystem hook, LArmSubsystem LArm, IntakeSubsystem intake) {
+    public Paths(Drivetrain drive, HookSubsystem hook, LArmSubsystem LArm, IntakeSubsystem intake, AutoGroup auto) {
         m_drive = drive;
         m_hook = hook;
         m_LArm = LArm;   
         m_intake = intake;
-        m_autoGroup = new AutoGroup(m_LArm, m_drive, m_intake);  
+        m_auto = auto;
     }
 
     /**
@@ -65,7 +66,11 @@ public class Paths { // extends CommandBase {
       );
     }
 
-    public Command IntakeAndTurn(String pos) {
+    /**
+     * @return
+     */
+
+    public Command ManualScore(String pos) {
       if (pos.equals("left")) {
         return new SequentialCommandGroup(
           //Auto dump
@@ -84,7 +89,7 @@ public class Paths { // extends CommandBase {
           new PIDGyroTurn(m_drive, -70),
 
           new WaitCommand(w),
-          new DriveStraight(m_drive, 0.2, 256).withTimeout(4)
+          new DriveStraight(m_drive, 0.2, 256).withTimeout(8)
         );
       } 
       
@@ -133,6 +138,15 @@ public class Paths { // extends CommandBase {
     /**
      * @return
      */
+
+    public Command AutoScore(String pos) {
+      return new SequentialCommandGroup(
+        m_auto.AutoDump(),
+        m_auto.MoveAndConsume(5),
+        m_auto.RotateToBall(pos),
+        m_auto.DriveToTerminal(pos)
+      );
+    }
 
     public Command Test() { 
       return new SequentialCommandGroup(

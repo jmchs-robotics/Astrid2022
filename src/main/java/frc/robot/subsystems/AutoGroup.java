@@ -11,6 +11,7 @@ import frc.robot.commands.PIDGyroTurn;
 import frc.robot.commands.PullDumpArm;
 import frc.robot.commands.PushDumpArm;
 import frc.robot.subsystems.LArmSubsystem;
+import frc.robot.Constants.Auto;
 import frc.robot.commands.ConsumeCargo;
 import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.Drivetrain;
@@ -21,7 +22,7 @@ public class AutoGroup extends SubsystemBase{
     private LArmSubsystem m_LArm;
     private IntakeSubsystem m_intake;
     private Drivetrain m_drive;
-    private final double w = 0.25;
+    private final double w = Auto.wait;
 
     /**
      * @param intake
@@ -31,33 +32,27 @@ public class AutoGroup extends SubsystemBase{
     public AutoGroup(LArmSubsystem larm, Drivetrain drive, IntakeSubsystem intake) {
         
         m_LArm = larm;
-        //addRequirements(m_LArm);
-
         m_intake = intake;
-        //addRequirements(m_intake);
-
         m_drive = drive;
-        //addRequirements(m_drive);
+
     }
 
-    public SequentialCommandGroup AutoDump()
-    {
+    public SequentialCommandGroup AutoDump() {
         return new SequentialCommandGroup(
             new PushDumpArm(m_LArm).withTimeout(0.1),
-            new WaitCommand(0.25),
+            new WaitCommand(w),
             new PullDumpArm(m_LArm).withTimeout(0.1),
-            new WaitCommand(0.25)
+            new WaitCommand(w)
         );
     }
 
-    public SequentialCommandGroup DriveToTerminal(String pos)
-    {
+    public SequentialCommandGroup DriveToTerminal(String pos) {
         String position = pos;
 
         if (position.equals("left") || position.equals("right")) {
             return new SequentialCommandGroup(
             	
-                new DriveStraight(m_drive, 0.2, 256).withTimeout(4), //change time to seconds it takes to get to terminal from left/right 
+                new DriveStraight(m_drive, 0.2, 256).withTimeout(8), //change time to seconds it takes to get to terminal from left/right 
                 new WaitCommand(w)
 
             );
@@ -65,7 +60,7 @@ public class AutoGroup extends SubsystemBase{
 
         return new SequentialCommandGroup(
 
-            new DriveStraight(m_drive, 0.2, 150).withTimeout(4), //change time to seconds it takes to get to terminal from center 
+            new DriveStraight(m_drive, 0.2, 150).withTimeout(5), //change time to seconds it takes to get to terminal from center 
             new WaitCommand(w)
           
         );
@@ -79,14 +74,14 @@ public class AutoGroup extends SubsystemBase{
         if (position.equals("left") || position.equals("right")) {
             return new SequentialCommandGroup(
             	
-                new DriveStraight(m_drive, vbus, 256).withTimeout(4),
+                new DriveStraight(m_drive, vbus, 256).withTimeout(8),
                 new WaitCommand(w)
 
             );
         }
         return new SequentialCommandGroup(
 
-            new DriveStraight(m_drive, vbus, 150).withTimeout(7),
+            new DriveStraight(m_drive, vbus, 150).withTimeout(5),
             new WaitCommand(w)
                 
         );

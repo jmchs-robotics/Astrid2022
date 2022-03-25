@@ -61,4 +61,10 @@ public final class Constants {
 
     }
 
+    public static final class Auto {
+        
+        public static final double wait = 0.25;
+
+    }
+
 }

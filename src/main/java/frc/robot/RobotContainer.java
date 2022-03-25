@@ -1,6 +1,8 @@
 package frc.robot;
 
+import frc.robot.Constants.Auto;
 import frc.robot.Constants.Drive;
+import frc.robot.Constants.LArm;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
@@ -26,6 +28,7 @@ public class RobotContainer {
     public final LArmSubsystem m_LArm = new LArmSubsystem();
     public final HookSubsystem m_Hook = new HookSubsystem();
     public final IntakeSubsystem m_Intake = new IntakeSubsystem();
+    public final AutoGroup m_Auto = new AutoGroup(m_LArm, m_drive, m_Intake);
 
     // Joysticks
     private final XboxController subStick = new XboxController(1);
@@ -43,18 +46,20 @@ public class RobotContainer {
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
 
+    private final double t = LArm.timeout;
+
     // The container for the robot. Configures subsystems, OI devices, and commands.
     private RobotContainer() {
 
         // SmartDashboard Command Buttons
         SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook));
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
-        SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm));
-        SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm));
-        SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm));
-        SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm));
-        SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm).withTimeout(0.1));
-        SmartDashboard.putData("Pull Spare Arms", new LowerIntake(m_LArm));
+        SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Pull Spare Arms", new LowerIntake(m_LArm).withTimeout(t));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
 
@@ -90,22 +95,22 @@ public class RobotContainer {
         */
 
         subA.whenPressed(
-            new PushClimbArm(m_LArm).withTimeout(0.1)
+            new PushClimbArm(m_LArm).withTimeout(t)
         ); 
         subY.whenPressed(
-            new RaiseIntake(m_LArm).withTimeout(0.1)
+            new RaiseIntake(m_LArm).withTimeout(t)
         );
         subX.whenPressed(
-            new LowerIntake(m_LArm).withTimeout(0.1)
+            new LowerIntake(m_LArm).withTimeout(t)
         );
         subB.whenPressed(
-            new PullClimbArm(m_LArm).withTimeout(0.1)
+            new PullClimbArm(m_LArm).withTimeout(t)
         );
         subLB.whenPressed(
-            new PullDumpArm(m_LArm).withTimeout(0.1)
+            new PullDumpArm(m_LArm).withTimeout(t)
         );
         subRB.whenPressed(
-            new PushDumpArm(m_LArm).withTimeout(0.1)
+            new PushDumpArm(m_LArm).withTimeout(t)
         );
         
         //new ExpelCargo(m_Intake)
@@ -142,21 +147,24 @@ public class RobotContainer {
      */
 
     public Command getAutonomousCommand(String a) {
-        Paths p = new Paths(m_drive, m_Hook, m_LArm, m_Intake);
+        Paths p = new Paths(m_drive, m_Hook, m_LArm, m_Intake, m_Auto);
         
         //Default set command
-        Command autoCommand = new SequentialCommandGroup(p.DumpAndRun("right"));
+        Command autoCommand = new SequentialCommandGroup(p.Dump());
 
         //Autonomous options
-        switch( a) {
+        switch(a) {
+        case "dump":
+            autoCommand = new SequentialCommandGroup(p.Dump());
+            break;
         case "left":
-            autoCommand = new SequentialCommandGroup(p.DumpAndRun("left"));
+            autoCommand = new SequentialCommandGroup(p.ManualScore("left"));
             break;
         case "right":
-            autoCommand = new SequentialCommandGroup(p.DumpAndRun("right"));
+            autoCommand = new SequentialCommandGroup(p.ManualScore("right"));
             break;
         case "center":
-            autoCommand = new SequentialCommandGroup(p.DumpAndRun("center")); 
+            autoCommand = new SequentialCommandGroup(p.ManualScore("center")); 
             break;
         case "taxi":
             autoCommand = new SequentialCommandGroup(p.Taxi()); 
