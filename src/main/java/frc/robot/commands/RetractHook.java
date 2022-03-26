@@ -10,14 +10,16 @@ import frc.robot.subsystems.HookSubsystem;
 public class RetractHook extends CommandBase {
 
     private HookSubsystem m_subsystem;
+    private boolean fullRetract;
 
     /**
      * @param subsystem
      */
 
-    public RetractHook(HookSubsystem subsystem) {
+    public RetractHook(HookSubsystem subsystem, boolean fullRetract) {
 
         m_subsystem = subsystem;
+        this.fullRetract = fullRetract;
         addRequirements(m_subsystem); 
 
     }
@@ -30,7 +32,12 @@ public class RetractHook extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setSpeed(-0.2);
+        if (m_subsystem.getLeftEncoderValue() > Hook.lowerLeftPos) {
+            m_subsystem.setLeft(0.2);
+        }
+        if (m_subsystem.getRightEncoderValue() < Hook.lowerRightPos) {
+            m_subsystem.setRight(0.2);
+        }
     }
 
     // Called once the command ends or is interrupted.
@@ -42,7 +49,13 @@ public class RetractHook extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_subsystem.getEncoderValue(true) < Hook.minHookPos;
+        if (fullRetract) {
+            return m_subsystem.getRightEncoderValue() > Hook.lowerRightPos; //&& m_subsystem.getLeftEncoderValue() < Hook.lowerLeftPos);
+        }
+        else {
+            return !(m_subsystem.checkLowerLimits());
+        }
+        
     }
 
     @Override

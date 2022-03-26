@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.RetractHook;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 
@@ -31,17 +32,17 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         RobotMap.init();
 
-        startPosChooser.setDefaultOption("Dump: Right", "right");
-        startPosChooser.addOption ("Dump: Left", "left");
-        startPosChooser.addOption ("Dump: Center", "center");
-        startPosChooser.addOption ("Taxi", "taxi");
-        startPosChooser.addOption ("Drive Test", "test");
+        startPosChooser.setDefaultOption("Dump", "dump");
+        startPosChooser.addOption("Right", "right");
+        startPosChooser.addOption("Left", "left");
+        startPosChooser.addOption("Center", "center");
+        startPosChooser.addOption("Taxi", "taxi");
+        startPosChooser.addOption("Drive Test", "test");
 
         //driveChooser.setDefaultOption("Arcade", "a");
         //driveChooser.addOption("Tank", "t");
 		
 		// 'print' the Chooser to the dashboard
-		SmartDashboard.putData("Path Chosen", startPosChooser);
         //SmartDashboard.putData("Drive Chosen", driveChooser);
 
         m_robotContainer = RobotContainer.getInstance();
@@ -60,11 +61,12 @@ public class Robot extends TimedRobot {
         //Print Test Statements
         SmartDashboard.putNumber("Gyro Yaw Value: ", m_robotContainer.m_drive.getGyroYaw());
         SmartDashboard.putString("LArm Values: ", m_robotContainer.m_LArm.getPistonValue());
-        SmartDashboard.putNumber("Left Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(true));
-        SmartDashboard.putNumber("Right Hook Encoder Value: ", m_robotContainer.m_Hook.getEncoderValue(false));
+        SmartDashboard.putNumber("Left Hook Encoder Value: ", m_robotContainer.m_Hook.getLeftEncoderValue());
+        SmartDashboard.putNumber("Right Hook Encoder Value: ", m_robotContainer.m_Hook.getRightEncoderValue());
         SmartDashboard.putNumber("Left Drive Encoder Value: ", m_robotContainer.m_drive.getLeftEncoderPos(0));
         SmartDashboard.putNumber("Right Drive Encoder Value: ", m_robotContainer.m_drive.getRightEncoderPos(0));
 
+        SmartDashboard.putData("Path Chosen", startPosChooser);
 
         CommandScheduler.getInstance().run();
     }
@@ -79,7 +81,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledPeriodic() {
-        
     }
 
     /**

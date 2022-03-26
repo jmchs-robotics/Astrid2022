@@ -42,19 +42,8 @@ public class DefaultHookTank extends CommandBase {
     leftSpeed = m_stick.getLeftY();
     rightSpeed = m_stick.getRightY();
 
-    /*
-    if(hookControl > 0 && m_subsystem.getEncoderValue(false) < Hook.maxHookPos) {
-      m_subsystem.setSpeed(hookControl);
-    }
-    else if(hookControl < 0 && m_subsystem.getEncoderValue(false) > Hook.minHookPos) {
-      m_subsystem.setSpeed(hookControl);
-    }
-    else {
-      m_subsystem.stopMotors();
-    }
-    */
-
-    m_subsystem.hookCorrectionTank(leftSpeed, rightSpeed);
+    //hook tank control with limits
+    m_subsystem.hookTankLimiter(leftSpeed, rightSpeed);
         
   }
 
