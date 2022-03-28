@@ -49,7 +49,7 @@ public class DriveStraight extends CommandBase {
     	vBus = Math.abs(percentVBus) * Math.signum(inches);
 
 		startVal = m_subsystem.getLeftEncoderPos(0);
-    	endVal = (inches * Drive.kEncoderTicksPerInch) + m_subsystem.getLeftEncoderPos(0);
+    	endVal = (m_subsystem.inchesToNativeUnits(inches)) + m_subsystem.getLeftEncoderPos(0);
 
 		initialHeading = endVal;
 		useEncoders = true;

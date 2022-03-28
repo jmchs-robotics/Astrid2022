@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -43,6 +44,8 @@ public class RobotContainer {
     private final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);  
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
+
+    private final Trigger subRT = new Trigger();
 
     private final double t = LArm.timeout;
     private final double h = Hook.timeout;
@@ -110,6 +113,9 @@ public class RobotContainer {
         );
         subRB.whenPressed(
             new PushDumpArm(m_LArm).withTimeout(t)
+        );
+        subRT.whileActiveContinuous(
+            new ScoreCargo(m_Intake).withTimeout(t)
         );
         
         //new ExpelCargo(m_Intake)

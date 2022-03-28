@@ -129,7 +129,7 @@ public class Drivetrain extends SubsystemBase {
 		return right2.getSelectedSensorPosition(pidIdx);
 	}
 
-	public double nativUnitsToInches(double sensorCounts) {
+	public double nativeUnitsToInches(double sensorCounts) {
 		double motorRotations = sensorCounts / Drive.kEncoderCPR;
 		double wheelRotations = motorRotations / Drive.kGearRatio;
 		double posInches = wheelRotations * Drive.kWheelCircumference;
