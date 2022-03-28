@@ -148,6 +148,12 @@ public class Paths { // extends CommandBase {
       );
     }
 
+    public Command TaxiAndIntake(String pos) {
+      return new SequentialCommandGroup(
+        m_auto.MoveAndConsume(3)
+      );
+    }
+
     public Command Test() { 
       return new SequentialCommandGroup(
         new PIDGyroTurn(m_drive, 90)
