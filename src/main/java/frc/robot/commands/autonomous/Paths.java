@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.AutoGroup;
+import frc.util.AutoGroup;
 import frc.robot.Constants.Auto;
 import frc.robot.Constants.Drive;
 import frc.robot.commands.*;

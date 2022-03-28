@@ -4,6 +4,7 @@ import frc.robot.Constants.*;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
+import frc.util.AutoGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -44,8 +45,6 @@ public class RobotContainer {
     private final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);  
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
-
-    private final Trigger subRT = new Trigger();
 
     private final double t = LArm.timeout;
     private final double h = Hook.timeout;
@@ -113,9 +112,6 @@ public class RobotContainer {
         );
         subRB.whenPressed(
             new PushDumpArm(m_LArm).withTimeout(t)
-        );
-        subRT.whileActiveContinuous(
-            new ScoreCargo(m_Intake).withTimeout(t)
         );
         
         //new ExpelCargo(m_Intake)
