@@ -8,14 +8,16 @@ import frc.robot.subsystems.HookSubsystem;
 public class ExtendHook extends CommandBase {
 
     private HookSubsystem m_subsystem;
+    private boolean fullExtend;
 
     /**
      * @param subsystem
      */
 
-    public ExtendHook(HookSubsystem subsystem) {
+    public ExtendHook(HookSubsystem subsystem, boolean fullExtend) {
 
         m_subsystem = subsystem;
+        this.fullExtend = fullExtend;
         addRequirements(m_subsystem);    
 
     }
@@ -28,7 +30,17 @@ public class ExtendHook extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setSpeed(0.2);
+        if (m_subsystem.getLeftEncoderValue() < Hook.upperLeftPos) {
+            m_subsystem.setLeft(-0.2);
+        } else {
+            m_subsystem.stopLeft();
+        }
+
+        if (m_subsystem.getRightEncoderValue() > Hook.upperRightPos) {
+            m_subsystem.setRight(-0.2);
+        } else {
+            m_subsystem.stopRight();
+        }
     }
 
     // Called once the command ends or is interrupted.
@@ -40,7 +52,13 @@ public class ExtendHook extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_subsystem.getEncoderValue(true) > Hook.maxHookPos;
+        if (fullExtend) {
+            return m_subsystem.getRightEncoderValue() < Hook.upperRightPos; //&& m_subsystem.getLeftEncoderValue() > Hook.upperLeftPos && );
+        }
+        else {
+            return !(m_subsystem.checkUpperLimits());
+        }
+        
     }
 
     @Override

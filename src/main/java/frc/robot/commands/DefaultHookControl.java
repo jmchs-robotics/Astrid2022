@@ -1,31 +1,24 @@
 package frc.robot.commands;
 
-import frc.robot.Constants.Hook;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.HookSubsystem;
-
-import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class DefaultHookArcade extends CommandBase {
+public class DefaultHookControl extends CommandBase {
   
   private final HookSubsystem m_subsystem;
   private final XboxController m_stick;
   private double control;
-  private double offset;
 
   /**
    *
    * @param subsystem The subsystem used by this command.
    * @param stick The XBoxController used by this command.
    */
-  public DefaultHookArcade(HookSubsystem subsystem, XboxController stick) {
+  public DefaultHookControl(HookSubsystem subsystem, XboxController stick) {
     m_subsystem = subsystem;
     m_stick = stick;
     addRequirements(subsystem);
@@ -40,10 +33,8 @@ public class DefaultHookArcade extends CommandBase {
   @Override
   public void execute() {
     control = m_stick.getLeftY();
-    offset = m_stick.getRightX();
 
-    //hook limiter control
-    m_subsystem.hookArcadeLimiter(control, offset);
+    m_subsystem.hookLimiter(control);
         
   }
 

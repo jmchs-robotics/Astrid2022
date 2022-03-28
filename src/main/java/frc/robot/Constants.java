@@ -18,9 +18,9 @@ public final class Constants {
         public static final int right2ID = 4;
 
         public static final int kEncoderCPR = 2048;
-        public static final double kWheelDiameterInches = 6;
-        public static final double kEncoderTicksPerInch = (double) kEncoderCPR / (kWheelDiameterInches * Math.PI);
-        public static final double kEncoderInchesPerTick = (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+        public static final int kGearRatio = 50/24;
+        public static final double kWheelRadiusInches = 3;
+        public static final double kWheelCircumference = 2 * Math.PI * kWheelRadiusInches;
 
         public static final double kP_turn = 0.8;
         public static final double kI_turn = 0;
@@ -41,8 +41,13 @@ public final class Constants {
         public static final int leftHookID = 1;
         public static final int rightHookID = 0;
 
-        public static final double minHookPos = -5; 
-        public static final double maxHookPos = 1000000; 
+        public static final double upperLeftPos = 0; 
+        public static final double lowerLeftPos = 0;
+        public static final double upperRightPos = -23000;
+        public static final double lowerRightPos = 5; 
+
+        public static final double deadband = 0.03;
+        public static final double timeout = 3;
     }
         
     public static final class LArm {

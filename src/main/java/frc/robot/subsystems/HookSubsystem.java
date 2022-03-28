@@ -19,21 +19,20 @@ private WPI_TalonFX leftHookMotor;
 private WPI_TalonFX rightHookMotor;
 private MotorControllerGroup bothHooks;
 private DifferentialDrive hookDrive;
+private double deadband = Hook.deadband;
 
     public HookSubsystem() {
         leftHookMotor = RobotMap.leftHookMotor;
-        leftHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("leftHookMotor",leftHookMotor);
 
         rightHookMotor = RobotMap.rightHookMotor;
-        rightHookMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         addChild("rightHookMotor",rightHookMotor);
 
         bothHooks = RobotMap.bothHooks;
         addChild("Motor Controller Group 1",bothHooks);
 
         hookDrive = RobotMap.hookDrive;
-        addChild("Motor Controller Group 1",bothHooks);
+        addChild("Differential Hook Drive", hookDrive);
 
     }
 
@@ -53,16 +52,77 @@ private DifferentialDrive hookDrive;
      * @param speed
      */
 
-    public void setSpeed(double speed){
+    public void setBoth(double speed) {
         bothHooks.set(speed);  
     }
 
-    public void hookCorrectionArcade(double speed, double rotation){
-        hookDrive.arcadeDrive(speed, rotation);
+    public void setLeft(double speed) {
+        leftHookMotor.set(speed);
     }
 
-    public void hookCorrectionTank(double leftSpeed, double rightSpeed){
+    public void setRight(double speed) {
+        rightHookMotor.set(speed);
+    }
+
+    public void hookArcade(double both, double correction) {
+        hookDrive.arcadeDrive(both, correction);
+    }
+
+    public void hookTank(double leftSpeed, double rightSpeed) {
         hookDrive.tankDrive(leftSpeed, rightSpeed);
+    }
+
+
+    /**
+     * @desc check hook limits
+     * @param speed
+     * @return true if within limits; false if limits are broken
+     */
+    public boolean checkUpperLimits() {
+        return getRightEncoderValue() > Hook.upperRightPos; //&& getLeftEncoderValue() < Hook.upperLeftPos;
+    }
+
+    public boolean checkLowerLimits() {
+        return getRightEncoderValue() < Hook.lowerRightPos; //&& getLeftEncoderValue() < Hook.lowerLeftPos;
+    }
+
+    public void hookLimiter(double control){
+        if(control > deadband && checkUpperLimits()) {
+            setBoth(control);
+          }
+          else if(control < -deadband && checkLowerLimits()) {
+            setBoth(control);
+          }
+          else {
+            stopMotors();
+          }
+    }
+
+    public void hookArcadeLimiter(double control, double offset){
+        if((control > deadband) && checkUpperLimits()) {
+            hookArcade(control, offset);
+          }
+        else if((control < -deadband) && checkLowerLimits()) {
+            hookArcade(control, offset);
+          }
+        else if((offset != 0) && checkUpperLimits() && checkLowerLimits()) {
+            hookArcade(control, offset);
+        } else {
+            stopMotors();
+        }     
+    }
+
+    public void hookTankLimiter(double left, double right){
+        if((left > deadband  || right > deadband) && checkUpperLimits()) {
+            hookTank(left, right);
+          }
+          else if((left < -deadband || right < -deadband) && checkLowerLimits()) {
+            hookTank(left, right);
+
+          }
+          else {
+            stopMotors();
+          }
     }
 
     /**
@@ -73,17 +133,25 @@ private DifferentialDrive hookDrive;
         bothHooks.stopMotor();
     }
 
+    public void stopLeft() {
+        leftHookMotor.stopMotor();
+    }
+
+    public void stopRight() {
+        rightHookMotor.stopMotor();
+    }
+
     public void resetEncoderValue() {
         leftHookMotor.setSelectedSensorPosition(0);
 		rightHookMotor.setSelectedSensorPosition(0);
 	}
 
-    public double getEncoderValue(boolean left) {
-		if (left) {
-            return leftHookMotor.getSelectedSensorPosition();
-        } else {
-            return rightHookMotor.getSelectedSensorPosition();
-        }
+    public double getLeftEncoderValue() {
+        return leftHookMotor.getSelectedSensorPosition();
+    }
+
+    public double getRightEncoderValue() {
+        return rightHookMotor.getSelectedSensorPosition();
 
     }
 

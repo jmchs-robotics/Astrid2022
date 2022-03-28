@@ -156,10 +156,7 @@ public class Paths { // extends CommandBase {
 
     public Command Test() { 
       return new SequentialCommandGroup(
-        new PIDGyroTurn(m_drive, 90)
-        //new PushDumpArm(m_LArm).withTimeout(0.1)
-        //new WaitCommand(w),
-        //new MoveAndConsume(m_intake, m_drive, 5, 12)
+        m_auto.AutoDump()
       );
     }
 }

@@ -1,8 +1,6 @@
 package frc.robot;
 
-import frc.robot.Constants.Auto;
-import frc.robot.Constants.Drive;
-import frc.robot.Constants.LArm;
+import frc.robot.Constants.*;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
@@ -47,13 +45,14 @@ public class RobotContainer {
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
 
     private final double t = LArm.timeout;
+    private final double h = Hook.timeout;
 
     // The container for the robot. Configures subsystems, OI devices, and commands.
     private RobotContainer() {
 
         // SmartDashboard Command Buttons
-        SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook));
-        SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook));
+        SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook, true).withTimeout(h));
+        SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook, true).withTimeout(h));
         SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm).withTimeout(t));
         SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm).withTimeout(t));
         SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm).withTimeout(t));

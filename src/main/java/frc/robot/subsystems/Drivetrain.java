@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
+import frc.robot.Constants.Drive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -126,6 +127,20 @@ public class Drivetrain extends SubsystemBase {
 
 	public double getRightEncoderPos(int pidIdx) {
 		return right2.getSelectedSensorPosition(pidIdx);
+	}
+
+	public double nativUnitsToInches(double sensorCounts) {
+		double motorRotations = sensorCounts / Drive.kEncoderCPR;
+		double wheelRotations = motorRotations / Drive.kGearRatio;
+		double posInches = wheelRotations * Drive.kWheelCircumference;
+		return posInches;
+	}
+
+	public double inchesToNativeUnits(double inches) {
+		double wheelRotations = inches / Drive.kWheelCircumference;
+		double motorRotations = wheelRotations * Drive.kGearRatio;
+		int sensorCounts = (int)(motorRotations * Drive.kEncoderCPR);
+		return sensorCounts;
 	}
 
 	private void initGyro() {
