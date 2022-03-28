@@ -159,5 +159,11 @@ public class Paths { // extends CommandBase {
         m_auto.AutoDump()
       );
     }
+
+    public Command Mutation(double seconds, double inch) {
+      m_auto.ScoreAndTurn(),
+      m_auto.MoveAndConsume(seconds),
+      m_auto.FlipReturn(seconds, inch)
+    }
 }
  
