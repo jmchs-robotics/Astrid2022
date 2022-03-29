@@ -27,8 +27,8 @@ public class RobotContainer {
     public final Drivetrain m_drive = new Drivetrain();
     public final LArmSubsystem m_LArm = new LArmSubsystem();
     public final HookSubsystem m_Hook = new HookSubsystem();
-    public final IntakeSubsystem m_Intake = new IntakeSubsystem();
-    public final AutoGroup m_Auto = new AutoGroup(m_LArm, m_drive, m_Intake);
+    //public final IntakeSubsystem m_Intake = new IntakeSubsystem();
+    public final AutoGroup m_Auto = new AutoGroup(m_LArm, m_drive);
 
     // Joysticks
     private final XboxController subStick = new XboxController(1);
@@ -123,7 +123,7 @@ public class RobotContainer {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
         m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
-        m_Intake.setDefaultCommand(new DefaultIntake(m_Intake, driveStick));
+        //m_Intake.setDefaultCommand(new DefaultIntake(m_Intake, driveStick));
         
     }
 
@@ -148,7 +148,7 @@ public class RobotContainer {
      */
 
     public Command getAutonomousCommand(String a) {
-        Paths p = new Paths(m_drive, m_Hook, m_LArm, m_Intake, m_Auto);
+        Paths p = new Paths(m_drive, m_Hook, m_LArm, m_Auto);
         
         //Default set command
         Command autoCommand = new SequentialCommandGroup(p.Dump());

@@ -20,7 +20,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class AutoGroup extends SubsystemBase{
     
     private LArmSubsystem m_LArm;
-    private IntakeSubsystem m_intake;
     private Drivetrain m_drive;
     private final double w = Auto.wait;
 
@@ -29,10 +28,9 @@ public class AutoGroup extends SubsystemBase{
      * @param drive
      * @param inches
      */
-    public AutoGroup(LArmSubsystem larm, Drivetrain drive, IntakeSubsystem intake) {
+    public AutoGroup(LArmSubsystem larm, Drivetrain drive) {
         
         m_LArm = larm;
-        m_intake = intake;
         m_drive = drive;
 
     }
@@ -87,6 +85,7 @@ public class AutoGroup extends SubsystemBase{
         );
     }
 
+    /*
     public SequentialCommandGroup MoveAndConsume(double seconds)
     {
         double time = seconds;
@@ -112,7 +111,7 @@ public class AutoGroup extends SubsystemBase{
             ).withTimeout(time),
             new WaitCommand(w)
         );
-    }
+    }*/
 
     public SequentialCommandGroup RotateToBall(String pos)
     {
