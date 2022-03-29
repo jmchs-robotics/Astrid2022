@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class ConsumeCargo extends CommandBase{
+public class IntakeCargo extends CommandBase{
 
     IntakeSubsystem m_subsystem;
 
@@ -11,7 +11,7 @@ public class ConsumeCargo extends CommandBase{
      * @param subsystem
      */
 
-    public ConsumeCargo(IntakeSubsystem subsystem) {
+    public IntakeCargo(IntakeSubsystem subsystem) {
       
         m_subsystem = subsystem;
         addRequirements(m_subsystem);

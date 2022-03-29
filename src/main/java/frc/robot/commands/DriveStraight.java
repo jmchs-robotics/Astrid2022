@@ -13,8 +13,11 @@ public class DriveStraight extends CommandBase {
 
 	private Drivetrain m_subsystem;
 
-	double startVal;
-	double endVal;
+	double startValLeft;
+	double startValRight;
+	double endValLeft;
+	double endValRight;
+
 	double vBus;
 	double initialHeading;
 	boolean useEncoders;
@@ -48,10 +51,11 @@ public class DriveStraight extends CommandBase {
 
     	vBus = Math.abs(percentVBus) * Math.signum(inches);
 
-		startVal = m_subsystem.getLeftEncoderPos(0);
-    	endVal = (inches * Drive.kEncoderTicksPerInch) + m_subsystem.getLeftEncoderPos(0);
+		startValLeft = m_subsystem.getLeftEncoderPos(0);
+		startValRight = m_subsystem.getRightEncoderPos(0);
+		endValLeft = startValLeft + m_subsystem.inchesToNativeUnits(inches);
+    	endValRight = startValRight - m_subsystem.inchesToNativeUnits(inches);
 
-		initialHeading = endVal;
 		useEncoders = true;
     	
     }
@@ -59,12 +63,11 @@ public class DriveStraight extends CommandBase {
     // Called just before this Command runs the first time
     public void initialize() {
     	// set our target position as current position plus desired distance
-    	endVal += m_subsystem.getLeftEncoderPos(0);
     	// get the robot's current direction, so we can stay pointed that way
     	initialHeading = m_subsystem.getGyroYaw();
 
-		SmartDashboard.putNumber("Start DriveStraight Val:", startVal);
-		SmartDashboard.putNumber("End DriveStraight Val:", endVal);
+		SmartDashboard.putNumber("Start DriveStraight Val:", startValLeft);
+		SmartDashboard.putNumber("End DriveStraight Val:", endValLeft);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -82,10 +85,10 @@ public class DriveStraight extends CommandBase {
     		// have we gone far enough?
     		if(Math.signum(vBus) < 0) {
 				SmartDashboard.putString("Reverse DriveStraight:", "end");
-    			return m_subsystem.getLeftEncoderPos(0) <= endVal;
+    			return m_subsystem.getLeftEncoderPos(0) <= endValLeft || m_subsystem.getRightEncoderPos(0) >= endValRight;
     		} else {
 				SmartDashboard.putString("Forward DriveStraight:", "end");
-    			return m_subsystem.getLeftEncoderPos(0) >= endVal;
+    			return m_subsystem.getLeftEncoderPos(0) >= endValLeft || m_subsystem.getRightEncoderPos(0) <= endValRight;
     		}
     	}
 

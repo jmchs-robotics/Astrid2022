@@ -43,7 +43,7 @@ public final class Constants {
 
         public static final double upperLeftPos = 0; 
         public static final double lowerLeftPos = 0;
-        public static final double upperRightPos = -23000;
+        public static final double upperRightPos = -200000;
         public static final double lowerRightPos = 5; 
 
         public static final double deadband = 0.03;

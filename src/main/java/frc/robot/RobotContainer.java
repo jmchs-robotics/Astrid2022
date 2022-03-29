@@ -42,7 +42,7 @@ public class RobotContainer {
     private final JoystickButton subX = new JoystickButton(subStick, XboxController.Button.kX.value);  
     private final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);  
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
-    private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value); 
+    private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value);
 
     private final double t = LArm.timeout;
     private final double h = Hook.timeout;
@@ -120,7 +120,7 @@ public class RobotContainer {
     private void configureDefaultCommands() {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
-        m_Hook.setDefaultCommand(new DefaultHookArcade(m_Hook, subStick));
+        m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
         m_Intake.setDefaultCommand(new DefaultIntake(m_Intake, driveStick));
         
     }
