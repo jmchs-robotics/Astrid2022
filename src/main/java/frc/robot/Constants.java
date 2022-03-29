@@ -14,8 +14,10 @@ public final class Constants {
         //Drivetrain Motor IDs
         public static final int left1ID = 3;
         public static final int left2ID = 5;
+        public static final int left3ID = 7;
         public static final int right1ID = 2;
         public static final int right2ID = 4;
+        public static final int right3ID = 6;
 
         public static final int kEncoderCPR = 2048;
         public static final int kGearRatio = 50/24;
@@ -60,11 +62,11 @@ public final class Constants {
         public static final double timeout = 0.1;
     }
     
-    public static final class Intake {
+    /*public static final class Intake {
         
         public static final int intakeID = 6;
 
-    }
+    }*/
 
     public static final class Auto {
         

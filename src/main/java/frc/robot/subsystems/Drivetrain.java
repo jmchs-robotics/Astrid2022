@@ -22,9 +22,11 @@ public class Drivetrain extends SubsystemBase {
 
 	private final WPI_TalonFX left1;
 	private final WPI_TalonFX left2;
+	private final WPI_TalonFX left3;
 	private final MotorControllerGroup leftMotors;
 	private final WPI_TalonFX right1;
 	private final WPI_TalonFX right2;
+	private final WPI_TalonFX right3;
 	private final MotorControllerGroup rightMotors;
 	private final DifferentialDrive drive;
 
@@ -41,11 +43,17 @@ public class Drivetrain extends SubsystemBase {
 		left2 = RobotMap.left2;
 		addChild("left2",left2);
 
+		left3 = RobotMap.left3;
+		addChild("left3", left3);
+
 		right1 = RobotMap.right1;
 		addChild("right1",right1);
 
 		right2 = RobotMap.right2;
 		addChild("right2",right2);
+
+		right3 = RobotMap.right3;
+		addChild("right3", right3);
 
 		leftMotors = RobotMap.leftMotors;
 		addChild("leftMotors",leftMotors);

@@ -2,7 +2,7 @@ package frc.robot;
 import frc.robot.Constants.LArm;
 import frc.robot.Constants.Drive;
 import frc.robot.Constants.Hook;
-import frc.robot.Constants.Intake;
+//import frc.robot.Constants.Intake;
 import frc.robot.Constants.LArm;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -20,9 +20,11 @@ public class RobotMap {
 	//drivetrain master objects
 	public static WPI_TalonFX left1;
     public static WPI_TalonFX left2;
+    public static WPI_TalonFX left3;
     public static MotorControllerGroup leftMotors;
     public static WPI_TalonFX right1;
     public static WPI_TalonFX right2;
+    public static WPI_TalonFX right3;
     public static MotorControllerGroup rightMotors;
     public static DifferentialDrive drive;
     
@@ -48,15 +50,17 @@ public class RobotMap {
     	//Convention: evens are left motors, odds are right motors.
         left1 = new WPI_TalonFX(Drive.left1ID);
         left2 = new WPI_TalonFX(Drive.left2ID);
+        left3 = new WPI_TalonFX(Drive.left3ID);
         right1 = new WPI_TalonFX(Drive.right1ID);
         right2 = new WPI_TalonFX(Drive.right2ID);
+        right3 = new WPI_TalonFX(Drive.right3ID);
         left1.setNeutralMode(NeutralMode.Brake);
         left2.setNeutralMode(NeutralMode.Brake);
         right1.setNeutralMode(NeutralMode.Brake);
         right2.setNeutralMode(NeutralMode.Brake);
      
-        leftMotors = new MotorControllerGroup(left1, left2);
-        rightMotors = new MotorControllerGroup(right1, right2);
+        leftMotors = new MotorControllerGroup(left1, left2, left3);
+        rightMotors = new MotorControllerGroup(right1, right2, right3);
         rightMotors.setInverted(true);
         
         drive = new DifferentialDrive(leftMotors, rightMotors);
@@ -74,7 +78,7 @@ public class RobotMap {
         hookDrive = new DifferentialDrive(leftHookMotor, rightHookMotor);      
 
         //instantiate intake motors
-        rollerMotor = new WPI_VictorSPX(Intake.intakeID);         
+        //rollerMotor = new WPI_VictorSPX(Intake.intakeID);         
       
         //instantiate gyro. B/c it is an SPI gyroscope, no need for calibration methods yet
         roborioGyro = new AHRS(SPI.Port.kMXP);
