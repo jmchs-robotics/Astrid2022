@@ -12,7 +12,7 @@ import frc.robot.commands.PullDumpArm;
 import frc.robot.commands.PushDumpArm;
 import frc.robot.subsystems.LArmSubsystem;
 import frc.robot.Constants.Auto;
-import frc.robot.commands.ConsumeCargo;
+import frc.robot.commands.IntakeCargo;
 import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -94,7 +94,7 @@ public class AutoGroup extends SubsystemBase{
         return new SequentialCommandGroup(
             new ParallelRaceGroup(
                 new DriveStraight(m_drive, 0.2),
-                new ConsumeCargo(m_intake)
+                new IntakeCargo(m_intake)
             ).withTimeout(time),
             new WaitCommand(w)
         );
@@ -108,7 +108,7 @@ public class AutoGroup extends SubsystemBase{
         return new SequentialCommandGroup(
             new ParallelRaceGroup(
                 new DriveStraight(m_drive, 0.2, inches),
-                new ConsumeCargo(m_intake)
+                new IntakeCargo(m_intake)
             ).withTimeout(time),
             new WaitCommand(w)
         );

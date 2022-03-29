@@ -82,7 +82,7 @@ public class Paths { // extends CommandBase {
           //Move and Intake a ball
           new ParallelCommandGroup(
             new DriveStraight(m_drive, 0.2).withTimeout(3),
-            new ConsumeCargo(m_intake).withTimeout(3)
+            new IntakeCargo(m_intake).withTimeout(3)
           ),
 
           new WaitCommand(w),
@@ -104,7 +104,7 @@ public class Paths { // extends CommandBase {
           //Move and Intake a ball
           new ParallelCommandGroup(
             new DriveStraight(m_drive, 0.2).withTimeout(3),
-            new ConsumeCargo(m_intake).withTimeout(3)
+            new IntakeCargo(m_intake).withTimeout(3)
           ),
 
           new WaitCommand(w),
@@ -126,7 +126,7 @@ public class Paths { // extends CommandBase {
           //Move and Intake a ball
           new ParallelCommandGroup(
             new DriveStraight(m_drive, 0.2).withTimeout(3),
-            new ConsumeCargo(m_intake).withTimeout(3)
+            new IntakeCargo(m_intake).withTimeout(3)
           ),
 
           new WaitCommand(w),
