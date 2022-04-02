@@ -72,11 +72,11 @@ private double deadband = Hook.deadband;
      * @return true if within limits; false if limits are broken
      */
     public boolean checkUpperRightLimit() {
-        return getRightEncoderValue() > Hook.upperRightPos;
+        return getRightEncoderValue() > Hook.maxPos;
     }
 
     public boolean checkUpperLeftLimit() {
-        return getLeftEncoderValue() > Hook.upperLeftPos;
+        return getLeftEncoderValue() > Hook.maxPos;
     }
 
     public boolean checkUpperLimits() {
@@ -84,11 +84,11 @@ private double deadband = Hook.deadband;
     }
 
     public boolean checkLowerLeftLimit() {
-        return getLeftEncoderValue() < Hook.lowerLeftPos;
+        return getLeftEncoderValue() < Hook.minPos;
     }
 
     public boolean checkLowerRightLimit() {
-        return getRightEncoderValue() < Hook.lowerRightPos;
+        return getRightEncoderValue() < Hook.minPos;
     }
 
     public boolean checkLowerLimits() {
@@ -137,40 +137,23 @@ private double deadband = Hook.deadband;
     
 
     public void hookArcadeLimiter(double control, double offset){
-        SmartDashboard.putNumber("Hook Control: ", control);
 
         if((control < -deadband) && checkUpperLimits()) { //both up
-            if (hookDifference > 800) {
-                setRight(-0.4);
-            }
-            else if (hookDifference < -800) {
-                setLeft(-0.4);
-            }
-            else {
-                setBoth(-0.4);
-            }
+            setBoth(-0.4);
         }
         
-        else if((control > deadband) && checkLowerLimits()) { //both down
-            if (hookDifference > 800) {
-                setLeft(0.4);
-            }
-            else if (hookDifference < -800) {
-                setRight(0.4);
-            }
-            else {
-                setBoth(0.4);
-            }
+        else if(control > deadband) { //both down
+            setBoth(0.4);
         }
         
         else if (offset < -deadband && checkLowerRightLimit() && checkUpperLeftLimit()) {
-            setLeft(-0.4);
-            setRight(0.4);
+            setLeft(-0.1);
+            setRight(0.1);
         }
         
         else if (offset > deadband && checkUpperRightLimit() && checkLowerLeftLimit()) {
-            setLeft(0.4);
-            setRight(-0.4);
+            setLeft(0.1);
+            setRight(-0.1);
         }    
         
         else {

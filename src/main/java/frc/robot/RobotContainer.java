@@ -45,6 +45,7 @@ public class RobotContainer {
     private final JoystickButton subY = new JoystickButton(subStick, XboxController.Button.kY.value);  
     private final JoystickButton subLB = new JoystickButton(subStick, XboxController.Button.kLeftBumper.value); 
     private final JoystickButton subRB = new JoystickButton(subStick, XboxController.Button.kRightBumper.value);
+    private final JoystickButton subStart = new JoystickButton(subStick, XboxController.Button.kStart.value);
 
     private final double t = LArm.timeout;
     private final double h = Hook.timeout;
@@ -120,8 +121,9 @@ public class RobotContainer {
             new PushDumpArm(m_LArm).withTimeout(t)
         );
         
-        //new ExpelCargo(m_Intake)
-        //new ConsumeCargo(m_Intake)
+        subStart.whenHeld(
+            new MidClimb(m_Hook)
+        );
     }
 
 
