@@ -209,5 +209,9 @@ private double deadband = Hook.deadband;
 
     }
 
+    public double getHookDifference() {
+        return hookDifference;
+    }
+
 }
 
