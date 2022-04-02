@@ -80,10 +80,12 @@ public class Paths { // extends CommandBase {
           new PullDumpArm(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
 
+          new DriveStraight(m_drive, 0.2).withTimeout(3),
           new WaitCommand(w),
+          
           new PIDGyroTurn(m_drive, -70),
-
           new WaitCommand(w),
+
           new DriveStraight(m_drive, 0.2, 256).withTimeout(8)
         );
       } 
@@ -96,10 +98,12 @@ public class Paths { // extends CommandBase {
           new PullDumpArm(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
 
+          new DriveStraight(m_drive, 0.2).withTimeout(3),
           new WaitCommand(w),
-          new PIDGyroTurn(m_drive, 70),
 
+          new PIDGyroTurn(m_drive, 70),
           new WaitCommand(w),
+
           new DriveStraight(m_drive, 0.2, 256).withTimeout(4)
         );
       } 
@@ -112,8 +116,11 @@ public class Paths { // extends CommandBase {
           new PullDumpArm(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
 
+          new DriveStraight(m_drive, 0.2).withTimeout(3),
           new WaitCommand(w),
+
           new PIDGyroTurn(m_drive, 15),
+          new WaitCommand(w),
 
           new WaitCommand(w),
           new DriveStraight(m_drive, 0.2, 256).withTimeout(4)
@@ -127,7 +134,7 @@ public class Paths { // extends CommandBase {
 
     public Command AutoScore(String pos) {
       return new SequentialCommandGroup(
-        m_auto.AutoDump(),
+        m_auto.AutoDumpTaxi(),
         new DriveStraight(m_drive, 0.2).withTimeout(5),
         new WaitCommand(w),
         m_auto.RotateToBall(pos),
@@ -137,7 +144,7 @@ public class Paths { // extends CommandBase {
 
     public Command Test() { 
       return new SequentialCommandGroup(
-        m_auto.AutoDump()
+        m_auto.AutoDumpTaxi()
       );
     }
 

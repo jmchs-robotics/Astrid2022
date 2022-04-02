@@ -2,12 +2,12 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import frc.robot.Constants.Hook;
+import frc.robot.commands.RetractHook;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 /**
@@ -19,6 +19,7 @@ private WPI_TalonFX leftHookMotor;
 private WPI_TalonFX rightHookMotor;
 private MotorControllerGroup bothHooks;
 private DifferentialDrive hookDrive;
+private double hookDifference; 
 private double deadband = Hook.deadband;
 
     public HookSubsystem() {
@@ -32,13 +33,14 @@ private double deadband = Hook.deadband;
         addChild("Motor Controller Group 1",bothHooks);
 
         hookDrive = RobotMap.hookDrive;
-        addChild("Differential Hook Drive", hookDrive);
-
+        addChild("Hook Drive", hookDrive);
     }
 
     @Override
     public void periodic() {
-
+        //positive is left higher and negative is right higher
+        hookDifference = getRightEncoderValue() - getLeftEncoderValue();
+        SmartDashboard.putNumber("Hook Difference: ", hookDifference);
     }
 
     @Override
@@ -64,65 +66,134 @@ private double deadband = Hook.deadband;
         rightHookMotor.set(speed);
     }
 
-    public void hookArcade(double both, double correction) {
-        hookDrive.arcadeDrive(both, correction);
-    }
-
-    public void hookTank(double leftSpeed, double rightSpeed) {
-        hookDrive.tankDrive(leftSpeed, rightSpeed);
-    }
-
-
     /**
      * @desc check hook limits
      * @param speed
      * @return true if within limits; false if limits are broken
      */
+    public boolean checkUpperRightLimit() {
+        return getRightEncoderValue() > Hook.upperRightPos;
+    }
+
+    public boolean checkUpperLeftLimit() {
+        return getLeftEncoderValue() > Hook.upperLeftPos;
+    }
+
     public boolean checkUpperLimits() {
-        return getRightEncoderValue() > Hook.upperRightPos; //&& getLeftEncoderValue() < Hook.upperLeftPos;
+        return checkUpperLeftLimit() && checkUpperRightLimit();
+    }
+
+    public boolean checkLowerLeftLimit() {
+        return getLeftEncoderValue() < Hook.lowerLeftPos;
+    }
+
+    public boolean checkLowerRightLimit() {
+        return getRightEncoderValue() < Hook.lowerRightPos;
     }
 
     public boolean checkLowerLimits() {
-        return getRightEncoderValue() < Hook.lowerRightPos; //&& getLeftEncoderValue() < Hook.lowerLeftPos;
+        return checkLowerLeftLimit() && checkLowerRightLimit();
     }
 
-    public void hookLimiter(double control){
-        if(control > deadband && checkUpperLimits()) {
-            setBoth(control);
-          }
-          else if(control < -deadband && checkLowerLimits()) {
-            setBoth(control);
-          }
-          else {
-            stopMotors();
-          }
+    //Going up with left/right correction
+    public void upHookCorrection() {
+
+        if (hookDifference > 800) {
+            setRight(-0.4);
+        }
+        else if (hookDifference < -800) {
+            setLeft(-0.4);
+        }
+        else {
+            setBoth(-0.4);
+        }
     }
+
+    //Going down with left/right correction
+    public void downHookCorrection() {
+        if (hookDifference > 800) {
+            setLeft(0.4);
+        }
+        else if (hookDifference < -800) {
+            setRight(0.4);
+        }
+        else {
+            setBoth(0.4);
+        }
+    }
+    
+    //Hook Control
+    public void hookLimiter(double control){
+        if((control < -deadband) && checkUpperLimits()) { //both up
+            upHookCorrection();
+        }
+        else if((control > deadband) && checkLowerLimits()) { //both down
+            downHookCorrection();
+        }
+        else {
+            stopMotors();
+        }
+    }
+    
 
     public void hookArcadeLimiter(double control, double offset){
-        if((control > deadband) && checkUpperLimits()) {
-            hookArcade(control, offset);
-          }
-        else if((control < -deadband) && checkLowerLimits()) {
-            hookArcade(control, offset);
-          }
-        else if((offset != 0) && checkUpperLimits() && checkLowerLimits()) {
-            hookArcade(control, offset);
-        } else {
+        SmartDashboard.putNumber("Hook Control: ", control);
+
+        if((control < -deadband) && checkUpperLimits()) { //both up
+            if (hookDifference > 800) {
+                setRight(-0.4);
+            }
+            else if (hookDifference < -800) {
+                setLeft(-0.4);
+            }
+            else {
+                setBoth(-0.4);
+            }
+        }
+        
+        else if((control > deadband) && checkLowerLimits()) { //both down
+            if (hookDifference > 800) {
+                setLeft(0.4);
+            }
+            else if (hookDifference < -800) {
+                setRight(0.4);
+            }
+            else {
+                setBoth(0.4);
+            }
+        }
+        
+        else if (offset < -deadband && checkLowerRightLimit() && checkUpperLeftLimit()) {
+            setLeft(-0.4);
+            setRight(0.4);
+        }
+        
+        else if (offset > deadband && checkUpperRightLimit() && checkLowerLeftLimit()) {
+            setLeft(0.4);
+            setRight(-0.4);
+        }    
+        
+        else {
             stopMotors();
         }     
-    }
+    }   
 
     public void hookTankLimiter(double left, double right){
-        if((left > deadband  || right > deadband) && checkUpperLimits()) {
-            hookTank(left, right);
-          }
-          else if((left < -deadband || right < -deadband) && checkLowerLimits()) {
-            hookTank(left, right);
-
-          }
-          else {
+        if((left > deadband) && checkUpperLeftLimit()) {
+            setLeft(0.4);
+        }
+        else if((right > deadband) && checkUpperRightLimit()) {
+            setRight(0.4);
+        }
+        else if((left < -deadband) && checkLowerLeftLimit()) {
+            setLeft(-0.4);
+        }
+        else if((right < -deadband) && checkLowerRightLimit()) {
+            setRight(-0.4);
+        }
+        else {
             stopMotors();
-          }
+        }
     }
 
     /**

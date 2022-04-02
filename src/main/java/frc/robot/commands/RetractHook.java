@@ -16,10 +16,9 @@ public class RetractHook extends CommandBase {
      * @param subsystem
      */
 
-    public RetractHook(HookSubsystem subsystem, boolean fullRetract) {
+    public RetractHook(HookSubsystem subsystem) {
 
         m_subsystem = subsystem;
-        this.fullRetract = fullRetract;
         addRequirements(m_subsystem); 
 
     }
@@ -32,12 +31,7 @@ public class RetractHook extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (m_subsystem.getLeftEncoderValue() > Hook.lowerLeftPos) {
-            m_subsystem.setLeft(0.2);
-        }
-        if (m_subsystem.getRightEncoderValue() < Hook.lowerRightPos) {
-            m_subsystem.setRight(0.2);
-        }
+        m_subsystem.setBoth(0.2);
     }
 
     // Called once the command ends or is interrupted.
@@ -49,13 +43,7 @@ public class RetractHook extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (fullRetract) {
-            return m_subsystem.getRightEncoderValue() > Hook.lowerRightPos; //&& m_subsystem.getLeftEncoderValue() < Hook.lowerLeftPos);
-        }
-        else {
-            return !(m_subsystem.checkLowerLimits());
-        }
-        
+        return false;
     }
 
     @Override

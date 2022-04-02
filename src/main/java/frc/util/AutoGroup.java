@@ -35,11 +35,13 @@ public class AutoGroup extends SubsystemBase{
 
     }
 
-    public SequentialCommandGroup AutoDump() {
+    public SequentialCommandGroup AutoDumpTaxi() {
         return new SequentialCommandGroup(
             new PushDumpArm(m_LArm).withTimeout(0.1),
             new WaitCommand(w),
             new PullDumpArm(m_LArm).withTimeout(0.1),
+            new WaitCommand(w),
+            new DriveStraight(m_drive, 0.2).withTimeout(3),
             new WaitCommand(w)
         );
     }

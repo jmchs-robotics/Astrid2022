@@ -39,8 +39,8 @@ public class DefaultHookTank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    leftSpeed = m_stick.getLeftY();
-    rightSpeed = m_stick.getRightY();
+    leftSpeed = -m_stick.getLeftY();
+    rightSpeed = -m_stick.getRightY();
 
     //hook tank control with limits
     m_subsystem.hookTankLimiter(leftSpeed, rightSpeed);

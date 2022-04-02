@@ -14,10 +14,9 @@ public class ExtendHook extends CommandBase {
      * @param subsystem
      */
 
-    public ExtendHook(HookSubsystem subsystem, boolean fullExtend) {
+    public ExtendHook(HookSubsystem subsystem) {
 
         m_subsystem = subsystem;
-        this.fullExtend = fullExtend;
         addRequirements(m_subsystem);    
 
     }
@@ -30,17 +29,7 @@ public class ExtendHook extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (m_subsystem.getLeftEncoderValue() < Hook.upperLeftPos) {
-            m_subsystem.setLeft(-0.2);
-        } else {
-            m_subsystem.stopLeft();
-        }
-
-        if (m_subsystem.getRightEncoderValue() > Hook.upperRightPos) {
-            m_subsystem.setRight(-0.2);
-        } else {
-            m_subsystem.stopRight();
-        }
+        m_subsystem.setBoth(-0.2);
     }
 
     // Called once the command ends or is interrupted.
@@ -52,13 +41,7 @@ public class ExtendHook extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (fullExtend) {
-            return m_subsystem.getRightEncoderValue() < Hook.upperRightPos; //&& m_subsystem.getLeftEncoderValue() > Hook.upperLeftPos && );
-        }
-        else {
-            return !(m_subsystem.checkUpperLimits());
-        }
-        
+        return false;
     }
 
     @Override

@@ -53,8 +53,8 @@ public class RobotContainer {
     private RobotContainer() {
 
         // SmartDashboard Command Buttons
-        SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook, true).withTimeout(h));
-        SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook, true).withTimeout(h));
+        SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook).withTimeout(h));
+        SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook).withTimeout(h));
         SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm).withTimeout(t));
         SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm).withTimeout(t));
         SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm).withTimeout(t));
@@ -86,30 +86,36 @@ public class RobotContainer {
 
         driveY.whenPressed(new auto1() ,true);
             SmartDashboard.putData("driveY",new auto1() );
-                
-        driveLB.whenPressed(new auto1() ,true);
-            SmartDashboard.putData("driveLB",new auto1() );
-        
-        driveRB.whenPressed(new auto1() ,true);
-            SmartDashboard.putData("driveRB",new auto1() );
-
         */
+              
+        driveLB.whenHeld(
+            new ExtendHook(m_Hook)
+        );
+            
+        driveRB.whenHeld(
+            new RetractHook(m_Hook)
+        );
 
         subA.whenPressed(
             new PushClimbArm(m_LArm).withTimeout(t)
         ); 
+
         subY.whenPressed(
             new RaiseIntake(m_LArm).withTimeout(t)
         );
+
         subX.whenPressed(
             new LowerIntake(m_LArm).withTimeout(t)
         );
+
         subB.whenPressed(
             new PullClimbArm(m_LArm).withTimeout(t)
         );
+
         subLB.whenPressed(
             new PullDumpArm(m_LArm).withTimeout(t)
         );
+
         subRB.whenPressed(
             new PushDumpArm(m_LArm).withTimeout(t)
         );
@@ -122,7 +128,7 @@ public class RobotContainer {
     private void configureDefaultCommands() {
 
         m_drive.setDefaultCommand(new DefaultArcadeDrive(m_drive, driveStick));
-        m_Hook.setDefaultCommand(new DefaultHookControl(m_Hook, subStick));
+        m_Hook.setDefaultCommand(new DefaultHookArcade(m_Hook, subStick));
         //m_Intake.setDefaultCommand(new DefaultIntake(m_Intake, driveStick));
         
     }

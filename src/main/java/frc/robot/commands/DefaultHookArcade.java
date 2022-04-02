@@ -51,6 +51,7 @@ public class DefaultHookArcade extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // Try to bring the robot to a dead stop before starting the next command
+
     m_subsystem.stopMotors(); 
   }
 

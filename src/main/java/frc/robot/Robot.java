@@ -118,6 +118,7 @@ public class Robot extends TimedRobot {
 
         m_robotContainer.m_Hook.resetEncoderValue();
         m_robotContainer.m_drive.resetEncoders();
+
     }
 
     /**
@@ -125,6 +126,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+
     }
 
     @Override
