@@ -99,10 +99,10 @@ private double deadband = Hook.deadband;
     public void upHookCorrection() {
 
         if (hookDifference > 800) {
-            setRight(-0.4);
+            setRight(-0.15);
         }
         else if (hookDifference < -800) {
-            setLeft(-0.4);
+            setLeft(-0.15);
         }
         else {
             setBoth(-0.4);
@@ -112,10 +112,10 @@ private double deadband = Hook.deadband;
     //Going down with left/right correction
     public void downHookCorrection() {
         if (hookDifference > 800) {
-            setLeft(0.4);
+            setLeft(0.15);
         }
         else if (hookDifference < -800) {
-            setRight(0.4);
+            setRight(0.15);
         }
         else {
             setBoth(0.4);
@@ -139,7 +139,7 @@ private double deadband = Hook.deadband;
     public void hookArcadeLimiter(double control, double offset){
 
         if((control < -deadband) && checkUpperLimits()) { //both up
-            setBoth(-0.4);
+            upHookCorrection();
         }
         
         else if(control > deadband) { //both down
@@ -147,13 +147,13 @@ private double deadband = Hook.deadband;
         }
         
         else if (offset < -deadband && checkLowerRightLimit() && checkUpperLeftLimit()) {
-            setLeft(-0.1);
-            setRight(0.1);
+            setLeft(-0.15);
+            setRight(0.15);
         }
         
         else if (offset > deadband && checkUpperRightLimit() && checkLowerLeftLimit()) {
-            setLeft(0.1);
-            setRight(-0.1);
+            setLeft(0.15);
+            setRight(-0.15);
         }    
         
         else {
@@ -162,16 +162,16 @@ private double deadband = Hook.deadband;
     }   
 
     public void hookTankLimiter(double left, double right){
-        if((left > deadband) && checkUpperLeftLimit()) {
+        if((left > deadband) && checkLowerLeftLimit()) {
             setLeft(0.4);
         }
-        else if((right > deadband) && checkUpperRightLimit()) {
+        else if((right > deadband) && checkLowerRightLimit()) {
             setRight(0.4);
         }
-        else if((left < -deadband) && checkLowerLeftLimit()) {
+        else if((left < -deadband) && checkUpperLeftLimit()) {
             setLeft(-0.4);
         }
-        else if((right < -deadband) && checkLowerRightLimit()) {
+        else if((right < -deadband) && checkUpperRightLimit()) {
             setRight(-0.4);
         }
         else {
