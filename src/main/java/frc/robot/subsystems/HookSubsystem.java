@@ -125,10 +125,10 @@ private double deadband = Hook.deadband;
     //Hook Control
     public void hookLimiter(double control){
         if((control < -deadband) && checkUpperLimits()) { //both up
-            upHookCorrection(0.4);
+            upHookCorrection(0.8);
         }
         else if((control > deadband) && checkLowerLimits()) { //both down
-            downHookCorrection(0.4);
+            downHookCorrection(0.8);
         }
         else {
             stopMotors();
@@ -139,11 +139,11 @@ private double deadband = Hook.deadband;
     public void hookArcadeLimiter(double control, double offset){
 
         if((control < -deadband) && checkUpperLimits()) { //both up
-            setBoth(-0.4);
+            setBoth(-0.8);
         }
         
         else if(control > deadband) { //both down
-            setBoth(0.4);
+            setBoth(0.8);
         }
         
         else if (offset < -deadband && checkLowerRightLimit() && checkUpperLeftLimit()) {
