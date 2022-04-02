@@ -39,7 +39,7 @@ public class DefaultHookArcade extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    control = m_stick.getLeftY();
+    control = -m_stick.getLeftY();
     offset = m_stick.getRightX();
 
     //hook limiter control
