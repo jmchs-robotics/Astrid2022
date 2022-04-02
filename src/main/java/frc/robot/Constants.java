@@ -43,8 +43,8 @@ public final class Constants {
         public static final int leftHookID = 1;
         public static final int rightHookID = 0;
 
-        public static final double maxPos = -300000; 
-        public static final double minPos = 800;
+        public static final double maxPos = 300000; 
+        public static final double minPos = -800;
 
         public static final double deadband = 0.1;
         public static final double timeout = 3;
