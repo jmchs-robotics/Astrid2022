@@ -75,7 +75,7 @@ public class RobotMap {
         rightHookMotor = new WPI_TalonFX(Hook.rightHookID);
         leftHookMotor.setNeutralMode(NeutralMode.Brake);
         rightHookMotor.setNeutralMode(NeutralMode.Brake);
-        rightHookMotor.setInverted(true);
+        leftHookMotor.setInverted(true);
         bothHooks = new MotorControllerGroup(leftHookMotor, rightHookMotor);
         hookDrive = new DifferentialDrive(leftHookMotor, rightHookMotor);
 
