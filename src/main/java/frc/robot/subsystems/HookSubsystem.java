@@ -96,29 +96,30 @@ private double deadband = Hook.deadband;
     }
 
     //Going up with left/right correction
+    //hookDifference    +:left higher     -:right higher
     public void upHookCorrection() {
-
         if (hookDifference > 800) {
-            setRight(-0.15);
+            setRight(-0.15); //right up to meet left
         }
         else if (hookDifference < -800) {
-            setLeft(-0.15);
+            setLeft(-0.15); //left up to meet right
         }
         else {
-            setBoth(-0.4);
+            setBoth(-0.4);  //both up if hook difference is tolerable
         }
     }
 
     //Going down with left/right correction
+    //hookDifference    +:left higher     -:right higher
     public void downHookCorrection() {
         if (hookDifference > 800) {
-            setLeft(0.15);
+            setLeft(0.15);  //left down to meet right
         }
         else if (hookDifference < -800) {
-            setRight(0.15);
+            setRight(0.15); //right down to meet left
         }
         else {
-            setBoth(0.4);
+            setBoth(0.4);   //both up if hook difference is tolerable
         }
     }
     
@@ -147,13 +148,13 @@ private double deadband = Hook.deadband;
         }
         
         else if (offset < -deadband && checkLowerRightLimit() && checkUpperLeftLimit()) {
-            setLeft(-0.15);
-            setRight(0.15);
+            setLeft(-0.15);  //goes up
+            setRight(0.15);  //goes down
         }
         
         else if (offset > deadband && checkUpperRightLimit() && checkLowerLeftLimit()) {
-            setLeft(0.15);
-            setRight(-0.15);
+            setLeft(0.15);   //goes down
+            setRight(-0.15); //goes up
         }    
         
         else {
