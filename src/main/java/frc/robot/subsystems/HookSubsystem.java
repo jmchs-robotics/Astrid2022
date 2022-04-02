@@ -74,7 +74,6 @@ private double deadband = Hook.deadband;
     public boolean checkUpperRightLimit() {
         return getRightEncoderValue() > Hook.maxPos;
     }
-
     public boolean checkUpperLeftLimit() {
         return getLeftEncoderValue() > Hook.maxPos;
     }
@@ -97,39 +96,39 @@ private double deadband = Hook.deadband;
 
     //Going up with left/right correction
     //hookDifference    +:left higher     -:right higher
-    public void upHookCorrection() {
+    public void upHookCorrection(double vBus) {
         if (hookDifference > 800) {
-            setRight(-0.15); //right up to meet left
+            setRight(-vBus); //right up to meet left
         }
         else if (hookDifference < -800) {
-            setLeft(-0.15); //left up to meet right
+            setLeft(-vBus); //left up to meet right
         }
         else {
-            setBoth(-0.4);  //both up if hook difference is tolerable
+            setBoth(-vBus);  //both up if hook difference is tolerable
         }
     }
 
     //Going down with left/right correction
     //hookDifference    +:left higher     -:right higher
-    public void downHookCorrection() {
+    public void downHookCorrection(double vBus) {
         if (hookDifference > 800) {
-            setLeft(0.15);  //left down to meet right
+            setLeft(vBus);  //left down to meet right
         }
         else if (hookDifference < -800) {
-            setRight(0.15); //right down to meet left
+            setRight(vBus); //right down to meet left
         }
         else {
-            setBoth(0.4);   //both up if hook difference is tolerable
+            setBoth(vBus);   //both up if hook difference is tolerable
         }
     }
     
     //Hook Control
     public void hookLimiter(double control){
         if((control < -deadband) && checkUpperLimits()) { //both up
-            upHookCorrection();
+            upHookCorrection(0.4);
         }
         else if((control > deadband) && checkLowerLimits()) { //both down
-            downHookCorrection();
+            downHookCorrection(0.4);
         }
         else {
             stopMotors();
@@ -140,7 +139,7 @@ private double deadband = Hook.deadband;
     public void hookArcadeLimiter(double control, double offset){
 
         if((control < -deadband) && checkUpperLimits()) { //both up
-            upHookCorrection();
+            setBoth(-0.4);
         }
         
         else if(control > deadband) { //both down

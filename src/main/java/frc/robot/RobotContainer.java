@@ -56,14 +56,15 @@ public class RobotContainer {
         // SmartDashboard Command Buttons
         SmartDashboard.putData("Extend Hook", new ExtendHook(m_Hook).withTimeout(h));
         SmartDashboard.putData("Retract Hook", new RetractHook(m_Hook).withTimeout(h));
-        SmartDashboard.putData("Push Dump Arm", new PushDumpArm(m_LArm).withTimeout(t));
-        SmartDashboard.putData("Pull Dump Arm", new PullDumpArm(m_LArm).withTimeout(t));
-        SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm).withTimeout(t));
-        SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm).withTimeout(t));
-        SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm).withTimeout(t));
-        SmartDashboard.putData("Pull Spare Arms", new LowerIntake(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Push Dump Arm", new PushArms(m_LArm).withTimeout(t));
+        SmartDashboard.putData("Pull Dump Arm", new PullArms(m_LArm).withTimeout(t));
+        //SmartDashboard.putData("Push Climb Arms", new PushClimbArm(m_LArm).withTimeout(t));
+        //SmartDashboard.putData("Pull Climb Arms", new PullClimbArm(m_LArm).withTimeout(t));
+        //SmartDashboard.putData("Push Spare Arm", new RaiseIntake(m_LArm).withTimeout(t));
+        //SmartDashboard.putData("Pull Spare Arms", new LowerIntake(m_LArm).withTimeout(t));
         SmartDashboard.putData("Drive Straight", new DriveStraight(m_drive, 0.5));
         SmartDashboard.putData("Turn", new GyroTurn(m_drive, 90, 0.2,0.05));
+        SmartDashboard.putData("Raise to Mid", new MidClimb(m_Hook).withTimeout(10));
 
         configureButtonBindings();
 
@@ -97,6 +98,7 @@ public class RobotContainer {
             new RetractHook(m_Hook)
         );
 
+        /*
         subA.whenPressed(
             new PushClimbArm(m_LArm).withTimeout(t)
         ); 
@@ -112,13 +114,14 @@ public class RobotContainer {
         subB.whenPressed(
             new PullClimbArm(m_LArm).withTimeout(t)
         );
+        */
 
         subLB.whenPressed(
-            new PullDumpArm(m_LArm).withTimeout(t)
+            new PullArms(m_LArm).withTimeout(t)
         );
 
         subRB.whenPressed(
-            new PushDumpArm(m_LArm).withTimeout(t)
+            new PushArms(m_LArm).withTimeout(t)
         );
         
         subStart.whenHeld(

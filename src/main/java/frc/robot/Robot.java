@@ -118,6 +118,7 @@ public class Robot extends TimedRobot {
 
         m_robotContainer.m_Hook.resetEncoderValue();
         m_robotContainer.m_drive.resetEncoders();
+        m_robotContainer.m_drive.resetGyro();
 
     }
 

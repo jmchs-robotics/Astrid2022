@@ -36,7 +36,7 @@ public class DefaultArcadeDrive extends CommandBase {
     SmartDashboard.putNumber("Gyro Heading:", m_subsystem.getGyroYaw());
 
     double forward = 0.75 * m_stick.getLeftY();
-    double rotation = 0.75 * m_stick.getLeftX();
+    double rotation = 0.5 * m_stick.getLeftX();
     
     m_subsystem.arcadeDrive(-forward, rotation);
   }

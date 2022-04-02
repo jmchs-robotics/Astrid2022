@@ -52,8 +52,8 @@ public final class Constants {
         
     public static final class LArm {
         //Pneumatic Channel IDs 
-        public static final int intakeForwardChannel = 1;
-        public static final int intakeReverseChannel = 0;
+        //public static final int intakeForwardChannel = 1;
+        //public static final int intakeReverseChannel = 0;
         public static final int dumpForwardChannel = 6;
         public static final int dumpReverseChannel = 7;
 

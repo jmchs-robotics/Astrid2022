@@ -32,13 +32,13 @@ public class RaiseIntake extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setIntakeSolenoid(Value.kReverse);
+        //m_subsystem.setIntakeSolenoid(Value.kReverse);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.setIntakeSolenoid(Value.kOff);
+        //m_subsystem.setIntakeSolenoid(Value.kOff);
     }
 
     // Returns true when the command should end.

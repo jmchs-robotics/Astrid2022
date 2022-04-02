@@ -42,7 +42,7 @@ public class RobotMap {
 
     //clip objects
     public static DoubleSolenoid dumpPiston;
-    public static DoubleSolenoid intakePiston;
+    //public static DoubleSolenoid intakePiston;
 
     public static void init() {
 
@@ -86,7 +86,7 @@ public class RobotMap {
         roborioGyro = new AHRS(SPI.Port.kMXP);
         
         //instantiate clip pistons
-        intakePiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, LArm.intakeForwardChannel, LArm.intakeReverseChannel);
+        //intakePiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, LArm.intakeForwardChannel, LArm.intakeReverseChannel);
         dumpPiston = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, LArm.dumpForwardChannel, LArm.dumpReverseChannel);
     }
 }

@@ -31,13 +31,13 @@ public class PullClimbArm extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setBothSolenoids(Value.kForward);
+        //m_subsystem.setBothSolenoids(Value.kForward);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.setBothSolenoids(Value.kOff);
+        //m_subsystem.setBothSolenoids(Value.kOff);
     }
 
     // Returns true when the command should end.

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class LArmSubsystem extends SubsystemBase {
 
-    private DoubleSolenoid intakePiston;
+    //private DoubleSolenoid intakePiston;
     private DoubleSolenoid dumpPiston;
         
     /**
@@ -19,8 +19,8 @@ public class LArmSubsystem extends SubsystemBase {
     */
     public LArmSubsystem() {
 
-        intakePiston = RobotMap.intakePiston;
-        addChild("intakePiston", intakePiston);
+        //intakePiston = RobotMap.intakePiston;
+        //addChild("intakePiston", intakePiston);
         dumpPiston = RobotMap.dumpPiston;
         addChild("dumpPiston", dumpPiston);  
 
@@ -42,17 +42,19 @@ public class LArmSubsystem extends SubsystemBase {
         dumpPiston.set(val);
     }
 
+    /*
     public void setIntakeSolenoid (Value val) {
         intakePiston.set(val);
     }
-
+    
     public void setBothSolenoids (Value val) {
         dumpPiston.set(val);
         intakePiston.set(val);
     }
+    */
 
     public String getPistonValue() {
-        return "Dump: " + dumpPiston.get() + "   Intake: " + intakePiston.get();
+        return "Dump: " + dumpPiston.get();
     }
 
 }
