@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.PIDGyroTurn;
-import frc.robot.commands.PullDumpArm;
-import frc.robot.commands.PushDumpArm;
+import frc.robot.commands.PullArms;
+import frc.robot.commands.PushArms;
 import frc.robot.subsystems.LArmSubsystem;
 import frc.robot.Constants.Auto;
 import frc.robot.commands.IntakeCargo;
@@ -37,9 +37,9 @@ public class AutoGroup extends SubsystemBase{
 
     public SequentialCommandGroup AutoDumpTaxi() {
         return new SequentialCommandGroup(
-            new PushDumpArm(m_LArm).withTimeout(0.1),
+            new PushArms(m_LArm).withTimeout(0.1),
             new WaitCommand(w),
-            new PullDumpArm(m_LArm).withTimeout(0.1),
+            new PullArms(m_LArm).withTimeout(0.1),
             new WaitCommand(w),
             new DriveStraight(m_drive, 0.2).withTimeout(3),
             new WaitCommand(w)

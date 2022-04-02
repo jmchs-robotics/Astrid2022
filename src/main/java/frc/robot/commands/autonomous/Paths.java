@@ -57,9 +57,9 @@ public class Paths { // extends CommandBase {
     public Command Dump() { //Intake Cargo
       return new SequentialCommandGroup(
 
-        new PushDumpArm(m_LArm).withTimeout(0.1),
+        new PushArms(m_LArm).withTimeout(0.1),
         new WaitCommand(w),
-        new PullDumpArm(m_LArm).withTimeout(0.1),
+        new PullArms(m_LArm).withTimeout(0.1),
         new WaitCommand(w),
 
         new DriveStraight(m_drive, 0.2).withTimeout(3)
@@ -75,9 +75,9 @@ public class Paths { // extends CommandBase {
       if (pos.equals("left")) {
         return new SequentialCommandGroup(
           //Auto dump
-          new PushDumpArm(m_LArm).withTimeout(0.1),
+          new PushArms(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
-          new PullDumpArm(m_LArm).withTimeout(0.1),
+          new PullArms(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
 
           new DriveStraight(m_drive, 0.2).withTimeout(3),
@@ -93,9 +93,9 @@ public class Paths { // extends CommandBase {
       else if (pos.equals("right")) {
         return new SequentialCommandGroup(
           //Auto dump
-          new PushDumpArm(m_LArm).withTimeout(0.1),
+          new PushArms(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
-          new PullDumpArm(m_LArm).withTimeout(0.1),
+          new PullArms(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
 
           new DriveStraight(m_drive, 0.2).withTimeout(3),
@@ -111,9 +111,9 @@ public class Paths { // extends CommandBase {
       else {
         return new SequentialCommandGroup(
           //Auto dump
-          new PushDumpArm(m_LArm).withTimeout(0.1),
+          new PushArms(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
-          new PullDumpArm(m_LArm).withTimeout(0.1),
+          new PullArms(m_LArm).withTimeout(0.1),
           new WaitCommand(w),
 
           new DriveStraight(m_drive, 0.2).withTimeout(3),

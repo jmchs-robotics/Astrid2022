@@ -32,13 +32,13 @@ public class LowerIntake extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.setIntakeSolenoid(Value.kForward);
+        //m_subsystem.setIntakeSolenoid(Value.kForward);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.setIntakeSolenoid(Value.kOff);
+        //m_subsystem.setIntakeSolenoid(Value.kOff);
     }
 
     // Returns true when the command should end.
