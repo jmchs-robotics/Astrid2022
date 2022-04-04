@@ -9,7 +9,7 @@ import frc.robot.subsystems.HookSubsystem;
 /**
  *
  */
-public class PIDMidClimb extends PIDCommand {
+public class PIDHookPos extends PIDCommand {
 	
 
 	/**
@@ -19,16 +19,16 @@ public class PIDMidClimb extends PIDCommand {
 	 * @param percentVBus
 	 * The maximum turning voltage bus proportion
 	 */
-    public PIDMidClimb(HookSubsystem m_subsystem, double targetEncoderHeight) {
+    public PIDHookPos(HookSubsystem m_subsystem, double targetEncoderPos) {
         super( 
 			new PIDController(Hook.kP_climb, Hook.kI_climb, Hook.kD_climb),
-			m_subsystem::getLeftEncoderValue,
-			targetEncoderHeight,
-			vBus -> m_subsystem.setBoth(vBus),
+			m_subsystem::getAvgEncoderValue,
+			targetEncoderPos,
+			vBus -> m_subsystem.setBoth(-vBus),
 			m_subsystem
 		);
 
-		getController().enableContinuousInput(0, -300000);
+		getController().enableContinuousInput(0, 300000);
 		getController().setTolerance(Drive.kTurnToleranceDeg, Drive.kTurnRateToleranceDegPerS);
     }
 

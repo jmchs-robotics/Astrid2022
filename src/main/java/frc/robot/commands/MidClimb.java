@@ -29,7 +29,7 @@ public class MidClimb extends CommandBase {
     @Override
     public void execute() {
 
-        m_subsystem.upHookCorrection(0.6);
+        m_subsystem.upHookCorrection(0.7);
 
     }
 
@@ -43,7 +43,7 @@ public class MidClimb extends CommandBase {
     @Override
     public boolean isFinished() {
 
-        return m_subsystem.getRightEncoderValue() > 185000 || m_subsystem.getLeftEncoderValue() > 185000;
+        return m_subsystem.getRightEncoderValue() > 190000 || m_subsystem.getLeftEncoderValue() > 190000;
       
     }
 

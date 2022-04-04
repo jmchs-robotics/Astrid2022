@@ -49,7 +49,7 @@ public final class Constants {
         public static final double deadband = 0.1;
         public static final double timeout = 3;
 
-        public static final double kP_climb = 0.8;
+        public static final double kP_climb = 0.6;
         public static final double kI_climb = 0;
 	    public static final double kD_climb = 0;
 

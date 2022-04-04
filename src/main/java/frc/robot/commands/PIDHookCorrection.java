@@ -19,7 +19,7 @@ public class PIDHookCorrection extends PIDCommand {
 	 * @param percentVBus
 	 * The maximum turning voltage bus proportion
 	 */
-    public PIDHookCorrection(HookSubsystem m_subsystem, double targetEncoderHeight) {
+    public PIDHookCorrection(HookSubsystem m_subsystem) {
         super( 
 			new PIDController(Hook.kP_align, Hook.kI_align, Hook.kD_align),
 			m_subsystem::getHookDifference,

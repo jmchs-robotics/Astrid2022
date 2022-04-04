@@ -125,19 +125,12 @@ private double deadband = Hook.deadband;
     //Hook Control
     //Control + is up, - is down
     public void hookLimiter(double control){
-<<<<<<< HEAD
-        if((control < -deadband) && checkUpperLimits()) { //both up
-            upHookCorrection(0.8);
-        }
-        else if((control > deadband) && checkLowerLimits()) { //both down
-            downHookCorrection(0.8);
-=======
+        
         if((control > deadband) && checkUpperLimits()) { //both up
             upHookCorrection(0.6);
         }
         else if((control < -deadband) && checkLowerLimits()) { //both down
             downHookCorrection(0.6);
->>>>>>> 87fc91bffd9cfa0acbf351202f70014c005728d8
         }
         else {
             stopMotors();
@@ -148,11 +141,11 @@ private double deadband = Hook.deadband;
     public void hookArcadeLimiter(double control, double offset){
 
         if((control > deadband) && checkUpperLimits()) { //both up
-            setBoth(0.8);
+            setBoth(0.7);
         }
         
         else if(control < -deadband) { //both down
-            setBoth(-0.8);
+            setBoth(-0.7);
         }
         
         else if (offset < -deadband && checkLowerRightLimit() && checkUpperLeftLimit()) {
@@ -215,7 +208,10 @@ private double deadband = Hook.deadband;
 
     public double getRightEncoderValue() {
         return rightHookMotor.getSelectedSensorPosition();
+    }
 
+    public double getAvgEncoderValue() {
+        return (getLeftEncoderValue() + getRightEncoderValue()) / 2;
     }
 
     public double getHookDifference() {
